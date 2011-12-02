@@ -193,6 +193,12 @@ Ext.define('RedAmp.module.Module', {
 					title: this.title
 				});
 				
+				//Set up show event
+				this.view.on('show', function(){
+					//Fire the show event
+					this.fireEvent('show', this);
+				}, this);
+				
 				//Fire the init view event
 				this.fireEvent('initview', this, this.getView());
 				
@@ -260,9 +266,6 @@ Ext.define('RedAmp.module.Module', {
 		
 		//Set the view to active
 		this.getApplication().setActive(this.getView());
-
-		//Fire the show event
-		this.fireEvent('show', this);
 	},
 	
 	/**

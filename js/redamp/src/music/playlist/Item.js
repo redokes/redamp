@@ -26,6 +26,7 @@ Ext.define('RedAmp.music.playlist.Item', {
 	},
 	
 	initDragDrop: function(){
+		return;
 		var drag = Ext.create('RedAmp.dd.DragItem', this.el.id);
 		var drop = Ext.create('RedAmp.dd.DropItem', this.el.id);
 		drag.on('dragstart', function(){

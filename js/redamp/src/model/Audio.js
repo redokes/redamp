@@ -1,7 +1,9 @@
 Ext.define('RedAmp.model.Audio', {
 	extend:'Ext.data.Model',
+	
 	fields:[{
-		name: 'file'
+		name: 'url',
+		type: 'string'
 	},{
 		name:'name',
 		type:'string'
@@ -37,5 +39,11 @@ Ext.define('RedAmp.model.Audio', {
 			type:'json',
 			root:'records'
 		}
+	},
+	
+	play: function(player){
+		player.setText(this.data);
+		player.setSrc(this.get('url'));
+		player.play();
 	}
 });

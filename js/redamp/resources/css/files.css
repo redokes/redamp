@@ -248,3 +248,15 @@ div::-webkit-scrollbar-track {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 
 }
+
+/******************************************
+* Last Fm Module
+******************************************/
+.redamp-lastfm-tree-proxy .x-dd-drop-icon{
+	display: none;
+}
+
+.redamp-lastfm-tree-proxy .x-dd-drag-ghost{
+	font-size: 24px;
+	padding: 5px !important;
+}

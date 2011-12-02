@@ -25,7 +25,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		this.initStore();
 		this.initTpl();
 		this.initListeners();
-		this.initDragDrop();
+		this.initDropZone();
 		this.initPlayer();
 		this.initToolbar();
 	},
@@ -69,20 +69,14 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		}, this);
 	},
 	
-	initDragDrop: function() {
+	initDropZone: function() {
 		if (!this.rendered) {
-			this.on('afterrender', this.initDragDrop, this);
+			this.on('afterrender', this.initDropZone, this);
 			return;
 		}
-		this.dragDrop = Ext.create('Ext.dd.DropTarget', this.getEl(), {
-			ddGroup: 'TreeDD',
-			notifyOver: function() {
-				return this.dropAllowed;
-			},
-			notifyDrop: Ext.bind(function(source, e, data) {
-				var files = this.getDroppedFiles(data.records);
-				this.addFiles(files);
-			}, this)
+		
+		this.dropZone = Ext.create('RedAmp.music.playlist.DropZone', this, {
+			ddGroup: RedAmp.music.Music.ddGroup
 		});
 	},
 	
@@ -103,25 +97,6 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 				text: 'test'
 			}]
 		});
-	},
-	
-	getDroppedFiles: function(records) {
-		var files = [];
-		for (var i = 0; i < records.length; i++) {
-			if (records[i].childNodes && records[i].childNodes.length) {
-				// Combine files with current file list
-				var newFiles = this.getDroppedFiles(records[i].childNodes)
-				var numFiles = newFiles.length;
-				for (var j = 0; j < numFiles; j++) {
-					files.push(newFiles[j]);
-				}
-			}
-			else {
-				files.push(records[i].raw.record);
-			}
-		}
-		
-		return files;
 	},
 	
 	play: function(record){
@@ -149,10 +124,5 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	
 	clear: function(){
 		this.store.removeAll();
-	},
-	
-	addFiles: function(records) {
-		this.store.add(records);
 	}
-	
 });

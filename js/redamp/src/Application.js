@@ -9,8 +9,11 @@ Ext.define('RedAmp.Application', {
 	//Requires
 	requires:[
 		'RedAmp.stream.Stream',
-		'RedAmp.user.User',
-		'RedAmp.music.Music'
+		'RedAmp.music.Music',
+		'RedAmp.lastfm.LastFm',
+		
+		//Sources
+		'RedAmp.source.local.Local'
 	],
 	
 	///////////////////////////////////////////////////
@@ -22,8 +25,11 @@ Ext.define('RedAmp.Application', {
 	 */
 	modules:[
 		'RedAmp.stream.Stream',
-		'RedAmp.user.User',
-		'RedAmp.music.Music'
+		'RedAmp.music.Music',
+		'RedAmp.lastfm.LastFm',
+		
+		//Sources
+		'RedAmp.source.local.Local'
 	],
 	
 	layout: 'border',
@@ -149,7 +155,6 @@ Ext.define('RedAmp.Application', {
 	
 	initCookieProvider: function(){
 		this.cookieProvider = Ext.create('Ext.state.CookieProvider', {
-			expires: new Date(new Date().getTime()+(1000*60*60*24*1)) //1 day
 		});
 		Ext.state.Manager.setProvider(this.cookieProvider);
 	},
@@ -253,6 +258,9 @@ Ext.define('RedAmp.Application', {
 	//////////////////////////////////////////////////////////////////////
 	//	Accessors
 	/////////////////////////////////////////////////////////////////////
+	getCookieProvider: function(){
+		return this.cookieProvider;
+	},
 	
 	/**
      * Gets a module by its name, or false if no module was found

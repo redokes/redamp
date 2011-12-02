@@ -1,7 +1,9 @@
 Ext.define('RedAmp.music.Player', {
 	extend:'Ext.Component',
 	
-	//Render Template
+	///////////////////////////////////////////////////////////////////////////
+	// Render Template
+	///////////////////////////////////////////////////////////////////////////
 	renderTpl:
         '<div class="audio-player {cls}">' +
 			'<audio preload="false"></audio>' +
@@ -18,7 +20,9 @@ Ext.define('RedAmp.music.Player', {
 			'<div class="clear"></div>' +
 		'</div>',
 	
-	//Elements to get after render
+	///////////////////////////////////////////////////////////////////////////
+	// Render Selectors
+	///////////////////////////////////////////////////////////////////////////
 	renderSelectors: {
         audio: 'audio',
         playPauseEl: '.play-pause',
@@ -31,17 +35,51 @@ Ext.define('RedAmp.music.Player', {
         nextEl: '.next'
     },
 	
-	//Properties
-	isLoaded: false,
-	isPlaying: false,
-	isPaused: false,
+	///////////////////////////////////////////////////////////////////////////
+	// Properties
+	///////////////////////////////////////////////////////////////////////////
+	lastTrack: false,
+	currentTrack: false,
+	loaded: false,
+	playing: false,
+	paused: false,
 	
-	onRender: function(){
-		this.callParent(arguments);
-		this.initAudio();
-		this.initPlayPause();
-	},
+	///////////////////////////////////////////////////////////////////////////
+	// Events
+	///////////////////////////////////////////////////////////////////////////
 	
+	/**
+	* @event play
+	* Fires when a song begins to play
+	* @param {Player} player
+	* @param {Record} record
+	*/
+   
+   /**
+	* @event pause
+	* Fires when a song has been paused
+	* @param {Player} player
+	* @param {Record} record
+	*/
+   
+   /**
+	* @event stop
+	* Fires when a song has been stopped
+	* @param {Player} player
+	* @param {Record} record
+	*/
+   
+   /**
+	* @event complete
+	* Fires when a song has completed playing
+	* @param {Player} player
+	* @param {Record} record
+	*/
+   
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Inits
+	///////////////////////////////////////////////////////////////////////////
 	initAudio: function(){
 		this.audio.on('progress', this.onProgress, this);
 		this.audio.on('timeupdate', this.onTimeUpdate, this);
@@ -61,6 +99,53 @@ Ext.define('RedAmp.music.Player', {
 		this.items.push(this.playlist);
 	},
 	
+	///////////////////////////////////////////////////////////////////////////
+	// On Events
+	///////////////////////////////////////////////////////////////////////////
+	onRender: function(){
+		this.callParent(arguments);
+		this.initAudio();
+		this.initPlayPause();
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Checkers
+	///////////////////////////////////////////////////////////////////////////
+	isLoaded: function(){
+		return this.loaded;
+	},
+	
+	isPlaying: function(){
+		return this.playing;
+	},
+	
+	isPaused: function(){
+		return this.paused;
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Accessors
+	///////////////////////////////////////////////////////////////////////////
+	getCurrentTrack: function(){
+		return this.currentTrack;
+	},
+	
+	getLastTrack: function(){
+		return this.lastTrack;
+	},
+	
+	getPlayPercentage: function(){
+		var percentage = 0;
+		if(this.isPlaying()){
+			percentage = (this.audio.dom.currentTime / this.audio.dom.duration) * 100;
+		}
+		return percentage;
+	},
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Mutators																 
+	///////////////////////////////////////////////////////////////////////////
 	setText: function(tags){
 		this.textEl.update(tags.artist + ' - ' + tags.title);
 	},
@@ -70,74 +155,94 @@ Ext.define('RedAmp.music.Player', {
 		this.audio.dom.src = '';
 		//this.audio.dom.src = 'data:' + type + ';base64,' + window.btoa(data);
 		this.audio.dom.src = data;
-		this.isLoaded = true;
+		this.loaded = true;
 	},
 	
 	setSrc: function(src){
 		this.stop();
 		this.audio.dom.src = '';
 		this.audio.dom.src = src;
-		this.isLoaded = true;
+		this.loaded = true;
 	},
 	
+	setVolume: function(volume) {
+		this.audio.dom.volume = volume;
+	},
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods
+	///////////////////////////////////////////////////////////////////////////
 	play: function(record) {
 		if(record != null){
+			//Stop the player
 			this.stop();
-			var file = Ext.create('RedAmp.file.File', record.get('file'));
-			file.getTags(function(file, tags, options){
-				file.getURL(function(url){
-					this.setSrc(url);
-					this.setText(tags);
-					this.play();
-				}, this);
-			}, this);
+			
+			//Save the lastTrack if necessary
+			if(this.currentTrack){
+				this.lastTrack = this.currentTrack;
+			}
+			
+			//Save this record as the playing record
+			this.currentTrack = record;
+			
+			//Run the play function of the record for custom loading
+			record.play(this);
 			return;
 		}
 		
 		//Make sure we are loaded and not already playing
-		if(!this.isLoaded || this.isPlaying){
+		if(!this.isLoaded() || this.isPlaying()){
 			return;
 		}
 		
 		this.audio.dom.play();
 		this.playPauseEl.removeCls('play');
 		this.playPauseEl.addCls('pause');
-		this.isPlaying = true;
-		this.isPaused = false;
+		this.playing = true;
+		this.paused = false;
+		
+		//Fire event
+		this.fireEvent('play', this, this.getCurrentTrack());
 	},
 	
 	stop: function() {
-		if(!this.isLoaded || !this.isPlaying){
+		if(!this.isLoaded || !this.isPlaying()){
+			return;
+		}
+		
+		//Fire before stop event
+		if(this.fireEvent('beforestop', this, this.getCurrentTrack(), this.getPlayPercentage()) === false){
 			return;
 		}
 		
 		this.seek(0);
 		this.audio.dom.pause();
-		this.isPlaying = false;
-		this.isPaused = false;
+		this.playing = false;
+		this.paused = false;
+		
+		//Fire event
+		this.fireEvent('stop', this, this.getCurrentTrack());
 	},
 	
 	pause: function() {
-		if(!this.isLoaded || !this.isPlaying || this.isPaused){
+		if(!this.isLoaded() || !this.isPlaying() || this.isPaused()){
 			return;
 		}
 		
 		this.playPauseEl.removeCls('pause');
 		this.playPauseEl.addCls('play');
 		this.audio.dom.pause();
-		this.isPaused = true;
-		this.isPlaying = false;
+		this.paused = true;
+		this.playing = false;
+		
+		//Fire event
+		this.fireEvent('pause', this, this.getCurrentTrack());
 	},
 	
-	previous: function() {
-	},
+	previous: function() {},
 	
-	next: function() {
-	},
-	
-	setVolume: function(volume) {
-		this.audio.dom.volume = volume;
-	},
+	next: function() {},
 	
 	mute: function() {
 		this.oldVolume = this.audio.dom.volume;
@@ -154,7 +259,10 @@ Ext.define('RedAmp.music.Player', {
 		}
 	},
 	
-	//Events
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Events
+	///////////////////////////////////////////////////////////////////////////
 	onProgress: function(){
 		var loaded = parseInt(((this.audio.dom.buffered.end(0) / this.audio.dom.duration) * 100), 10);
 		this.loaderEl.setWidth(loaded + "%");
@@ -170,7 +278,7 @@ Ext.define('RedAmp.music.Player', {
 		var remainingMinutes = Math.floor((totalTime - currentTime)/60, 10);
 		var remainingSeconds = (totalTime-currentTime) - remainingMinutes * 60;
 		
-		var percentage = (this.audio.dom.currentTime / this.audio.dom.duration) * 100;
+		var percentage = this.getPlayPercentage();
 		
 		//Update the progress
 		this.progressEl.setWidth(percentage + "%");
@@ -180,7 +288,7 @@ Ext.define('RedAmp.music.Player', {
 	},
 	
 	onEnded: function(){
-		this.fireEvent('complete', this);
+		this.fireEvent('complete', this, this.getCurrentTrack());
 	},
 	
 	onProgressClick: function(event){
@@ -192,11 +300,11 @@ Ext.define('RedAmp.music.Player', {
 	},
 	
 	onPlayPauseClick: function(){
-		if(!this.isLoaded){
+		if(!this.isLoaded()){
 			return;
 		}
 		
-		if(this.isPlaying){
+		if(this.isPlaying()){
 			this.pause();
 		}
 		else{
