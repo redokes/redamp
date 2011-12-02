@@ -97,8 +97,15 @@ Ext.define('RedAmp.lastfm.LastFm', {
 				track: track.get('title'),
 				artist: track.get('artist')
 			},
-			callback: function(){
-				console.log(arguments);
+			callback: function(response){
+				if(response.success){
+					this.getApplication().onModuleReady('stream', function(stream, options){
+						var response = options.response;
+						stream.addMessage({
+							text: '<span style="font-weight: bold;">Now Playing: </span>' + response.nowplaying.artist.text + ' - ' + response.nowplaying.track.text
+						});
+					}, this, {response: response});
+				}
 			}
 		});
 	},
@@ -120,8 +127,16 @@ Ext.define('RedAmp.lastfm.LastFm', {
 				track: track.get('title'),
 				artist: track.get('artist')
 			},
-			callback: function(){
-				console.log(arguments);
+			callback: function(response){
+				if(response.success){
+					this.getApplication().onModuleReady('stream', function(stream, options){
+						var response = options.response;
+						var scrobble = response.scrobbles.scrobble;
+						stream.addMessage({
+							text: '<span style="font-weight: bold;">Scrobbled: </span>' + scrobble.artist.text + ' - ' + scrobble.track.text
+						});
+					}, this, {response: response});
+				}
 			}
 		});
 	},

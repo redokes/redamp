@@ -78,6 +78,18 @@ div::-webkit-scrollbar-track {
 	box-shadow: 0 0 5px #888;
 }
 
+.x-dd-drop-icon{
+	display: none;
+}
+
+.x-dd-drag-ghost{
+	width: auto !important;
+	padding: 0px;
+	margin: 0px;
+	background-color: transparent !important;
+	border: 0px !important;
+}
+
 /******************************************
 * Icons
 ******************************************/
@@ -250,13 +262,9 @@ div::-webkit-scrollbar-track {
 }
 
 /******************************************
-* Last Fm Module
+* Last FM Module
 ******************************************/
-.redamp-lastfm-tree-proxy .x-dd-drop-icon{
-	display: none;
-}
-
-.redamp-lastfm-tree-proxy .x-dd-drag-ghost{
+.redamp-lastfm-tree-proxy{
+	padding: 10px;
 	font-size: 24px;
-	padding: 5px !important;
 }

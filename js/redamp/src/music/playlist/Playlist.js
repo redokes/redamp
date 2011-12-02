@@ -25,6 +25,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		this.initStore();
 		this.initTpl();
 		this.initListeners();
+		this.initDragZone();
 		this.initDropZone();
 		this.initPlayer();
 		this.initToolbar();
@@ -67,6 +68,17 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 				Ext.create('RedAmp.music.playlist.Item', this, record);
 			}, this);
 		}, this);
+	},
+	
+	initDragZone: function() {
+		if (!this.rendered) {
+			this.on('afterrender', this.initDragZone, this);
+			return;
+		}
+		
+		this.dragZone = Ext.create('RedAmp.music.playlist.DragZone', this, {
+			ddGroup: RedAmp.music.Music.ddGroup
+		});
 	},
 	
 	initDropZone: function() {

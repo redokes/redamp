@@ -70,6 +70,25 @@ Ext.define('RedAmp.music.playlist.DropZone', {
 	},
 	
 	onNodeDrop : function(target, dd, event, data){
+		if(dd == this.playlist.dragZone){
+			return this.handleInternalDrop(target, dd, event, data);
+		}
+		else{
+			return this.handleExternalDrop(target, dd, event, data);
+		}
+		
+	},
+	
+	handleInternalDrop: function(target, dd, event, data){
+		var records = data.records;
+		if(data.index == null){
+			return false;
+		}
+		this.playlist.getStore().remove(records);
+		this.playlist.getStore().insert(data.index, records);
+	},
+	
+	handleExternalDrop: function(target, dd, event, data){
 		//Make copies of the records
 		var records = [];
 		Ext.each(data.records, function(record){

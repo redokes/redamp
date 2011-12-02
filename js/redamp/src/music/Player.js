@@ -136,7 +136,7 @@ Ext.define('RedAmp.music.Player', {
 	
 	getPlayPercentage: function(){
 		var percentage = 0;
-		if(this.isPlaying()){
+		if(this.isPlaying() || this.isPaused()){
 			percentage = (this.audio.dom.currentTime / this.audio.dom.duration) * 100;
 		}
 		return percentage;

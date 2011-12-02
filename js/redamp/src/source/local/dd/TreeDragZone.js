@@ -12,6 +12,7 @@ Ext.define('RedAmp.source.local.dd.TreeDragZone', {
 		this.view = tree.getView();
 		this.callParent([tree.getView().getEl().dom.parentNode, config]);
 		this.ddel = Ext.get(document.createElement('div'));
+		this.ddel.addCls('redamp-lastfm-tree-proxy');
     },
 	
 
@@ -41,6 +42,10 @@ Ext.define('RedAmp.source.local.dd.TreeDragZone', {
 		
 		//update the el
 		this.updateDragEl(dragData);
+		
+		setTimeout(Ext.bind(function(){
+			console.log(this.getProxy().getEl().dom);
+		}, this), 500);
 		
 		//return the data
 		return dragData;
