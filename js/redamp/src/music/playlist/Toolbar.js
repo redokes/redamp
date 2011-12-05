@@ -12,18 +12,40 @@ Ext.define('RedAmp.music.playlist.Toolbar', {
 	},
 	
 	init: function() {
-		this.initClear();
+		this.initTrash();
+		this.initDropZone();
 	},
 	
-	initClear: function(){
-		this.items.push({
+	initTrash: function(){
+		this.trashButton = new Ext.button.Button({
 			scope: this,
-			iconCls: 'clear',
+			iconCls: 'trash',
 			scale: 'medium',
 			tooltip: 'clear',
 			handler: function(){
 				this.playlist.clear();
 			}
 		});
+		this.items.push(this.trashButton);
+	},
+	
+	initDropZone: function(){
+		this.on('afterrender', function(){
+			new Ext.dd.DropTarget(this.trashButton.getEl(), {
+				ddGroup: RedAmp.music.Music.ddGroup,
+				notifyDrop: Ext.bind(function(source, event, data){
+					if(!data.playlist){
+						return false;
+					}
+					data.playlist.getStore().remove(data.records);
+				}, this),
+				notifyOver: Ext.bind(function(source, event, data){
+					if(!data.playlist){
+						return Ext.dd.DropZone.prototype.dropNotAllowed;
+					}
+					return 'drop-trash';
+				}, this)
+			});
+		}, this);
 	}
 });

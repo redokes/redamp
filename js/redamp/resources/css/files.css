@@ -41,11 +41,13 @@ div::-webkit-scrollbar-track {
 /******************************************
 * Icons
 ******************************************/
-.x-btn .x-btn-icon.clear{
-	background-image: url(../images/icons/clear-24.png);
+.x-btn .x-btn-icon.trash{
+	background-image: url(../images/icons/trash-24.png);
 	width: 24px;
 	height: 24px;
 }
+
+
 
 /******************************************
 * Ext
@@ -100,6 +102,14 @@ div::-webkit-scrollbar-track {
 	background-image: url(../images/icons/check-24.gif);
 }
 .x-dd-drop-ok .x-dd-drag-ghost{
+	opacity: 1;
+}
+
+.drop-trash .x-dd-drop-icon{
+	background-image: url(../images/icons/trash-24.png);
+}
+
+.drop-trash .x-dd-drag-ghost{
 	opacity: 1;
 }
 
@@ -227,26 +237,51 @@ div::-webkit-scrollbar-track {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a3a3a3', endColorstr='#878787',GradientType=0 ); /* IE6-9 */
 	border-bottom: 1px solid #777777;
 }
-.audio-player .play-pause{
-	width: 32px;
-	height: 32px;
+
+.audio-player .previous{
 	cursor: pointer;
 	position: absolute;
-	top: 10px;
+	top: 14px;
 	left: 10px;
+	width: 24px;
+	height: 24px;
+	background-image: url(../images/icons/previous-24.png);
+}
+
+.audio-player .play-pause{
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	left: 36px;
+	border: 1px solid #757575;
+	border-radius: 20px;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 .audio-player .play-pause.play{
-	background-image: url(../images/icons/play-32.png);
+	background-image: url(../images/icons/play-24.png);
 }
 
 .audio-player .play-pause.pause{
-	background-image: url(../images/icons/pause-32.png);
+	background-image: url(../images/icons/pause-24.png);
+}
+
+.audio-player .next{
+	cursor: pointer;
+	position: absolute;
+	top: 14px;
+	left: 78px;
+	width: 24px;
+	height: 24px;
+	background-image: url(../images/icons/next-24.png);
 }
 
 .audio-player .text{
 	position: absolute;
 	top: 10px;
-	left: 50px;
+	left: 120px;
 	color: #333;
 	font-size: 12px;
 	font-weight: bold;
@@ -264,7 +299,7 @@ div::-webkit-scrollbar-track {
 }
 
 .audio-player .progress-container{
-	padding: 30px 90px 0px 50px;
+	padding: 30px 90px 0px 120px;
 }
 
 .audio-player .progress-container .loader{

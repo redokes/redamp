@@ -34,7 +34,8 @@ Ext.define('RedAmp.music.Music', {
 		this.playlist = Ext.create('RedAmp.music.playlist.Playlist', {
 			player: this.player
 		});
-		this.getApplication().getCenter().add(new Ext.panel.Panel({
+		
+		var view = this.getApplication().getCenter().add(new Ext.panel.Panel({
 			layout: 'fit',
 			title: 'Playlist',
 			items:[this.playlist],
@@ -42,6 +43,27 @@ Ext.define('RedAmp.music.Music', {
 				playlist: this.playlist
 			})
 		}));
+		
+		var tabBar = this.getApplication().getCenter().getTabBar();
+		var tab = tabBar.items.getAt(tabBar.items.findIndex('card', view));
+		if(tab != null){
+			tab.on('afterrender', function(tab){
+				new Ext.dd.DropTarget(tab.getEl(), {
+					ddGroup: this.ddGroup,
+					notifyDrop: Ext.bind(function(source, event, data){
+						//Make copies of the records
+						var records = [];
+						Ext.each(data.records, function(record){
+							var copy = record.copy();
+							Ext.data.Model.id(copy);
+							records.push(copy);
+						}, this);
+						
+						this.playlist.getStore().add(records);
+					}, this)
+				});
+			}, this);
+		}
 	},
 	
 	///////////////////////////////////////////////////////////////////////////

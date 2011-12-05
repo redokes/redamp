@@ -81,7 +81,7 @@ Ext.define('RedAmp.music.playlist.DragZone', {
 		//Setup the drag data
 		Ext.apply(dragData, {
 			event: new Ext.EventObjectImpl(e),
-			view: view,
+			playlist: this.playlist,
 			item: item,
 			ddel: this.ddel.dom
 		});
