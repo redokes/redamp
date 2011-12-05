@@ -43,10 +43,6 @@ Ext.define('RedAmp.source.local.dd.TreeDragZone', {
 		//update the el
 		this.updateDragEl(dragData);
 		
-		setTimeout(Ext.bind(function(){
-			console.log(this.getProxy().getEl().dom);
-		}, this), 500);
-		
 		//return the data
 		return dragData;
     },
@@ -75,6 +71,6 @@ Ext.define('RedAmp.source.local.dd.TreeDragZone', {
 	},
 	
 	updateDragEl: function(dragData){
-		this.ddel.update(dragData.records.length);
+		this.ddel.update("+ " + dragData.records.length + " file(s)");
 	}
 });

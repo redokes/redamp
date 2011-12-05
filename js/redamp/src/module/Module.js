@@ -193,6 +193,9 @@ Ext.define('RedAmp.module.Module', {
 					title: this.title
 				});
 				
+				//Set creating view to false
+				this.creatingView = false;
+				
 				//Set up show event
 				this.view.on('show', function(){
 					//Fire the show event
@@ -206,11 +209,8 @@ Ext.define('RedAmp.module.Module', {
 				regionPanel.add(this.getView());
 				regionPanel.setLoading(false);
 				
-				//Set creating view to false
-				this.creatingView = false;
-				
 				//Set the view active
-				this.setViewActive();
+				//this.setViewActive();
 				
 			}, this);
 		}
@@ -262,7 +262,7 @@ Ext.define('RedAmp.module.Module', {
 		}
 		
 		//Add history to the application
-		this.getApplication().addHistory(this.getModuleName());
+		//this.getApplication().addHistory(this.getModuleName());
 		
 		//Set the view to active
 		this.getApplication().setActive(this.getView());

@@ -5,8 +5,11 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		'RedAmp.model.Audio'
 	],
 	
-	//config
+	///////////////////////////////////////////////////////////////////////////
+	// Config
+	///////////////////////////////////////////////////////////////////////////
 	player: null,
+	albumSelector: '.playlist-album-item',
 	itemSelector: '.view-item',
 	emptyText: '<div class="playlist-empty-text">Drop files here....</div>',
 	deferEmptyText: false,
@@ -14,7 +17,12 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	playingCls: 'playing',
 	trackOver: true,
 	autoScroll: true,
+	multiSelect: true,
 	
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Inits
+	///////////////////////////////////////////////////////////////////////////
 	initComponent: function(){
 		this.items = this.items || [];
 		this.init();
@@ -63,11 +71,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 			this.refresh();
 		}, this);
 		
-		this.on('refresh', function(){
-			Ext.each(this.store.data.items, function(record){
-				Ext.create('RedAmp.music.playlist.Item', this, record);
-			}, this);
-		}, this);
+		this.on('refresh', this.onRefreshView, this);
 	},
 	
 	initDragZone: function() {
@@ -111,6 +115,16 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		});
 	},
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Accessors
+	///////////////////////////////////////////////////////////////////////////
+	getAlbumSelector: function(){
+		return this.albumSelector;
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods
+	///////////////////////////////////////////////////////////////////////////
 	play: function(record){
 		if(this.player == null){
 			return
@@ -136,5 +150,44 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	
 	clear: function(){
 		this.store.removeAll();
+	},
+	
+	createAlbum: function(artist, album, records){
+		if(!artist.length || !album.length || records.length < 2){
+			return;
+		}
+		
+		Ext.create('RedAmp.music.playlist.Album', this, artist, album, records);
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// On Events
+	///////////////////////////////////////////////////////////////////////////
+	onRefreshView: function(){
+		//Create all the items
+		this.getStore().each( function(record){
+			Ext.create('RedAmp.music.playlist.Item', this, record);
+		}, this);
+		
+		//Find albums
+		var currentAlbum = false;
+		var currentArtist = false;
+		var albumRecords = [];
+		this.getStore().each(function(record){
+			var artist = record.get('artist');
+			var album = record.get('album');
+			if(!currentArtist || !currentAlbum){
+				currentArtist = artist;
+				currentAlbum = album;
+			}
+			if(artist != currentArtist || album != currentAlbum){
+				this.createAlbum(currentArtist, currentAlbum, albumRecords);
+				currentArtist = artist;
+				currentAlbum = album;
+				albumRecords = [];
+			}
+			albumRecords.push(record);
+		}, this);
+		this.createAlbum(currentArtist, currentAlbum, albumRecords);
 	}
 });

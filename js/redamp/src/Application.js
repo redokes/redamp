@@ -91,7 +91,9 @@ Ext.define('RedAmp.Application', {
 		this.on('afterrender', function(){
 			//this.initLocation();
 			this.onModuleReady('stream', function(stream){
-				stream.show();
+				stream.onViewReady(function(stream){
+					stream.getView().show();
+				}, this);
 			}, this);
 		}, this);
 	},
@@ -342,6 +344,7 @@ Ext.define('RedAmp.Application', {
 	 * @param {Ext.component.Component} item
      */
 	setActive: function(item){
+		console.log(item);
 		this.getCenter().setActiveTab(item);
 	},
 	

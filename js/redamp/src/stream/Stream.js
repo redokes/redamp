@@ -17,7 +17,6 @@ Ext.define('RedAmp.stream.Stream', {
 	//Init Functions
 	init: function(){
 		this.initWelcomeMessage();
-		//this.initStreamHandler();
 	},
 	
 	initWelcomeMessage: function(){
@@ -51,19 +50,6 @@ Ext.define('RedAmp.stream.Stream', {
 			}, this);
 			
 		}, this);
-	},
-	
-	initStreamHandler: function(){
-		Ext.create('Redokes.socket.client.Handler', {
-			scope: this,
-			client: this.getApplication().getSocketClient(),
-			module: 'stream',
-			actions: {
-				message: function(handler, response){
-					this.addMessage(response.data);
-				}
-			}
-		});
 	},
 		
 	//Helper Functions

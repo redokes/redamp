@@ -36,7 +36,7 @@ Ext.define('RedAmp.music.playlist.DropZone', {
 	
 	onNodeOver: function(target, dd, event, data){
 		if(target == this.playlist.getEl()){
-			return;
+			return Ext.dd.DropZone.prototype.dropAllowed;
 		}
 		target = Ext.get(target);
 		
@@ -67,6 +67,7 @@ Ext.define('RedAmp.music.playlist.DropZone', {
 				}
 			});
 		}
+        return Ext.dd.DropZone.prototype.dropAllowed;
 	},
 	
 	onNodeDrop : function(target, dd, event, data){
