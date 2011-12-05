@@ -281,13 +281,7 @@ Ext.define('RedAmp.music.Player', {
 		var percentage = this.getPlayPercentage();
 		
 		//Update the progress
-		this.progressEl.stopAnimation();
-		this.progressEl.animate({
-			to: {
-				width: this.progressContainerEl.getWidth() * (percentage / 100)
-			}
-		});
-		//this.progressEl.setWidth(percentage + "%");
+		this.progressEl.setWidth(percentage + "%");
 		
 		//Update the text
 		this.timeEl.update("-" + remainingMinutes + ':' + (remainingSeconds > 9 ? remainingSeconds : '0' + remainingSeconds));
