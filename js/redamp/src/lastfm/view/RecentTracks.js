@@ -63,15 +63,20 @@ Ext.define('RedAmp.lastfm.view.RecentTracks', {
 						'<span>{artist.text} - {name}</span>',
 					'</div>',
 					'<div class="date">',
-						'{[this.formatDate(values.date.uts)]}',
+						'{[this.formatDate(values.date.uts, values)]}',
 					'</div>',
 				'</div>',
 			'</tpl>',
 			{
-				formatDate: function(date){
+				formatDate: function(date, values){
 					var d = new Date();
-					d.setTime(date * 1000);
-					return Ext.util.Format.date(d, 'F j, Y g:i a');
+					if(values.attr.nowplaying != null && values.attr.nowplaying == "true"){
+						return 'now playing';
+					}
+					else{
+						d.setTime(date * 1000);
+						return Ext.util.Format.date(d, 'F j, Y g:i a');
+					}
 				}
 			}
 		);

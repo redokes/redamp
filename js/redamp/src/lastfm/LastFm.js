@@ -95,7 +95,8 @@ Ext.define('RedAmp.lastfm.LastFm', {
 			method: 'updateNowPlaying',
 			params:{
 				track: track.get('title'),
-				artist: track.get('artist')
+				artist: track.get('artist'),
+				album: track.get('album')
 			},
 			callback: function(response){
 				if(response.success){
@@ -114,8 +115,18 @@ Ext.define('RedAmp.lastfm.LastFm', {
 		if(percentagePlayed < 50){
 			return;
 		}
-		
-		//Scrobble the track
+		this.scrobble(track);
+	},
+	
+	onShowAuth: function(){
+		if(this.api.isAuthenticated()){
+			return;
+		}
+		this.getView().getEl().mask();
+		this.authWindow.show();
+	},
+	
+	scrobble: function(track){
 		this.api.request({
 			scope: this,
 			signed: true,
@@ -125,7 +136,8 @@ Ext.define('RedAmp.lastfm.LastFm', {
 			params:{
 				timestamp: RedAmp.util.Util.getUnixTimestamp(),
 				track: track.get('title'),
-				artist: track.get('artist')
+				artist: track.get('artist'),
+				album: track.get('album')
 			},
 			callback: function(response){
 				if(response.success){
@@ -139,13 +151,5 @@ Ext.define('RedAmp.lastfm.LastFm', {
 				}
 			}
 		});
-	},
-	
-	onShowAuth: function(){
-		if(this.api.isAuthenticated()){
-			return;
-		}
-		this.getView().getEl().mask();
-		this.authWindow.show();
 	}
 });

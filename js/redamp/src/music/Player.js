@@ -288,6 +288,7 @@ Ext.define('RedAmp.music.Player', {
 	},
 	
 	onEnded: function(){
+		this.stop();
 		this.fireEvent('complete', this, this.getCurrentTrack());
 	},
 	
