@@ -325,3 +325,32 @@ div::-webkit-scrollbar-track {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 
 }
+
+/******************************************
+* Last Fm Module
+******************************************/
+.lastfm-recent-track{
+	position: relative;
+	padding: 10px;
+}
+
+.lastfm-recent-track .image{
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	width: 34px;
+	height: 34px;
+	overflow: hidden;
+}
+
+.lastfm-recent-track .display{
+	padding-left: 40px;
+	font-weight: bold;
+}
+
+.lastfm-recent-track .date{
+	padding-left: 40px;
+	padding-top: 3px;
+	font-size: 10px;
+	font-style: italic;
+}

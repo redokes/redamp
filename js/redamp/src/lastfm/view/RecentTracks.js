@@ -8,7 +8,7 @@ Ext.define('RedAmp.lastfm.view.RecentTracks', {
 	
 	//config
 	itemSelector: '.view-item',
-	emptyText: '<div class="playlist-empty-text">No recent tracks...</div>',
+	emptyText: '<div class="empty-text">No recent tracks...</div>',
 	deferEmptyText: false,
 	overItemCls: 'view-hover',
 	trackOver: true,
@@ -55,10 +55,25 @@ Ext.define('RedAmp.lastfm.view.RecentTracks', {
 	initTpl: function() {
 		this.tpl = Ext.create('Ext.XTemplate', 
 			'<tpl for=".">',
-				'<div class="playlist-item view-item x-unselectable">',
-				  '<span>{artist.text} - {name}</span>',
+				'<div class="lastfm-recent-track view-item x-unselectable">',
+					'<div class="image">',
+						'<img src="{[values.image[0].text]}" />',
+					'</div>',
+					'<div class="display">',
+						'<span>{artist.text} - {name}</span>',
+					'</div>',
+					'<div class="date">',
+						'{[this.formatDate(values.date.uts)]}',
+					'</div>',
 				'</div>',
-			'</tpl>'
+			'</tpl>',
+			{
+				formatDate: function(date){
+					var d = new Date();
+					d.setTime(date * 1000);
+					return Ext.util.Format.date(d, 'F j, Y g:i a');
+				}
+			}
 		);
 	}
 });
