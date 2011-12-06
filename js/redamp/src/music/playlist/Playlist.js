@@ -14,10 +14,11 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	emptyText: '<div class="playlist-empty-text">Drop files here....</div>',
 	deferEmptyText: false,
 	overItemCls: 'view-hover',
-	playingCls: 'playing',
 	trackOver: true,
 	autoScroll: true,
 	multiSelect: true,
+	playlistItems: false,
+	playingCls: 'playing',
 	
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -25,6 +26,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	///////////////////////////////////////////////////////////////////////////
 	initComponent: function(){
 		this.items = this.items || [];
+		this.playlistItems = new Ext.util.MixedCollection();
 		this.init();
 		this.callParent(arguments);
 	},
@@ -71,7 +73,9 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 			this.refresh();
 		}, this);
 		
-		this.on('refresh', this.onRefreshView, this);
+		this.on('refresh', this.onRefreshView, this, { buffer: 100});
+		
+		this.on('itemupdate', this.onItemUpdate, this);
 	},
 	
 	initDragZone: function() {
@@ -130,15 +134,10 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 			return
 		}
 		
-		//If there is a currentlyPlaying remove the class
-		if(this.currentlyPlaying != null){
-			Ext.get(this.getNode(this.currentlyPlaying)).removeCls(this.playingCls);
-		}
-		
+		//Tell the player to play the record
 		this.currentlyPlaying = record;
 		this.player.play(record);
 		this.select(record);
-		Ext.get(this.getNode(this.currentlyPlaying)).addCls(this.playingCls);
 	},
 	
 	next: function(){
@@ -164,11 +163,19 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	// On Events
 	///////////////////////////////////////////////////////////////////////////
 	onRefreshView: function(){
+		//Destroy any current items
+		this.playlistItems.each(function(item){
+			item.destroy();
+		}, this);
+		this.playlistItems.clear();
+		
 		//Create all the items
 		this.getStore().each( function(record){
-			Ext.create('RedAmp.music.playlist.Item', this, record);
+			var item = Ext.create('RedAmp.music.playlist.Item', this, record);
+			this.playlistItems.add(record.internalId, item);
 		}, this);
 		
+		return;
 		//Find albums
 		var currentAlbum = false;
 		var currentArtist = false;
@@ -189,5 +196,12 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 			albumRecords.push(record);
 		}, this);
 		this.createAlbum(currentArtist, currentAlbum, albumRecords);
+	},
+	
+	onItemUpdate: function(record){
+		this.playlistItems.get(record.internalId).destroy();
+		this.playlistItems.removeAtKey(record.internalId);
+		var item = Ext.create('RedAmp.music.playlist.Item', this, record);
+		this.playlistItems.add(record.internalId, item);
 	}
 });

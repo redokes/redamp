@@ -1,0 +1,1159 @@
+3.2.0.alpha.0 (Bleeding Edge)
+df43ce98ccd58f5622da9f73e7bbb0ec83b6a2ee
+o:Sass::Tree::RootNode
+:@has_childrenT:@options{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@template"'\@mixin extjs-grid {
+    //main grid view
+    .#{$prefix}panel {
+        .#{$prefix}grid-body {
+            background: $panel-body-background-color;
+            border-color: $panel-body-border-color;
+            border-style: $panel-body-border-style;
+            border-width: 1px;
+            border-top-color: $grid-header-background-color;
+        }
+
+        // Still needs left and right border even if it's not visible so that its available width can be calculated correctly
+        .#{$prefix}grid-header-ct-hidden {
+            border-top-width: 0 !important;
+        }
+    }
+
+    .#{$prefix}grid-header-hidden .#{$prefix}grid-body {
+        border-top-color: $panel-body-border-color !important;
+    }
+
+    .#{$prefix}grid-view {
+        overflow: hidden;
+
+        position: relative;
+    }
+
+    .#{$prefix}grid-table {
+        table-layout: fixed;
+        border-collapse: separate;
+    }
+
+    .#{$prefix}grid-row .#{$prefix}grid-table {
+        border-collapse: collapse;
+    }
+
+    .#{$prefix}grid-locked .#{$prefix}grid-inner-locked {
+        border-width: 0 1px 0 0 !important;
+        border-style: solid;
+    }
+
+    .#{$prefix}grid-header-ct {
+        cursor: default;
+        zoom: 1;
+        padding: 0;
+        border: 1px solid $panel-body-border-color;
+
+        @if $supports-gradients or $compile-all {
+            @include background-gradient($grid-header-background-color, $grid-header-background-gradient);
+        }
+    }
+
+    .#{$prefix}accordion-item .#{$prefix}grid-header-ct {
+        border: 0 none;
+    }
+
+    @if $include-ie or $compile-all {
+        .#{$prefix}border-box .#{$prefix}ie9 {
+            .#{$prefix}grid-header-ct {
+                padding-left: 1px;
+            }
+        }
+        .#{$prefix}ie6, .#{$prefix}ie7 {
+            .#{$prefix}grid-header-ct {
+                padding-left: 1px;
+            }
+        }
+
+    }
+
+    .#{$prefix}column-header {
+        padding: 0;
+        position: absolute;
+        overflow: hidden;
+
+        border-right: 1px solid $grid-header-background-color;
+        border-left: 0 none;
+        border-top: 0 none;
+        border-bottom: 0 none;
+
+        text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+        font: normal 11px/15px $font-family;
+
+        @if $grid-header-color {
+            color: $grid-header-color;
+        }
+        font: normal ceil($font-size * .9) $font-family;
+
+        @if $supports-gradients or $compile-all {
+            @include background-gradient($grid-header-background-color, $grid-header-background-gradient);
+        }
+    }
+
+    .#{$prefix}group-header {
+        padding: 0;
+        border-left-width: 0;
+    }
+    .#{$prefix}group-sub-header {
+        background: transparent;
+        border-top: 1px solid $grid-header-background-color;
+        border-left-width: 0;
+    }
+
+    .#{$prefix}column-header-inner {
+        zoom: 1;
+        position: relative;
+        white-space: nowrap;
+        line-height: 22px;
+        padding: $grid-header-padding;
+
+        .#{$prefix}column-header-text {
+            white-space: nowrap;
+        }
+    }
+
+    .#{$prefix}column-header-over,
+    .#{$prefix}column-header-sort-ASC,
+    .#{$prefix}column-header-sort-DESC {
+        border-left-color: $grid-header-over-border-color;
+        border-right-color: $grid-header-over-border-color;
+
+        @if $supports-gradients or $compile-all {
+            @include background-gradient($grid-header-over-background-color, $grid-header-over-background-gradient);
+        }
+    }
+
+    @if not $supports-gradients or $compile-all {
+        .#{$prefix}nlg {
+            .#{$prefix}grid-header-ct,
+            .#{$prefix}column-header {
+                background: repeat-x 0 top;
+                background-image: theme-background-image($theme-name, 'grid/column-header-bg.gif');
+            }
+
+            .#{$prefix}column-header-over,
+            .#{$prefix}column-header-sort-ASC,
+            .#{$prefix}column-header-sort-DESC {
+                background: #ebf3fd repeat-x 0 top;
+                background-image: theme-background-image($theme-name, 'grid/column-header-over-bg.gif');
+            }
+        }
+    }
+
+    .#{$prefix}column-header-trigger {
+        display: none;
+        height: 100%;
+        width: $grid-header-trigger-width;
+        background: no-repeat left center;
+        background-color: #c3daf9;
+        background-image: theme-background-image($theme-name, 'grid/grid3-hd-btn.gif');
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .#{$prefix}column-header-over, .#{$prefix}column-header-open {
+        .#{$prefix}column-header-trigger {
+            display: block;
+        }
+    }
+
+    .#{$prefix}column-header-align-right {
+        text-align: right;
+
+        .#{$prefix}column-header-text {
+            padding-right: 0.5ex;
+            margin-right: 6px;
+        }
+    }
+    .#{$prefix}column-header-align-center {
+        text-align: center;
+    }
+    .#{$prefix}column-header-align-left {
+        text-align: left;
+    }
+
+    // Sort direction indicator is a background of the text span.
+    .#{$prefix}column-header-sort-ASC .#{$prefix}column-header-text {
+        padding-right: 16px;
+        background: no-repeat right 6px;
+        background-image: theme-background-image($theme-name, 'grid/sort_asc.gif');
+    }
+    .#{$prefix}column-header-sort-DESC .#{$prefix}column-header-text {
+        padding-right: 16px;
+        background: no-repeat right 6px;
+        background-image: theme-background-image($theme-name, 'grid/sort_desc.gif');
+    }
+
+    //grid rows
+    .#{$prefix}grid-row {
+        line-height: 13px;
+
+        vertical-align: top;
+
+        padding: $grid-row-padding;
+
+        @include no-select;
+
+        .#{$prefix}grid-cell {
+            @if $grid-row-cell-color {
+                color: $grid-row-cell-color;
+            }
+            font: $grid-row-cell-font;
+            background-color: $grid-row-cell-background;
+            border-color: $grid-row-cell-border-color;
+            border-style: $grid-row-cell-border-style;
+            border-width: $grid-row-cell-border-width;
+            border-top-color: lighten($grid-row-cell-border-color, 5);
+        }
+    }
+
+    .#{$prefix}grid-rowwrap-div {
+        border-width: $grid-row-wrap-border-width;
+        border-color: $grid-row-wrap-border-color;
+        border-style: $grid-row-wrap-border-style;
+        border-top-color: lighten($grid-row-wrap-border-color, 5);
+
+        overflow: hidden;
+    }
+
+    .#{$prefix}grid-row-alt .#{$prefix}grid-cell,
+    .#{$prefix}grid-row-alt .#{$prefix}grid-rowwrap-div {
+        background-color: $grid-row-cell-alt-background;
+    }
+
+    .#{$prefix}grid-row-over .#{$prefix}grid-cell,
+    .#{$prefix}grid-row-over .#{$prefix}grid-rowwrap-div {
+        border-color: $grid-row-cell-over-border-color;
+
+        background-color: $grid-row-cell-over-background-color;
+    }
+
+    .#{$prefix}grid-row-focused .#{$prefix}grid-cell,
+    .#{$prefix}grid-row-focused .#{$prefix}grid-rowwrap-div {
+        border-color: $grid-row-cell-focus-border-color;
+
+        background-color: $grid-row-cell-focus-background-color;
+    }
+
+    .#{$prefix}grid-row-selected .#{$prefix}grid-cell,
+    .#{$prefix}grid-row-selected .#{$prefix}grid-rowwrap-div {
+        border-style: $grid-row-cell-selected-border-style;
+        border-color: $grid-row-cell-selected-border-color;
+
+        background-color: $grid-row-cell-selected-background-color !important;
+    }
+
+    .#{$prefix}grid-rowwrap-div {
+        .#{$prefix}grid-cell,
+        .#{$prefix}grid-cell-inner {
+            border-width: 0;
+
+            background: transparent;
+        }
+    }
+
+    .#{$prefix}grid-row-body-hidden {
+        display: none;
+    }
+
+    .#{$prefix}grid-rowbody {
+        font: $grid-row-body-font;
+
+        padding: $grid-row-body-padding;
+
+        p {
+            margin: 5px 5px 10px 5px;
+        }
+    }
+
+    //grid cells
+    .#{$prefix}grid-cell {
+        overflow: hidden;
+
+        font: $grid-cell-font;
+
+        @include no-select;
+    }
+
+    .#{$prefix}grid-cell-inner {
+        overflow: hidden;
+
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+
+        padding: $grid-cell-inner-padding;
+
+        white-space: nowrap;
+    }
+
+    // Action columns with a standard, 16x16 icon require less padding
+    .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
+        padding: 1px 2px 0 2px;
+    }
+
+    .#{$prefix}ie6,
+    .#{$prefix}ie7,
+    .#{$prefix}quirks .#{$prefix}ie9,
+    .#{$prefix}quirks .#{$prefix}ie8,
+    .#{$prefix}strict .#{$prefix}ie8 {
+        .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
+            padding: 2px 2px 1px 2px;
+        }
+    }
+
+    .#{$prefix}grid-row .#{$prefix}grid-cell-special {
+        padding: 0;
+        border-right: 1px solid $grid-cell-with-col-lines-border-color;
+
+        @include background-gradient(#f6f6f6, 'grid-cell-special');
+    }
+
+    /*
+    IE6-8 have issues with shrinking the TR to 0px (even w/line-height=0), so we
+    use an IE-specific trick to make the row disappear. We cannot do this on any
+    other browser, because it is not a non-standard thing to do and those other
+    browsers will do whacky things with it.
+    */
+
+    .#{$prefix}ie6,
+    .#{$prefix}ie7,
+    .#{$prefix}quirks .#{$prefix}ie8,
+    .#{$prefix}strict .#{$prefix}ie8 {
+        .#{$prefix}grid-header-row {
+            position: absolute;
+        }
+    }
+
+    .#{$prefix}grid-row-selected .#{$prefix}grid-cell-special {
+        border-right: 1px solid adjust-color($base-color, $hue: -0.175deg, $saturation: 25.296%, $lightness: -2.549%);
+
+        @include background-gradient($grid-row-cell-selected-background-color, 'grid-cell-special');
+    }
+
+    .#{$prefix}grid-dirty-cell {
+        background-image: theme-background-image($theme-name, 'grid/dirty.gif');
+        background-position: 0 0;
+        background-repeat: no-repeat;
+    }
+
+    .#{$prefix}grid-cell-selected {
+        background-color: #B8CFEE !important;
+    }
+
+    @if not $supports-gradients or $compile-all {
+        .#{$prefix}nlg {
+            .#{$prefix}grid-cell-special {
+                background-repeat: repeat-y;
+                background-position: top right;
+            }
+
+            .#{$prefix}grid-row .#{$prefix}grid-cell-special,
+            .#{$prefix}grid-row-over .#{$prefix}grid-cell-special {
+                background-image: theme-background-image($theme-name, 'grid/cell-special-bg.gif');
+
+            }
+
+            .#{$prefix}grid-row-focused .#{$prefix}grid-cell-special,
+            .#{$prefix}grid-row-selected .#{$prefix}grid-cell-special {
+                background-image: theme-background-image($theme-name, 'grid/cell-special-selected-bg.gif');
+            }
+        }
+    }
+
+    //this is panel as gridpanel doesn't use a baseCls
+    .#{$prefix}panel-with-col-lines .#{$prefix}grid-row .#{$prefix}grid-cell {
+        padding-right: 0;
+        border-right: 1px solid $grid-cell-with-col-lines-border-color;
+    }
+
+    @if $include-ie {
+        .#{$prefix}ie {
+            .#{$prefix}grid-cell-special {
+                border-right-width: 0 !important;
+            }
+        }
+    }
+
+    .#{$prefix}property-grid {
+        .#{$prefix}grid-row .#{$prefix}grid-cell-inner {
+            padding: 3px 6px 5px;
+        }
+
+        .#{$prefix}grid-row .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner,
+        .#{$prefix}grid-row-over .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner {
+            padding-left: 12px;
+            background-image: theme-background-image($theme-name, 'grid/property-cell-bg.gif');
+            background-repeat: no-repeat;
+            background-position: -16px 1px;
+        }
+    }
+
+    @if $include-ie {
+        .#{$prefix}quirks .#{$prefix}ie .#{$prefix}grid-row .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner {
+            background-position: -16px 2px;
+        }
+    }
+
+    .#{$prefix}unselectable {
+        @include no-select;
+    }
+
+    .#{$prefix}grid-row-body-hidden {
+        display: none;
+    }
+
+    .#{$prefix}grid-group-collapsed {
+        display: none;
+    }
+
+    //grid expander
+    .#{$prefix}grid-view {
+        .#{$prefix}grid-td-expander {
+            vertical-align: top;
+        }
+    }
+
+    .#{$prefix}grid-td-expander {
+        background: repeat-y right transparent;
+    }
+
+    .#{$prefix}grid-view {
+        .#{$prefix}grid-td-expander {
+            .#{$prefix}grid-cell-inner {
+                padding: 0 !important;
+            }
+        }
+    }
+
+    .#{$prefix}grid-row-expander {
+        background-image: theme-background-image($theme-name, 'grid/group-collapse.gif');
+        background-color: transparent;
+
+        width: 9px;
+        height: 13px;
+
+        margin-left: 3px;
+
+        background-repeat: no-repeat;
+        background-position: 0 -2px;
+    }
+
+    .#{$prefix}grid-row-collapsed {
+        .#{$prefix}grid-row-expander {
+            background-image: theme-background-image($theme-name, 'grid/group-expand.gif');
+        }
+    }
+
+    .#{$prefix}grid-resize-marker {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        width: 1px;
+        background-color: #0f0f0f;
+    }
+
+    //column move icons, when moving columns
+    .col-move-top,
+    .col-move-bottom {
+        width: 9px;
+        height: 9px;
+        position: absolute;
+        top: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+        z-index: 20000;
+        background: no-repeat left top transparent;
+    }
+
+    .col-move-top {
+        background-image: theme-background-image($theme-name, 'grid/col-move-top.gif');
+    }
+
+    .col-move-bottom {
+        background-image: theme-background-image($theme-name, 'grid/col-move-bottom.gif');
+    }
+
+    //pading toolbar
+    .#{$prefix}tbar-page-number {
+        width: 30px;
+    }
+
+    //grouped grid
+    .#{$prefix}grid-group,
+    .#{$prefix}grid-group-body,
+    .#{$prefix}grid-group-hd {
+        zoom: 1;
+    }
+
+    .#{$prefix}grid-group-hd {
+        padding-top: 6px;
+
+        .#{$prefix}grid-cell-inner {
+            padding: 10px 4px 4px 4px;
+
+            background: $grid-grouped-header-background-color;
+
+            border-width: $grid-grouped-header-border-width;
+            border-style: $grid-grouped-header-border-style;
+            border-color: $grid-grouped-header-border-color;
+
+            cursor: pointer;
+        }
+    }
+
+    .#{$prefix}grid-group-title {
+        background: transparent no-repeat 0 -1px;
+        background-image: theme-background-image($theme-name, 'grid/group-collapse.gif');
+
+        color: $grid-grouped-title-color;
+        font: $grid-grouped-title-font;
+
+        padding: 0 0 0 14px;
+    }
+
+    .#{$prefix}grid-group-hd-collapsed {
+        .#{$prefix}grid-group-title {
+            background-image: theme-background-image($theme-name, 'grid/group-expand.gif');
+        }
+    }
+
+    .#{$prefix}grid-group-collapsed .#{$prefix}grid-group-body {
+        display: none;
+    }
+
+    .#{$prefix}grid-group-collapsed .#{$prefix}grid-group-title {
+        background-image: theme-background-image($theme-name, 'grid/group-expand.gif');
+    }
+
+    .#{$prefix}group-by-icon {
+        background-image: theme-background-image($theme-name, 'grid/group-by.gif');
+    }
+
+    .#{$prefix}show-groups-icon {
+        background-image: theme-background-image($theme-name, 'grid/group-by.gif');
+    }
+
+    .#{$prefix}column-header-checkbox .#{$prefix}column-header-inner {
+        padding: 1px;
+    }
+
+    .#{$prefix}grid-cell-special .#{$prefix}grid-cell-inner {
+        padding: 4px;
+    }
+
+    .#{$prefix}grid-row-checker,
+    .#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
+        height: 14px;
+        width: 14px;
+        background-image: theme-background-image($theme-name, 'grid/unchecked.gif');
+        background-position: -1px -1px;
+        background-repeat: no-repeat;
+        background-color: transparent;
+    }
+
+    // Row checker is a div but column header checker is the text span element, so make it display: block
+    // Header checkbox element needs centering
+    .#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
+        display: block;
+        margin-top: 4px;
+        margin-left: 4px;
+    }
+
+    @if $include-ie or $compile-all {
+        /* All IE Quirks mode need to squish the header height or the line-height will become too tall */
+        /* IE6 always needs the hack regardless of quirks/strict */
+        .#{$prefix}quirks .#{$prefix}ie, .#{$prefix}ie6 {
+            .#{$prefix}column-header-checkbox .#{$prefix}column-header-inner {
+                line-height: 18px;
+            }
+        }
+
+        /* IE 6, 7 & 9 are 1px too far to the right when centering, drop the margin 1px. */
+        .#{$prefix}ie6, .#{$prefix}ie7, .#{$prefix}ie9 {
+            .#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
+                margin-left: 3px;
+            }
+        }
+    }
+
+    .#{$prefix}grid-hd-checker-on .#{$prefix}column-header-text {
+        background-image: theme-background-image($theme-name, 'grid/checked.gif');
+    }
+
+    .#{$prefix}grid-row-checker {
+        margin-left: 1px;
+
+        background-position: 50% -2px;
+    }
+
+    .#{$prefix}grid-row-selected .#{$prefix}grid-row-checker,
+    .#{$prefix}grid-row-checked .#{$prefix}grid-row-checker {
+        background-image: theme-background-image($theme-name, 'grid/checked.gif');
+    }
+
+    //grid icons
+    .#{$prefix}tbar-page-first {
+        background-image: theme-background-image($theme-name, 'grid/page-first.gif') !important;
+    }
+
+    .#{$prefix}tbar-loading {
+        background-image: theme-background-image($theme-name, 'grid/refresh.gif') !important;
+    }
+
+    .#{$prefix}tbar-page-last {
+        background-image: theme-background-image($theme-name, 'grid/page-last.gif') !important;
+    }
+
+    .#{$prefix}tbar-page-next {
+        background-image: theme-background-image($theme-name, 'grid/page-next.gif') !important;
+    }
+
+    .#{$prefix}tbar-page-prev {
+        background-image: theme-background-image($theme-name, 'grid/page-prev.gif') !important;
+    }
+
+    .#{$prefix}item-disabled {
+        .#{$prefix}tbar-loading {
+            background-image: theme-background-image($theme-name, 'grid/refresh-disabled.gif') !important;
+        }
+
+        .#{$prefix}tbar-page-first {
+            background-image: theme-background-image($theme-name, 'grid/page-first-disabled.gif') !important;
+        }
+
+        .#{$prefix}tbar-page-last {
+            background-image: theme-background-image($theme-name, 'grid/page-last-disabled.gif') !important;
+        }
+
+        .#{$prefix}tbar-page-next {
+            background-image: theme-background-image($theme-name, 'grid/page-next-disabled.gif') !important;
+        }
+
+        .#{$prefix}tbar-page-prev {
+            background-image: theme-background-image($theme-name, 'grid/page-prev-disabled.gif') !important;
+        }
+    }
+
+    //menu icons
+    .#{$prefix}hmenu-sort-asc .#{$prefix}menu-item-icon {
+        background-image: theme-background-image($theme-name, 'grid/hmenu-asc.gif');
+    }
+
+    .#{$prefix}hmenu-sort-desc .#{$prefix}menu-item-icon {
+        background-image: theme-background-image($theme-name, 'grid/hmenu-desc.gif');
+    }
+
+    .#{$prefix}hmenu-lock .#{$prefix}menu-item-icon {
+        background-image: theme-background-image($theme-name, 'grid/hmenu-lock.gif');
+    }
+
+    .#{$prefix}hmenu-unlock .#{$prefix}menu-item-icon {
+        background-image: theme-background-image($theme-name, 'grid/hmenu-unlock.gif');
+    }
+
+    .#{$prefix}group-by-icon {
+        background-image: theme-background-image($theme-name, 'grid/group-by.gif');
+    }
+
+    .#{$prefix}cols-icon .#{$prefix}menu-item-icon {
+        background-image: theme-background-image($theme-name, 'grid/columns.gif');
+    }
+
+    .#{$prefix}show-groups-icon {
+        background-image: theme-background-image($theme-name, 'grid/group-by.gif');
+    }
+
+    // Drag/drop indicator styles
+    .#{$prefix}grid-drop-indicator {
+        position: absolute;
+        height: 1px;
+        line-height: 0px;
+        background-color: #77BC71;
+        overflow: visible;
+
+        .#{$prefix}grid-drop-indicator-left {
+            position: absolute;
+            top: -8px;
+            left: -12px;
+            background-image: theme-background-image($theme-name, 'grid/dd-insert-arrow-right.png');
+            height: 16px;
+            width: 16px;
+        }
+
+        .#{$prefix}grid-drop-indicator-right {
+            position: absolute;
+            top: -8px;
+            right: -11px;
+            background-image: theme-background-image($theme-name, 'grid/dd-insert-arrow-left.png');
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    .#{$prefix}ie6 {
+        .#{$prefix}grid-drop-indicator-left {
+            background-image: theme-background-image($theme-name, 'grid/dd-insert-arrow-right.gif');
+        }
+
+        .#{$prefix}grid-drop-indicator-right {
+            background-image: theme-background-image($theme-name, 'grid/dd-insert-arrow-left.gif');
+        }
+    }
+
+    // Row Editor
+    .#{$prefix}grid-row-editor {
+        position: absolute !important;
+        z-index: 1;
+        zoom: 1;
+        overflow: visible !important;
+
+        .#{$prefix}form-field {
+            font: $grid-row-editor-font;
+        }
+        .#{$prefix}form-display-field {
+            font: $grid-row-editor-font;
+            padding-top: 0;
+            padding-left: 4px;
+        }
+
+        .#{$prefix}panel-body {
+            background-color: $grid-row-editor-background-color;
+            border-top: $grid-row-editor-border;
+            border-bottom: $grid-row-editor-border;
+        }
+    }
+
+    // Perfect alignment of input text with cell text
+    .#{$prefix}grid-row-editor {
+        // Align input text with text value in cell
+        .#{$prefix}form-text {
+            padding-left: 2px;
+        }
+    }
+    .#{$prefix}grid-editor {
+        // Align checkboxes input
+        .#{$prefix}form-cb-wrap {
+            text-align: center;
+        }
+    }
+
+.#{$prefix}grid-row-editor-buttons {
+        background-color: $grid-row-editor-background-color;
+        position: absolute;
+        bottom: -31px;
+        padding: 4px;
+        width: 200px;
+        height: 32px;
+
+        .#{$prefix}strict & {
+            width: 192px;
+            height: 24px;
+        }
+
+        &-ml,
+        &-mr,
+        &-bl,
+        &-br,
+        &-bc {
+            position: absolute;
+            overflow: hidden;
+        }
+
+        &-bl,
+        &-br {
+            width: 4px;
+            height: 4px;
+            bottom: 0px;
+            background-image: theme-background-image($theme-name, 'panel/panel-default-framed-corners.gif');
+        }
+        &-bl {
+            left: 0px;
+            background-position: 0px -16px;
+        }
+        &-br {
+            right: 0px;
+            background-position: 0px -20px;
+        }
+
+        &-bc {
+            position: absolute;
+            left: 4px;
+            bottom: 0px;
+            width: 192px;
+            height: 1px;
+            background-color: $grid-row-editor-border-color;
+        }
+
+        &-ml,
+        &-mr {
+            height: 27px;
+            width: 1px;
+            top: 1px;
+            background-color: $grid-row-editor-border-color;
+        }
+        &-ml {
+            left: 0px
+        }
+        &-mr {
+            background-position: 0px -20px;
+            right: 0px;
+        }
+    }
+
+    .#{$prefix}grid-row-editor-errors {
+        ul {
+            margin-left: 5px;
+        }
+        li {
+            list-style: disc;
+            margin-left: 15px;
+        }
+    }
+}
+:
+@linei:@children[o:Sass::Tree::MixinDefNode;T:
+@name"extjs-grid;@:
+@args[ ;i;[to:Sass::Tree::CommentNode:@lines[ :
+@loud0:@value"/*main grid view */;@;i:@silenti ;[ o:Sass::Tree::RuleNode;T:
+@tabsi :
+@rule[".o:Sass::Script::Variable	;"prefix;{ :@underscored_name"prefix;i"
+panel;@;i;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;i	"grid-body;@;i	;[
+o:Sass::Tree::PropNode;i ;o;	;" panel-body-background-color;{ ;" panel_body_background_color;i
+;["background;@:@prop_syntax:new;i
+;[ o;;i ;o;	;"panel-body-border-color;{ ;"panel_body_border_color;i;["border-color;@;;;i;[ o;;i ;o;	;"panel-body-border-style;{ ;"panel_body_border_style;i;["border-style;@;;;i;[ o;;i ;o:Sass::Script::String;"1px:
+@type:identifier;["border-width;@;;;i;[ o;;i ;o;	;"!grid-header-background-color;{ ;"!grid_header_background_color;i;["border-top-color;@;;;i;[ o;;[ ;0;"}/* Still needs left and right border even if it's not visible so that its available width can be calculated correctly */;@;i;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-header-ct-hidden;@;i;[o;;i ;o;;"0 !important;; ;["border-top-width;@;;;i;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i"grid-header-hidden .o;	;"prefix;{ ;"prefix;i"grid-body;@;i;[o;;i ;o:Sass::Script::List	;[o;	;"panel-body-border-color;{ ;"panel_body_border_color;io;	;"!important;@q;i;; ;@q:@separator:
+space;i;["border-top-color;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-view;@;i;[o;;i ;o;;"hidden;; ;["overflow;@;;;i;[ o;;i ;o;;"relative;; ;["position;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i!"grid-table;@;i!;[o;;i ;o;;"
+fixed;; ;["table-layout;@;;;i";[ o;;i ;o;;"separate;; ;["border-collapse;@;;;i#;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i&"grid-row .o;	;"prefix;{ ;"prefix;i&"grid-table;@;i&;[o;;i ;o;;"collapse;; ;["border-collapse;@;;;i';[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i*"grid-locked .o;	;"prefix;{ ;"prefix;i*"grid-inner-locked;@;i*;[o;;i ;o;;"0 1px 0 0 !important;; ;["border-width;@;;;i+;[ o;;i ;o;;"
+solid;; ;["border-style;@;;;i,;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i/"grid-header-ct;@;i/;[
+o;;i ;o;;"default;; ;["cursor;@;;;i0;[ o;;i ;o;;"1;; ;["	zoom;@;;;i1;[ o;;i ;o;;"0;; ;["padding;@;;;i2;[ o;;i ;o;!	;[o:Sass::Script::Number;i;{ :@original"1px:@denominator_units[ ;i3:@numerator_units["pxo;	;"
+solid;@Í;i3;; o;	;"panel-body-border-color;@Í;"panel_body_border_color;i3;@Í;";#;i3;["border;@;;;i3;[ u:Sass::Tree::IfNodei[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei5:@operator:or;i5:@operand1o;	;	"supports-gradients;@;
+"supports_gradients;i50[o:Sass::Tree::MixinNode;	"background-gradient;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@keywords{ :
+@args[o;	;	"!grid-header-background-color;{ ;
+"!grid_header_background_color;i6o;	;	"$grid-header-background-gradient;@;
+"$grid_header_background_gradient;i6;i6:@children[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i:"accordion-item .o;	;"prefix;{ ;"prefix;i:"grid-header-ct;@;i:;[o;;i ;o;;"0 none;; ;["border;@;;;i;;[ u;(Œ[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei>:@operator:or;i>:@operand1o;	;	"include-ie;@;
+"include_ie;i>0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[
+".o;	;	"prefix;{ ;
+"prefix;i?"border-box .o;	;	"prefix;{ ;
+"prefix;i?"ie9;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;i?:@children[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;i@"grid-header-ct;@;i@;[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::String;"1px:
+@type:identifier;	["padding-left;@:@prop_syntax:new;iA;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;iD"ie6, .o;	;	"prefix;{ ;
+"prefix;iD"ie7;@;iD;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iE"grid-header-ct;@;iE;[o;;i ;o;;"1px;;;	["padding-left;@;;;iF;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iL"column-header;@;iL;[o;;i ;o;;"0;; ;["padding;@;;;iM;[ o;;i ;o;;"absolute;; ;["position;@;;;iN;[ o;;i ;o;;"hidden;; ;["overflow;@;;;iO;[ o;;i ;o;!	;[o;$;i;{ ;%"1px;&[ ;iQ;'["pxo;	;"
+solid;@,;iQ;; o;	;"!grid-header-background-color;@,;"!grid_header_background_color;iQ;@,;";#;iQ;["border-right;@;;;iQ;[ o;;i ;o;;"0 none;; ;["border-left;@;;;iR;[ o;;i ;o;;"0 none;; ;["border-top;@;;;iS;[ o;;i ;o;;"0 none;; ;["border-bottom;@;;;iT;[ o;;i ;o;!	;[	o;$;i ;{ ;%"0;&[ ;iV;'[ o;$;i;@O;%"1px;&[ ;iV;'["pxo;$;i ;@O;%"0;&@Q;iV;'[ o:Sass::Script::Funcall
+;"	rgba;@O:@keywords{ ;[	o;$;iˇ;@O;%"255;&@Q;iV;'[ o;$;iˇ;@O;%"255;&@Q;iV;'[ o;$;iˇ;@O;%"255;&@Q;iV;'[ o;$;f0.29999999999999999 33;@O;%"0.3;&@Q;iV;'[ ;iV;@O;";#;iV;["text-shadow;@;;;iV;[ o;;i ;o;!	;[o;	;"normal;{ ;iW;; o:Sass::Script::Operation
+;@t:@operand2o;$;i;@t;%"	15px;&[ ;iW;'["px:@operator:div;iW:@operand1o;$;i;@t;%"	11px;&[ ;iW;'["pxo;	;"font-family;@t;"font_family;iW;@t;";#;iW;["	font;@;;;iW;[ u;(é[o:Sass::Script::Variable	:
+@name"grid-header-color:@options{ :@underscored_name"grid_header_color:
+@lineiY0[o:Sass::Tree::PropNode:
+@tabsi :@valueo; 	;"grid-header-color;{ ;"grid_header_color;	iZ;["
+color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;	iZ:@children[ o;;i ;o;!	;[o;	;"normal;{ ;i\;; o;)
+;"	ceil;@å;*{ ;[o;+
+;@å;,o;$;f0.90000000000000002 ÃÕ;@å;%"0.9;&@Q;i\;'[ ;-:
+times;i\;/o;	;"font-size;@å;"font_size;i\;i\o;	;"font-family;@å;"font_family;i\;@å;";#;i\;["	font;@;;;i\;[ u;(i[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei^:@operator:or;i^:@operand1o;	;	"supports-gradients;@;
+"supports_gradients;i^0[o:Sass::Tree::MixinNode;	"background-gradient;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@keywords{ :
+@args[o;	;	"!grid-header-background-color;{ ;
+"!grid_header_background_color;i_o;	;	"$grid-header-background-gradient;@;
+"$grid_header_background_gradient;i_;i_:@children[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;ic"group-header;@;ic;[o;;i ;o;;"0;; ;["padding;@;;;id;[ o;;i ;o;;"0;; ;["border-left-width;@;;;ie;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;ig"group-sub-header;@;ig;[o;;i ;o;;"transparent;; ;["background;@;;;ih;[ o;;i ;o;!	;[o;$;i;{ ;%"1px;&[ ;ii;'["pxo;	;"
+solid;@»;ii;; o;	;"!grid-header-background-color;@»;"!grid_header_background_color;ii;@»;";#;ii;["border-top;@;;;ii;[ o;;i ;o;;"0;; ;["border-left-width;@;;;ij;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;im"column-header-inner;@;im;[o;;i ;o;;"1;; ;["	zoom;@;;;in;[ o;;i ;o;;"relative;; ;["position;@;;;io;[ o;;i ;o;;"nowrap;; ;["white-space;@;;;ip;[ o;;i ;o;;"	22px;; ;["line-height;@;;;iq;[ o;;i ;o;	;"grid-header-padding;{ ;"grid_header_padding;ir;["padding;@;;;ir;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;it"column-header-text;@;it;[o;;i ;o;;"nowrap;; ;["white-space;@;;;iu;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iy"column-header-over,
+    .o;	;"prefix;{ ;"prefix;iz""column-header-sort-ASC,
+    .o;	;"prefix;{ ;"prefix;i{"column-header-sort-DESC;@;i{;[o;;i ;o;	;""grid-header-over-border-color;{ ;""grid_header_over_border_color;i|;["border-left-color;@;;;i|;[ o;;i ;o;	;""grid-header-over-border-color;{ ;""grid_header_over_border_color;i};["border-right-color;@;;;i};[ u;(Ä[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei:@operator:or;i:@operand1o;	;	"supports-gradients;@;
+"supports_gradients;i0[o:Sass::Tree::MixinNode;	"background-gradient;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@keywords{ :
+@args[o;	;	"&grid-header-over-background-color;{ ;
+"&grid_header_over_background_color;i{o;	;	")grid-header-over-background-gradient;@;
+")grid_header_over_background_gradient;i{;i{:@children[ u;([o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei:@operator:or;i:@operand1o:!Sass::Script::UnaryOperation	:@operando;	;	"supports-gradients;@;
+"supports_gradients;i;@;:not;i0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;	"prefix;{ ;
+"prefix;iÄ"nlg;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;iÄ:@children[o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;iÅ""grid-header-ct,
+            .o;	;	"prefix;{ ;
+"prefix;iÇ"column-header;@;iÇ;[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::String;"repeat-x 0 top:
+@type:identifier;	["background;@:@prop_syntax:new;iÉ;[ o;;i ;o:Sass::Script::Funcall
+;	"theme-background-image;{ :@keywords{ :
+@args[o;	;	"theme-name;@3;
+"theme_name;iÑo;	;"grid/column-header-bg.gif;@3;iÑ;:string;iÑ;	["background-image;@;; ;iÑ;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iá"&column-header-over,
+            .o;	;	"prefix;{ ;
+"prefix;ià"*column-header-sort-ASC,
+            .o;	;	"prefix;{ ;
+"prefix;iâ"column-header-sort-DESC;@;iâ;[o;;i ;o;;"#ebf3fd repeat-x 0 top;;;	["background;@;; ;iä;[ o;;i ;o;!
+;	"theme-background-image;{ ;"{ ;#[o;	;	"theme-name;@Z;
+"theme_name;ião;	;"#grid/column-header-over-bg.gif;@Z;iã;;$;iã;	["background-image;@;; ;iã;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iê"column-header-trigger;@;iê;[o;;i ;o;;"	none;; ;["display;@;;;ië;[ o;;i ;o;;"	100%;; ;["height;@;;;ií;[ o;;i ;o;	;"grid-header-trigger-width;{ ;"grid_header_trigger_width;iì;["
+width;@;;;iì;[ o;;i ;o;;"no-repeat left center;; ;["background;@;;;iî;[ o;;i ;o;;"#c3daf9;; ;["background-color;@;;;iï;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@d;"theme_name;iño;	;"grid/grid3-hd-btn.gif;@d;iñ;:string;iñ;["background-image;@;;;iñ;[ o;;i ;o;;"absolute;; ;["position;@;;;ió;[ o;;i ;o;;"0;; ;["
+right;@;;;iò;[ o;;i ;o;;"0;; ;["top;@;;;iô;[ o;;i ;o;;"2;; ;["z-index;@;;;iö;[ o;;i ;o;;"pointer;; ;["cursor;@;;;iõ;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iû"column-header-over, .o;	;"prefix;{ ;"prefix;iû"column-header-open;@;iû;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;iü"column-header-trigger;@;iü;[o;;i ;o;;"
+block;; ;["display;@;;;i†;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i§"column-header-align-right;@;i§;[o;;i ;o;;"
+right;; ;["text-align;@;;;i•;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iß"column-header-text;@;iß;[o;;i ;o;;"
+0.5ex;; ;["padding-right;@;;;i®;[ o;;i ;o;;"6px;; ;["margin-right;@;;;i©;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i¨"column-header-align-center;@;i¨;[o;;i ;o;;"center;; ;["text-align;@;;;i≠;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iØ"column-header-align-left;@;iØ;[o;;i ;o;;"	left;; ;["text-align;@;;;i∞;[ o;;[ ;0;"E/* Sort direction indicator is a background of the text span. */;@;i≥;i ;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i¥"column-header-sort-ASC .o;	;"prefix;{ ;"prefix;i¥"column-header-text;@;i¥;[o;;i ;o;;"	16px;; ;["padding-right;@;;;iµ;[ o;;i ;o;;"no-repeat right 6px;; ;["background;@;;;i∂;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@;"theme_name;i∑o;	;"grid/sort_asc.gif;@;i∑;;1;i∑;["background-image;@;;;i∑;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iπ"column-header-sort-DESC .o;	;"prefix;{ ;"prefix;iπ"column-header-text;@;iπ;[o;;i ;o;;"	16px;; ;["padding-right;@;;;i∫;[ o;;i ;o;;"no-repeat right 6px;; ;["background;@;;;iª;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@5;"theme_name;iºo;	;"grid/sort_desc.gif;@5;iº;;1;iº;["background-image;@;;;iº;[ o;;[ ;0;"/*grid rows */;@;iø;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i¿"grid-row;@;i¿;[
+o;;i ;o;;"	13px;; ;["line-height;@;;;i¡;[ o;;i ;o;;"top;; ;["vertical-align;@;;;i√;[ o;;i ;o;	;"grid-row-padding;{ ;"grid_row_padding;i≈;["padding;@;;;i≈;[ o:Sass::Tree::MixinNode;"no-select;@;*{ ;[ ;i«;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i…"grid-cell;@;i…;[u;(ô[o:Sass::Script::Variable	:
+@name"grid-row-cell-color:@options{ :@underscored_name"grid_row_cell_color:
+@linei 0[o:Sass::Tree::PropNode:
+@tabsi :@valueo; 	;"grid-row-cell-color;{ ;"grid_row_cell_color;	iÀ;["
+color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;	iÀ:@children[ o;;i ;o;	;"grid-row-cell-font;{ ;"grid_row_cell_font;iÕ;["	font;@;;;iÕ;[ o;;i ;o;	;"grid-row-cell-background;{ ;"grid_row_cell_background;iŒ;["background-color;@;;;iŒ;[ o;;i ;o;	;"grid-row-cell-border-color;{ ;"grid_row_cell_border_color;iœ;["border-color;@;;;iœ;[ o;;i ;o;	;"grid-row-cell-border-style;{ ;"grid_row_cell_border_style;i–;["border-style;@;;;i–;[ o;;i ;o;	;"grid-row-cell-border-width;{ ;"grid_row_cell_border_width;i—;["border-width;@;;;i—;[ o;;i ;o;)
+;"lighten;{ ;*{ ;[o;	;"grid-row-cell-border-color;@õ;"grid_row_cell_border_color;i“o;$;i
+;@õ;%"5;&@Q;i“;'[ ;i“;["border-top-color;@;;;i“;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i÷"grid-rowwrap-div;@;i÷;[
+o;;i ;o;	;"grid-row-wrap-border-width;{ ;"grid_row_wrap_border_width;i◊;["border-width;@;;;i◊;[ o;;i ;o;	;"grid-row-wrap-border-color;{ ;"grid_row_wrap_border_color;iÿ;["border-color;@;;;iÿ;[ o;;i ;o;	;"grid-row-wrap-border-style;{ ;"grid_row_wrap_border_style;iŸ;["border-style;@;;;iŸ;[ o;;i ;o;)
+;"lighten;{ ;*{ ;[o;	;"grid-row-wrap-border-color;@À;"grid_row_wrap_border_color;i⁄o;$;i
+;@À;%"5;&@Q;i⁄;'[ ;i⁄;["border-top-color;@;;;i⁄;[ o;;i ;o;;"hidden;; ;["overflow;@;;;i‹;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iﬂ"grid-row-alt .o;	;"prefix;{ ;"prefix;iﬂ"grid-cell,
+    .o;	;"prefix;{ ;"prefix;i‡"grid-row-alt .o;	;"prefix;{ ;"prefix;i‡"grid-rowwrap-div;@;i‡;[o;;i ;o;	;"!grid-row-cell-alt-background;{ ;"!grid_row_cell_alt_background;i·;["background-color;@;;;i·;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i‰"grid-row-over .o;	;"prefix;{ ;"prefix;i‰"grid-cell,
+    .o;	;"prefix;{ ;"prefix;iÂ"grid-row-over .o;	;"prefix;{ ;"prefix;iÂ"grid-rowwrap-div;@;iÂ;[o;;i ;o;	;"$grid-row-cell-over-border-color;{ ;"$grid_row_cell_over_border_color;iÊ;["border-color;@;;;iÊ;[ o;;i ;o;	;"(grid-row-cell-over-background-color;{ ;"(grid_row_cell_over_background_color;iË;["background-color;@;;;iË;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÎ"grid-row-focused .o;	;"prefix;{ ;"prefix;iÎ"grid-cell,
+    .o;	;"prefix;{ ;"prefix;iÏ"grid-row-focused .o;	;"prefix;{ ;"prefix;iÏ"grid-rowwrap-div;@;iÏ;[o;;i ;o;	;"%grid-row-cell-focus-border-color;{ ;"%grid_row_cell_focus_border_color;iÌ;["border-color;@;;;iÌ;[ o;;i ;o;	;")grid-row-cell-focus-background-color;{ ;")grid_row_cell_focus_background_color;iÔ;["background-color;@;;;iÔ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÚ"grid-row-selected .o;	;"prefix;{ ;"prefix;iÚ"grid-cell,
+    .o;	;"prefix;{ ;"prefix;iÛ"grid-row-selected .o;	;"prefix;{ ;"prefix;iÛ"grid-rowwrap-div;@;iÛ;[o;;i ;o;	;"(grid-row-cell-selected-border-style;{ ;"(grid_row_cell_selected_border_style;iÙ;["border-style;@;;;iÙ;[ o;;i ;o;	;"(grid-row-cell-selected-border-color;{ ;"(grid_row_cell_selected_border_color;iı;["border-color;@;;;iı;[ o;;i ;o;!	;[o;	;",grid-row-cell-selected-background-color;{ ;",grid_row_cell_selected_background_color;i˜o;	;"!important;@z;i˜;; ;@z;";#;i˜;["background-color;@;;;i˜;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i˙"grid-rowwrap-div;@;i˙;[o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i˚"grid-cell,
+        .o;	;"prefix;{ ;"prefix;i¸"grid-cell-inner;@;i¸;[o;;i ;o;;"0;; ;["border-width;@;;;i˝;[ o;;i ;o;;"transparent;; ;["background;@;;;iˇ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-row-body-hidden;@;i;[o;;i ;o;;"	none;; ;["display;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-rowbody;@;i;[o;;i ;o;	;"grid-row-body-font;{ ;"grid_row_body_font;i;["	font;@;;;i;[ o;;i ;o;	;"grid-row-body-padding;{ ;"grid_row_body_padding;i
+;["padding;@;;;i
+;[ o;;T;i ;["p;@:@parsed_ruleso:"Sass::Selector::CommaSequence:@members[o:Sass::Selector::Sequence;5[o:#Sass::Selector::SimpleSequence;5[o:Sass::Selector::Element	:@namespace0;["p:@filename" ;i;:@ÿ;i;:@ÿ;i;i;[o;;i ;o;;"5px 5px 10px 5px;; ;["margin;@;;;i;[ o;;[ ;0;"/*grid cells */;@;i;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-cell;@;i;[o;;i ;o;;"hidden;; ;["overflow;@;;;i;[ o;;i ;o;	;"grid-cell-font;{ ;"grid_cell_font;i;["	font;@;;;i;[ o;2;"no-select;@;*{ ;[ ;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-cell-inner;@;i;[
+o;;i ;o;;"hidden;; ;["overflow;@;;;i;[ o;;i ;o;;"ellipsis;; ;["-o-text-overflow;@;;;i;[ o;;i ;o;;"ellipsis;; ;["text-overflow;@;;;i;[ o;;i ;o;	;"grid-cell-inner-padding;{ ;"grid_cell_inner_padding;i ;["padding;@;;;i ;[ o;;i ;o;;"nowrap;; ;["white-space;@;;;i";[ o;;[ ;0;"J/* Action columns with a standard, 16x16 icon require less padding */;@;i%;i ;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i&"action-col-cell .o;	;"prefix;{ ;"prefix;i&"grid-cell-inner;@;i&;[o;;i ;o;;"1px 2px 0 2px;; ;["padding;@;;;i';[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i*"ie6,
+    .o;	;"prefix;{ ;"prefix;i+"ie7,
+    .o;	;"prefix;{ ;"prefix;i,"quirks .o;	;"prefix;{ ;"prefix;i,"ie9,
+    .o;	;"prefix;{ ;"prefix;i-"quirks .o;	;"prefix;{ ;"prefix;i-"ie8,
+    .o;	;"prefix;{ ;"prefix;i."strict .o;	;"prefix;{ ;"prefix;i."ie8;@;i.;[o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i/"action-col-cell .o;	;"prefix;{ ;"prefix;i/"grid-cell-inner;@;i/;[o;;i ;o;;"2px 2px 1px 2px;; ;["padding;@;;;i0;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i4"grid-row .o;	;"prefix;{ ;"prefix;i4"grid-cell-special;@;i4;[o;;i ;o;;"0;; ;["padding;@;;;i5;[ o;;i ;o;!	;[o;$;i;{ ;%"1px;&[ ;i6;'["pxo;	;"
+solid;@ô;i6;; o;	;"*grid-cell-with-col-lines-border-color;@ô;"*grid_cell_with_col_lines_border_color;i6;@ô;";#;i6;["border-right;@;;;i6;[ o;2;"background-gradient;@;*{ ;[o:Sass::Script::Color	;0:@attrs{	:rediˆ:
+alphai:
+greeniˆ:	blueiˆ;{ ;i8o;	;"grid-cell-special;@¨;i8;;1;i8;[ o;;[ ;0;"/*
+IE6-8 have issues with shrinking the TR to 0px (even w/line-height=0), so we
+use an IE-specific trick to make the row disappear. We cannot do this on any
+other browser, because it is not a non-standard thing to do and those other
+browsers will do whacky things with it.
+*/;@;i;;0;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iB"ie6,
+    .o;	;"prefix;{ ;"prefix;iC"ie7,
+    .o;	;"prefix;{ ;"prefix;iD"quirks .o;	;"prefix;{ ;"prefix;iD"ie8,
+    .o;	;"prefix;{ ;"prefix;iE"strict .o;	;"prefix;{ ;"prefix;iE"ie8;@;iE;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;iF"grid-header-row;@;iF;[o;;i ;o;;"absolute;; ;["position;@;;;iG;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iK"grid-row-selected .o;	;"prefix;{ ;"prefix;iK"grid-cell-special;@;iK;[o;;i ;o;!	;[o;$;i;{ ;%"1px;&[ ;iL;'["pxo;	;"
+solid;@˜;iL;; o;)
+;"adjust-color;@˜;*{"lightnesso;$;f-2.5489999999999999 1;@˜;%"-2.549%;&[ ;iL;'["%"hueo;$;f-0.17499999999999999 ff;@˜;%"-0.175deg;&[ ;iL;'["deg"saturationo;$;f25.295999999999999 ù≤;@˜;%"25.296%;&[ ;iL;'["%;[o;	;"base-color;@˜;"base_color;iL;iL;@˜;";#;iL;["border-right;@;;;iL;[ o;2;"background-gradient;@;*{ ;[o;	;",grid-row-cell-selected-background-color;{ ;",grid_row_cell_selected_background_color;iNo;	;"grid-cell-special;@#;iN;;1;iN;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iQ"grid-dirty-cell;@;iQ;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@4;"theme_name;iRo;	;"grid/dirty.gif;@4;iR;;1;iR;["background-image;@;;;iR;[ o;;i ;o;;"0 0;; ;["background-position;@;;;iS;[ o;;i ;o;;"no-repeat;; ;["background-repeat;@;;;iT;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iW"grid-cell-selected;@;iW;[o;;i ;o;;"#B8CFEE !important;; ;["background-color;@;;;iX;[ u;([o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei[:@operator:or;i[:@operand1o:!Sass::Script::UnaryOperation	:@operando;	;	"supports-gradients;@;
+"supports_gradients;i[;@;:not;i[0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;	"prefix;{ ;
+"prefix;i\"nlg;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;i\:@children[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;i]"grid-cell-special;@;i];[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::String;"repeat-y:
+@type:identifier;	["background-repeat;@:@prop_syntax:new;i^;[ o;;i ;o;;"top right;;;	["background-position;@;; ;i_;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;ib"grid-row .o;	;	"prefix;{ ;
+"prefix;ib"%grid-cell-special,
+            .o;	;	"prefix;{ ;
+"prefix;ic"grid-row-over .o;	;	"prefix;{ ;
+"prefix;ic"grid-cell-special;@;ic;[o;;i ;o:Sass::Script::Funcall
+;	"theme-background-image;{ :@keywords{ :
+@args[o;	;	"theme-name;@L;
+"theme_name;ido;	;"grid/cell-special-bg.gif;@L;id;:string;id;	["background-image;@;; ;id;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;ih"grid-row-focused .o;	;	"prefix;{ ;
+"prefix;ih"%grid-cell-special,
+            .o;	;	"prefix;{ ;
+"prefix;ii"grid-row-selected .o;	;	"prefix;{ ;
+"prefix;ii"grid-cell-special;@;ii;[o;;i ;o;!
+;	"theme-background-image;{ ;"{ ;#[o;	;	"theme-name;@r;
+"theme_name;ijo;	;"&grid/cell-special-selected-bg.gif;@r;ij;;$;ij;	["background-image;@;; ;ij;[ o;;[ ;0;":/*this is panel as gridpanel doesn't use a baseCls */;@;io;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;ip"panel-with-col-lines .o;	;"prefix;{ ;"prefix;ip"grid-row .o;	;"prefix;{ ;"prefix;ip"grid-cell;@;ip;[o;;i ;o;;"0;; ;["padding-right;@;;;iq;[ o;;i ;o;!	;[o;$;i;{ ;%"1px;&[ ;ir;'["pxo;	;"
+solid;@|;ir;; o;	;"*grid-cell-with-col-lines-border-color;@|;"*grid_cell_with_col_lines_border_color;ir;@|;";#;ir;["border-right;@;;;ir;[ u;(W[o:Sass::Script::Variable	:
+@name"include-ie:@options{ :@underscored_name"include_ie:
+@lineiu0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o; 	;"prefix;{ ;"prefix;	iv"ie;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;	iv:@children[o;
+;T;i ;[".o; 	;"prefix;{ ;"prefix;	iw"grid-cell-special;@;	iw;[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::String;"0 !important:
+@type:identifier;["border-right-width;@:@prop_syntax:new;	ix;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i}"property-grid;@;i};[o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i~"grid-row .o;	;"prefix;{ ;"prefix;i~"grid-cell-inner;@;i~;[o;;i ;o;;"3px 6px 5px;; ;["padding;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÇ"grid-row .o;	;"prefix;{ ;"prefix;iÇ"grid-property-name .o;	;"prefix;{ ;"prefix;iÇ"grid-cell-inner,
+        .o;	;"prefix;{ ;"prefix;iÉ"grid-row-over .o;	;"prefix;{ ;"prefix;iÉ"grid-property-name .o;	;"prefix;{ ;"prefix;iÉ"grid-cell-inner;@;iÉ;[	o;;i ;o;;"	12px;; ;["padding-left;@;;;iÑ;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@“;"theme_name;iÖo;	;"grid/property-cell-bg.gif;@“;iÖ;;1;iÖ;["background-image;@;;;iÖ;[ o;;i ;o;;"no-repeat;; ;["background-repeat;@;;;iÜ;[ o;;i ;o;!	;[o;$;iÎ;{ ;%"
+-16px;&[ ;iá;'["pxo;$;i;@Á;%"1px;&[ ;iá;'["px;@Á;";#;iá;["background-position;@;;;iá;[ u;(Q[o:Sass::Script::Variable	:
+@name"include-ie:@options{ :@underscored_name"include_ie:
+@lineiã0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o; 	;"prefix;{ ;"prefix;	iå"quirks .o; 	;"prefix;{ ;"prefix;	iå"	ie .o; 	;"prefix;{ ;"prefix;	iå"grid-row .o; 	;"prefix;{ ;"prefix;	iå"grid-property-name .o; 	;"prefix;{ ;"prefix;	iå"grid-cell-inner;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;	iå:@children[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::List	;[o:Sass::Script::Number;iÎ;{ :@original"
+-16px:@denominator_units[ ;	iç:@numerator_units["pxo;;i;@/;"2px;[ ;	iç;["px;@/:@separator:
+space;	iç;["background-position;@':@prop_syntax:new;	iç;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;ië"unselectable;@;ië;[o;2;"no-select;@;*{ ;[ ;ií;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iï"grid-row-body-hidden;@;iï;[o;;i ;o;;"	none;; ;["display;@;;;iñ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iô"grid-group-collapsed;@;iô;[o;;i ;o;;"	none;; ;["display;@;;;iö;[ o;;[ ;0;"/*grid expander */;@;iù;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iû"grid-view;@;iû;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;iü"grid-td-expander;@;iü;[o;;i ;o;;"top;; ;["vertical-align;@;;;i†;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i§"grid-td-expander;@;i§;[o;;i ;o;;"repeat-y right transparent;; ;["background;@;;;i•;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i®"grid-view;@;i®;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;i©"grid-td-expander;@;i©;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;i™"grid-cell-inner;@;i™;[o;;i ;o;;"0 !important;; ;["padding;@;;;i´;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i∞"grid-row-expander;@;i∞;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@y;"theme_name;i±o;	;"grid/group-collapse.gif;@y;i±;;1;i±;["background-image;@;;;i±;[ o;;i ;o;;"transparent;; ;["background-color;@;;;i≤;[ o;;i ;o;;"9px;; ;["
+width;@;;;i¥;[ o;;i ;o;;"	13px;; ;["height;@;;;iµ;[ o;;i ;o;;"3px;; ;["margin-left;@;;;i∑;[ o;;i ;o;;"no-repeat;; ;["background-repeat;@;;;iπ;[ o;;i ;o;!	;[o;$;i ;{ ;%"0;&@Q;i∫;'[ o;$;i˘;@¶;%"	-2px;&[ ;i∫;'["px;@¶;";#;i∫;["background-position;@;;;i∫;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iΩ"grid-row-collapsed;@;iΩ;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;iæ"grid-row-expander;@;iæ;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@∆;"theme_name;iøo;	;"grid/group-expand.gif;@∆;iø;;1;iø;["background-image;@;;;iø;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i√"grid-resize-marker;@;i√;[
+o;;i ;o;;"absolute;; ;["position;@;;;iƒ;[ o;;i ;o;;"5;; ;["z-index;@;;;i≈;[ o;;i ;o;;"0;; ;["top;@;;;i∆;[ o;;i ;o;;"1px;; ;["
+width;@;;;i«;[ o;;i ;o;;"#0f0f0f;; ;["background-color;@;;;i»;[ o;;[ ;0;"0/*column move icons, when moving columns */;@;iÀ;i ;[ o;;T;i ;["(.col-move-top,
+    .col-move-bottom;@;3o;4;5[o;6;5[o;7;5[o:Sass::Selector::Class;["col-move-top;:" ;iÕ;:@;iÕo;6;5["
+o;7;5[o;A;["col-move-bottom;:@;iÕ;:@;iÕ;:@;iÕ;iÕ;[o;;i ;o;;"9px;; ;["
+width;@;;;iŒ;[ o;;i ;o;;"9px;; ;["height;@;;;iœ;[ o;;i ;o;;"absolute;; ;["position;@;;;i–;[ o;;i ;o;;"0;; ;["top;@;;;i—;[ o;;i ;o;;"0;; ;["line-height;@;;;i“;[ o;;i ;o;;"0;; ;["font-size;@;;;i”;[ o;;i ;o;;"hidden;; ;["overflow;@;;;i‘;[ o;;i ;o;;"
+20000;; ;["z-index;@;;;i’;[ o;;i ;o;;"#no-repeat left top transparent;; ;["background;@;;;i÷;[ o;;T;i ;[".col-move-top;@;3o;4;5[o;6;5[o;7;5[o;A;["col-move-top;:" ;iŸ;:@T;iŸ;:@T;iŸ;iŸ;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@Y;"theme_name;i⁄o;	;"grid/col-move-top.gif;@Y;i⁄;;1;i⁄;["background-image;@;;;i⁄;[ o;;T;i ;[".col-move-bottom;@;3o;4;5[o;6;5[o;7;5[o;A;["col-move-bottom;:" ;i›;:@p;i›;:@p;i›;i›;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@u;"theme_name;iﬁo;	;"grid/col-move-bottom.gif;@u;iﬁ;;1;iﬁ;["background-image;@;;;iﬁ;[ o;;[ ;0;"/*pading toolbar */;@;i·;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i‚"tbar-page-number;@;i‚;[o;;i ;o;;"	30px;; ;["
+width;@;;;i„;[ o;;[ ;0;"/*grouped grid */;@;iÊ;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÁ"grid-group,
+    .o;	;"prefix;{ ;"prefix;iË"grid-group-body,
+    .o;	;"prefix;{ ;"prefix;iÈ"grid-group-hd;@;iÈ;[o;;i ;o;;"1;; ;["	zoom;@;;;iÍ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÌ"grid-group-hd;@;iÌ;[o;;i ;o;;"6px;; ;["padding-top;@;;;iÓ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-cell-inner;@;i;[o;;i ;o;;"10px 4px 4px 4px;; ;["padding;@;;;iÒ;[ o;;i ;o;	;")grid-grouped-header-background-color;{ ;")grid_grouped_header_background_color;iÛ;["background;@;;;iÛ;[ o;;i ;o;	;"%grid-grouped-header-border-width;{ ;"%grid_grouped_header_border_width;iı;["border-width;@;;;iı;[ o;;i ;o;	;"%grid-grouped-header-border-style;{ ;"%grid_grouped_header_border_style;iˆ;["border-style;@;;;iˆ;[ o;;i ;o;	;"%grid-grouped-header-border-color;{ ;"%grid_grouped_header_border_color;i˜;["border-color;@;;;i˜;[ o;;i ;o;;"pointer;; ;["cursor;@;;;i˘;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i˝"grid-group-title;@;i˝;[
+o;;i ;o;!	;[	o;	;"transparent;{ ;i˛;; o;	;"no-repeat;@	;i˛;; o;$;i ;@	;%"0;&@Q;i˛;'[ o;$;i˙;@	;%"	-1px;&[ ;i˛;'["px;@	;";#;i˛;["background;@;;;i˛;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@	;"theme_name;iˇo;	;"grid/group-collapse.gif;@	;iˇ;;1;iˇ;["background-image;@;;;iˇ;[ o;;i ;o;	;"grid-grouped-title-color;{ ;"grid_grouped_title_color;i;["
+color;@;;;i;[ o;;i ;o;	;"grid-grouped-title-font;{ ;"grid_grouped_title_font;i;["	font;@;;;i;[ o;;i ;o;;"0 0 0 14px;; ;["padding;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-group-hd-collapsed;@;i;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"grid-group-title;@;i;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@I	;"theme_name;i	o;	;"grid/group-expand.gif;@I	;i	;;1;i	;["background-image;@;;;i	;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i"grid-group-collapsed .o;	;"prefix;{ ;"prefix;i"grid-group-body;@;i;[o;;i ;o;;"	none;; ;["display;@;;;i;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i"grid-group-collapsed .o;	;"prefix;{ ;"prefix;i"grid-group-title;@;i;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@y	;"theme_name;io;	;"grid/group-expand.gif;@y	;i;;1;i;["background-image;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"group-by-icon;@;i;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@ê	;"theme_name;io;	;"grid/group-by.gif;@ê	;i;;1;i;["background-image;@;;;i;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i"show-groups-icon;@;i;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@ß	;"theme_name;io;	;"grid/group-by.gif;@ß	;i;;1;i;["background-image;@;;;i;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i"column-header-checkbox .o;	;"prefix;{ ;"prefix;i"column-header-inner;@;i;[o;;i ;o;;"1px;; ;["padding;@;;;i;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i!"grid-cell-special .o;	;"prefix;{ ;"prefix;i!"grid-cell-inner;@;i!;[o;;i ;o;;"4px;; ;["padding;@;;;i";[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i%"grid-row-checker,
+    .o;	;"prefix;{ ;"prefix;i&"column-header-checkbox .o;	;"prefix;{ ;"prefix;i&"column-header-text;@;i&;[o;;i ;o;;"	14px;; ;["height;@;;;i';[ o;;i ;o;;"	14px;; ;["
+width;@;;;i(;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@¸	;"theme_name;i)o;	;"grid/unchecked.gif;@¸	;i);;1;i);["background-image;@;;;i);[ o;;i ;o;!	;[o;$;i˙;{ ;%"	-1px;&[ ;i*;'["pxo;$;i˙;@
+;%"	-1px;&[ ;i*;'["px;@
+;";#;i*;["background-position;@;;;i*;[ o;;i ;o;;"no-repeat;; ;["background-repeat;@;;;i+;[ o;;i ;o;;"transparent;; ;["background-color;@;;;i,;[ o;;[ ;0;"ì/* Row checker is a div but column header checker is the text span element, so make it display: block
+ * Header checkbox element needs centering */;@;i/;i ;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;i1"column-header-checkbox .o;	;"prefix;{ ;"prefix;i1"column-header-text;@;i1;[o;;i ;o;;"
+block;; ;["display;@;;;i2;[ o;;i ;o;;"4px;; ;["margin-top;@;;;i3;[ o;;i ;o;;"4px;; ;["margin-left;@;;;i4;[ u;(3[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@linei7:@operator:or;i7:@operand1o;	;	"include-ie;@;
+"include_ie;i70[
+o:Sass::Tree::CommentNode:@lines[ :
+@loud0:@value"f/* All IE Quirks mode need to squish the header height or the line-height will become too tall */;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;i8:@silent0:@children[ o;;[ ;0;"@/* IE6 always needs the hack regardless of quirks/strict */;@;i9;0;[ o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;	"prefix;{ ;
+"prefix;i:"quirks .o;	;	"prefix;{ ;
+"prefix;i:"
+ie, .o;	;	"prefix;{ ;
+"prefix;i:"ie6;@;i:;[o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;i;"column-header-checkbox .o;	;	"prefix;{ ;
+"prefix;i;"column-header-inner;@;i;;[o:Sass::Tree::PropNode;i ;o:Sass::Script::String;"	18px:
+@type:identifier;	["line-height;@:@prop_syntax:new;i<;[ o;;[ ;0;"X/* IE 6, 7 & 9 are 1px too far to the right when centering, drop the margin 1px. */;@;i@;0;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iA"ie6, .o;	;	"prefix;{ ;
+"prefix;iA"ie7, .o;	;	"prefix;{ ;
+"prefix;iA"ie9;@;iA;[o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;iB"column-header-checkbox .o;	;	"prefix;{ ;
+"prefix;iB"column-header-text;@;iB;[o;;i ;o;;"3px;;;	["margin-left;@; ;!;iC;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iH"grid-hd-checker-on .o;	;"prefix;{ ;"prefix;iH"column-header-text;@;iH;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@Z
+;"theme_name;iIo;	;"grid/checked.gif;@Z
+;iI;;1;iI;["background-image;@;;;iI;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iL"grid-row-checker;@;iL;[o;;i ;o;;"1px;; ;["margin-left;@;;;iM;[ o;;i ;o;!	;[o;$;i7;{ ;%"50%;&[ ;iO;'["%o;$;i˘;@x
+;%"	-2px;&[ ;iO;'["px;@x
+;";#;iO;["background-position;@;;;iO;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iR"grid-row-selected .o;	;"prefix;{ ;"prefix;iR"grid-row-checker,
+    .o;	;"prefix;{ ;"prefix;iS"grid-row-checked .o;	;"prefix;{ ;"prefix;iS"grid-row-checker;@;iS;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@†
+;"theme_name;iTo;	;"grid/checked.gif;@†
+;iT;;1;iT;["background-image;@;;;iT;[ o;;[ ;0;"/*grid icons */;@;iW;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iX"tbar-page-first;@;iX;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@Ω
+;"theme_name;iYo;	;"grid/page-first.gif;@Ω
+;iY;;1;iYo;	;"!important;@Ω
+;iY;; ;@Ω
+;";#;iY;["background-image;@;;;iY;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i\"tbar-loading;@;i\;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@ÿ
+;"theme_name;i]o;	;"grid/refresh.gif;@ÿ
+;i];;1;i]o;	;"!important;@ÿ
+;i];; ;@ÿ
+;";#;i];["background-image;@;;;i];[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i`"tbar-page-last;@;i`;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@Û
+;"theme_name;iao;	;"grid/page-last.gif;@Û
+;ia;;1;iao;	;"!important;@Û
+;ia;; ;@Û
+;";#;ia;["background-image;@;;;ia;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;id"tbar-page-next;@;id;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@;"theme_name;ieo;	;"grid/page-next.gif;@;ie;;1;ieo;	;"!important;@;ie;; ;@;";#;ie;["background-image;@;;;ie;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;ih"tbar-page-prev;@;ih;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@);"theme_name;iio;	;"grid/page-prev.gif;@);ii;;1;iio;	;"!important;@);ii;; ;@);";#;ii;["background-image;@;;;ii;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;il"item-disabled;@;il;[
+o;;T;i ;[".o;	;"prefix;{ ;"prefix;im"tbar-loading;@;im;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@M;"theme_name;ino;	;"grid/refresh-disabled.gif;@M;in;;1;ino;	;"!important;@M;in;; ;@M;";#;in;["background-image;@;;;in;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iq"tbar-page-first;@;iq;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@h;"theme_name;iro;	;"!grid/page-first-disabled.gif;@h;ir;;1;iro;	;"!important;@h;ir;; ;@h;";#;ir;["background-image;@;;;ir;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iu"tbar-page-last;@;iu;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@É;"theme_name;ivo;	;" grid/page-last-disabled.gif;@É;iv;;1;ivo;	;"!important;@É;iv;; ;@É;";#;iv;["background-image;@;;;iv;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iy"tbar-page-next;@;iy;[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@û;"theme_name;izo;	;" grid/page-next-disabled.gif;@û;iz;;1;izo;	;"!important;@û;iz;; ;@û;";#;iz;["background-image;@;;;iz;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i}"tbar-page-prev;@;i};[o;;i ;o;!	;[o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@π;"theme_name;i~o;	;" grid/page-prev-disabled.gif;@π;i~;;1;i~o;	;"!important;@π;i~;; ;@π;";#;i~;["background-image;@;;;i~;[ o;;[ ;0;"/*menu icons */;@;iÇ;i ;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iÉ"hmenu-sort-asc .o;	;"prefix;{ ;"prefix;iÉ"menu-item-icon;@;iÉ;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@€;"theme_name;iÑo;	;"grid/hmenu-asc.gif;@€;iÑ;;1;iÑ;["background-image;@;;;iÑ;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iá"hmenu-sort-desc .o;	;"prefix;{ ;"prefix;iá"menu-item-icon;@;iá;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@˜;"theme_name;iào;	;"grid/hmenu-desc.gif;@˜;ià;;1;ià;["background-image;@;;;ià;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iã"hmenu-lock .o;	;"prefix;{ ;"prefix;iã"menu-item-icon;@;iã;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@;"theme_name;iåo;	;"grid/hmenu-lock.gif;@;iå;;1;iå;["background-image;@;;;iå;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;iè"hmenu-unlock .o;	;"prefix;{ ;"prefix;iè"menu-item-icon;@;iè;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@/;"theme_name;iêo;	;"grid/hmenu-unlock.gif;@/;iê;;1;iê;["background-image;@;;;iê;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iì"group-by-icon;@;iì;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@F;"theme_name;iîo;	;"grid/group-by.gif;@F;iî;;1;iî;["background-image;@;;;iî;[ o;;T;i ;[
+".o;	;"prefix;{ ;"prefix;ió"cols-icon .o;	;"prefix;{ ;"prefix;ió"menu-item-icon;@;ió;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@b;"theme_name;iòo;	;"grid/columns.gif;@b;iò;;1;iò;["background-image;@;;;iò;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iõ"show-groups-icon;@;iõ;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@y;"theme_name;iúo;	;"grid/group-by.gif;@y;iú;;1;iú;["background-image;@;;;iú;[ o;;[ ;0;"%/* Drag/drop indicator styles */;@;iü;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i†"grid-drop-indicator;@;i†;[o;;i ;o;;"absolute;; ;["position;@;;;i°;[ o;;i ;o;;"1px;; ;["height;@;;;i¢;[ o;;i ;o;;"0px;; ;["line-height;@;;;i£;[ o;;i ;o;;"#77BC71;; ;["background-color;@;;;i§;[ o;;i ;o;;"visible;; ;["overflow;@;;;i•;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iß"grid-drop-indicator-left;@;iß;[o;;i ;o;;"absolute;; ;["position;@;;;i®;[ o;;i ;o;$;iÛ;{ ;%"	-8px;&[ ;i©;'["px;["top;@;;;i©;[ o;;i ;o;$;iÔ;{ ;%"
+-12px;&[ ;i™;'["px;["	left;@;;;i™;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@’;"theme_name;i´o;	;"#grid/dd-insert-arrow-right.png;@’;i´;;1;i´;["background-image;@;;;i´;[ o;;i ;o;;"	16px;; ;["height;@;;;i¨;[ o;;i ;o;;"	16px;; ;["
+width;@;;;i≠;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i∞"grid-drop-indicator-right;@;i∞;[o;;i ;o;;"absolute;; ;["position;@;;;i±;[ o;;i ;o;$;iÛ;{ ;%"	-8px;&[ ;i≤;'["px;["top;@;;;i≤;[ o;;i ;o;$;i;{ ;%"
+-11px;&[ ;i≥;'["px;["
+right;@;;;i≥;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@;"theme_name;i¥o;	;""grid/dd-insert-arrow-left.png;@;i¥;;1;i¥;["background-image;@;;;i¥;[ o;;i ;o;;"	16px;; ;["height;@;;;iµ;[ o;;i ;o;;"	16px;; ;["
+width;@;;;i∂;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i∫"ie6;@;i∫;[o;;T;i ;[".o;	;"prefix;{ ;"prefix;iª"grid-drop-indicator-left;@;iª;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@>;"theme_name;iºo;	;"#grid/dd-insert-arrow-right.gif;@>;iº;;1;iº;["background-image;@;;;iº;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iø"grid-drop-indicator-right;@;iø;[o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@U;"theme_name;i¿o;	;""grid/dd-insert-arrow-left.gif;@U;i¿;;1;i¿;["background-image;@;;;i¿;[ o;;[ ;0;"/* Row Editor */;@;iƒ;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i≈"grid-row-editor;@;i≈;[o;;i ;o;;"absolute !important;; ;["position;@;;;i∆;[ o;;i ;o;;"1;; ;["z-index;@;;;i«;[ o;;i ;o;;"1;; ;["	zoom;@;;;i»;[ o;;i ;o;;"visible !important;; ;["overflow;@;;;i…;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÀ"form-field;@;iÀ;[o;;i ;o;	;"grid-row-editor-font;{ ;"grid_row_editor_font;iÃ;["	font;@;;;iÃ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iŒ"form-display-field;@;iŒ;[o;;i ;o;	;"grid-row-editor-font;{ ;"grid_row_editor_font;iœ;["	font;@;;;iœ;[ o;;i ;o;;"0;; ;["padding-top;@;;;i–;[ o;;i ;o;;"4px;; ;["padding-left;@;;;i—;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i‘"panel-body;@;i‘;[o;;i ;o;	;"%grid-row-editor-background-color;{ ;"%grid_row_editor_background_color;i’;["background-color;@;;;i’;[ o;;i ;o;	;"grid-row-editor-border;{ ;"grid_row_editor_border;i÷;["border-top;@;;;i÷;[ o;;i ;o;	;"grid-row-editor-border;{ ;"grid_row_editor_border;i◊;["border-bottom;@;;;i◊;[ o;;[ ;0;"9/* Perfect alignment of input text with cell text */;@;i€;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i‹"grid-row-editor;@;i‹;[o;;[ ;0;"3/* Align input text with text value in cell */;@;i›;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iﬁ"form-text;@;iﬁ;[o;;i ;o;;"2px;; ;["padding-left;@;;;iﬂ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i‚"grid-editor;@;i‚;[o;;[ ;0;"!/* Align checkboxes input */;@;i„;i ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i‰"form-cb-wrap;@;i‰;[o;;i ;o;;"center;; ;["text-align;@;;;iÂ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÈ"grid-row-editor-buttons;@;iÈ;[o;;i ;o;	;"%grid-row-editor-background-color;{ ;"%grid_row_editor_background_color;iÍ;["background-color;@;;;iÍ;[ o;;i ;o;;"absolute;; ;["position;@;;;iÎ;[ o;;i ;o;$;i‹;{ ;%"
+-31px;&[ ;iÏ;'["px;["bottom;@;;;iÏ;[ o;;i ;o;;"4px;; ;["padding;@;;;iÌ;[ o;;i ;o;;"
+200px;; ;["
+width;@;;;iÓ;[ o;;i ;o;;"	32px;; ;["height;@;;;iÔ;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;iÒ"strict &;@;iÒ;[o;;i ;o;;"
+192px;; ;["
+width;@;;;iÚ;[ o;;i ;o;;"	24px;; ;["height;@;;;iÛ;[ o;;T;i ;["A&-ml,
+        &-mr,
+        &-bl,
+        &-br,
+        &-bc;@;3o;4;5[
+o;6;5[o;7;5[o:Sass::Selector::Parent;:" ;i˙o;8	;90;["-ml;:@b;i˙;:@b;i˙o;6;5["
+o;7;5[o;B;:@b;i˙o;8	;90;["-mr;:@b;i˙;:@b;i˙o;6;5["
+o;7;5[o;B;:@b;i˙o;8	;90;["-bl;:@b;i˙;:@b;i˙o;6;5["
+o;7;5[o;B;:@b;i˙o;8	;90;["-br;:@b;i˙;:@b;i˙o;6;5["
+o;7;5[o;B;:@b;i˙o;8	;90;["-bc;:@b;i˙;:@b;i˙;:@b;i˙;i˙;[o;;i ;o;;"absolute;; ;["position;@;;;i˚;[ o;;i ;o;;"hidden;; ;["overflow;@;;;i¸;[ o;;T;i ;["&-bl,
+        &-br;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;i o;8	;90;["-bl;:@°;i ;:@°;i o;6;5["
+o;7;5[o;B;:@°;i o;8	;90;["-br;:@°;i ;:@°;i ;:@°;i ;i ;[	o;;i ;o;;"4px;; ;["
+width;@;;;i;[ o;;i ;o;;"4px;; ;["height;@;;;i;[ o;;i ;o;;"0px;; ;["bottom;@;;;i;[ o;;i ;o;)
+;"theme-background-image;{ ;*{ ;[o;	;"theme-name;@ƒ;"theme_name;io;	;"+panel/panel-default-framed-corners.gif;@ƒ;i;;1;i;["background-image;@;;;i;[ o;;T;i ;["	&-bl;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;io;8	;90;["-bl;:@Ÿ;i;:@Ÿ;i;:@Ÿ;i;i;[o;;i ;o;;"0px;; ;["	left;@;;;i;[ o;;i ;o;!	;[o;$;i ;{ ;%"0px;&[ ;i;'["pxo;$;iÎ;@Ë;%"
+-16px;&[ ;i;'["px;@Ë;";#;i;["background-position;@;;;i;[ o;;T;i ;["	&-br;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;i
+o;8	;90;["-br;:@ˇ;i
+;:@ˇ;i
+;:@ˇ;i
+;i
+;[o;;i ;o;;"0px;; ;["
+right;@;;;i;[ o;;i ;o;!	;[o;$;i ;{ ;%"0px;&[ ;i;'["pxo;$;iÁ;@;%"
+-20px;&[ ;i;'["px;@;";#;i;["background-position;@;;;i;[ o;;T;i ;["	&-bc;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;io;8	;90;["-bc;:@%;i;:@%;i;:@%;i;i;[o;;i ;o;;"absolute;; ;["position;@;;;i;[ o;;i ;o;;"4px;; ;["	left;@;;;i;[ o;;i ;o;;"0px;; ;["bottom;@;;;i;[ o;;i ;o;;"
+192px;; ;["
+width;@;;;i;[ o;;i ;o;;"1px;; ;["height;@;;;i;[ o;;i ;o;	;"!grid-row-editor-border-color;{ ;"!grid_row_editor_border_color;i;["background-color;@;;;i;[ o;;T;i ;["&-ml,
+        &-mr;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;io;8	;90;["-ml;:@Z;i;:@Z;io;6;5["
+o;7;5[o;B;:@Z;io;8	;90;["-mr;:@Z;i;:@Z;i;:@Z;i;i;[	o;;i ;o;;"	27px;; ;["height;@;;;i;[ o;;i ;o;;"1px;; ;["
+width;@;;;i;[ o;;i ;o;;"1px;; ;["top;@;;;i;[ o;;i ;o;	;"!grid-row-editor-border-color;{ ;"!grid_row_editor_border_color;i;["background-color;@;;;i;[ o;;T;i ;["	&-ml;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;io;8	;90;["-ml;:@å;i;:@å;i;:@å;i;i;[o;;i ;o;;"0px;; ;["	left;@;;;i!;[ o;;T;i ;["	&-mr;@;3o;4;5[o;6;5[o;7;5[o;B;:" ;i"o;8	;90;["-mr;:@°;i";:@°;i";:@°;i";i";[o;;i ;o;!	;[o;$;i ;{ ;%"0px;&[ ;i#;'["pxo;$;iÁ;@™;%"
+-20px;&[ ;i#;'["px;@™;";#;i#;["background-position;@;;;i#;[ o;;i ;o;;"0px;; ;["
+right;@;;;i$;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;i("grid-row-editor-errors;@;i(;[o;;T;i ;["ul;@;3o;4;5[o;6;5[o;7;5[o;8	;90;["ul;:" ;i);:@“;i);:@“;i);i);[o;;i ;o;;"5px;; ;["margin-left;@;;;i*;[ o;;T;i ;["li;@;3o;4;5[o;6;5[o;7;5[o;8	;90;["li;:" ;i,;:@Ê;i,;:@Ê;i,;i,;[o;;i ;o;;"	disc;; ;["list-style;@;;;i-;[ o;;i ;o;;"	15px;; ;["margin-left;@;;;i.;[ 

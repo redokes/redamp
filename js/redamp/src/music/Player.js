@@ -8,7 +8,9 @@ Ext.define('RedAmp.music.Player', {
         '<div class="audio-player {cls}">' +
 			'<audio preload="false"></audio>' +
 			'<div class="previous"></div>' + 
-			'<div class="play-pause play"></div>' +
+			'<div class="play-pause play">' +
+				'<div class="play-pause-inner"></div>' +
+			'</div>' +
 			'<div class="next"></div>' +
 			'<div class="progress-container">' +
 				'<div class="loader" style="">' +
@@ -221,6 +223,9 @@ Ext.define('RedAmp.music.Player', {
 		this.playing = false;
 		this.paused = false;
 		
+		//call the function on the track
+		this.getCurrentTrack().stop(this);
+		
 		//Fire event
 		this.fireEvent('stop', this, this.getCurrentTrack());
 	},
@@ -235,6 +240,9 @@ Ext.define('RedAmp.music.Player', {
 		this.audio.dom.pause();
 		this.paused = true;
 		this.playing = false;
+		
+		//call the function on the track
+		this.getCurrentTrack().pause(this);
 		
 		//Fire event
 		this.fireEvent('pause', this, this.getCurrentTrack());

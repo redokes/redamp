@@ -1,0 +1,1074 @@
+3.2.0.alpha.0 (Bleeding Edge)
+b067c20d38902169246299661e14f5ee7106d189
+o:Sass::Tree::RootNode
+:@has_childrenT:@options{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@template"ÛB/**
+  * @class Ext.Tab
+  */
+@mixin extjs-tab {
+    @include x-frame(
+        $cls: 'tab',
+        $ui: 'default-top',
+        $border-radius: $tab-top-border-radius,
+        $border-width: $tab-top-border-width,
+        $background-color: $tab-base-color,
+        $background-gradient: $tab-background-gradient,
+        $background-direction: top,
+        $table: true
+    );
+
+    @include x-frame(
+        $cls: 'tab',
+        $ui: 'default-bottom',
+        $border-radius: $tab-bottom-border-radius,
+        $border-width: $tab-bottom-border-width,
+        $background-color: $tab-base-color,
+        $background-gradient: $tab-background-gradient,
+        $background-direction: bottom,
+        $table: true
+    );
+
+    .#{$prefix}tab {
+        z-index: 1;
+        margin: 0 0 0 $tab-spacing;
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+        white-space: nowrap;
+        height: $tab-height;
+        border-color: $tab-border-color;
+        cursor: pointer;
+        cursor: hand;
+
+        * {
+            cursor: pointer;
+            cursor: hand;
+        }
+
+        em {
+            display: block;
+            padding: 0 6px;
+            line-height: 1px;
+        }
+
+        button {
+            background: none;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            -webkit-appearance: none;
+            font-size: $tab-font-size;
+            @if $tab-font-weight {
+                font-weight: $tab-font-weight;
+            }
+            @if $tab-font-family {
+                $font-family: $tab-font-family;
+            }
+
+            color: $tab-color;
+            outline: 0 none;
+
+            overflow: hidden;
+            overflow-x: visible;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+
+            &::-moz-focus-inner {
+                border: 0;
+                padding: 0;
+            }
+
+            .#{$prefix}tab-inner {
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-position: 0 -2px;
+                display: block;
+                text-align: center;
+                white-space: nowrap;
+            }
+        }
+
+        img {
+            display: none;
+        }
+    }
+
+    .#{$prefix}tab-disabled {
+        @include opacity(1);
+    }
+
+    .#{$prefix}border-box {
+        .#{$prefix}tab-default-top {
+            height: $tab-height + top($tabbar-top-strip-border-width);
+        }
+        .#{$prefix}tab-default-bottom {
+            height: $tab-height + bottom($tabbar-bottom-strip-border-width);
+        }
+    }
+
+    @if $include-ie {
+        * html .#{$prefix}ie {
+            .#{$prefix}tab button {
+                width: 1px;
+            }
+        }
+
+        .#{$prefix}strict .#{$prefix}ie6,
+        .#{$prefix}strict .#{$prefix}ie7 {
+            .#{$prefix}tab .#{$prefix}frame-mc {
+                height: 100%;
+            }
+        }
+
+        .#{$prefix}ie .#{$prefix}tab-active button:active {
+            position: relative;
+            top: -1px;
+            left: -1px;
+        }
+    }
+
+    $framepad: max(top($tab-top-border-radius), right($tab-top-border-radius)) - top($tab-top-border-width);
+
+    .#{$prefix}tab-default-top {
+        @if $tab-inner-border {
+            @include inner-border(
+                $width: $tab-top-inner-border-width,
+                $color: $tab-inner-border-color
+            );
+        }
+
+        border-bottom: 1px solid $tabbar-strip-border-color !important;
+
+        em {
+            padding-bottom: $framepad;
+        }
+
+        button,
+        .#{$prefix}tab-inner {
+            height: $tab-height - $framepad * 2 - top($tab-top-border-width);
+            line-height: $tab-height - $framepad * 2 - top($tab-top-border-width);
+        }
+    }
+
+    .#{$prefix}nbr .#{$prefix}tab-default-top {
+        border-bottom-width: 1px !important;
+    }
+
+    .#{$prefix}tab-default-top-active {
+        border-bottom-color: $tabbar-strip-background-color !important;
+    }
+
+    $framepad: max(bottom($tab-bottom-border-radius), left($tab-bottom-border-radius)) - bottom($tab-bottom-border-width);
+
+    .#{$prefix}tab-default-bottom {
+        @if $tab-inner-border {
+            @include inner-border(
+                $width: $tab-bottom-inner-border-width,
+                $color: $tab-inner-border-color
+            );
+        }
+
+        border-top: 1px solid $tabbar-strip-border-color !important;
+
+        @include inner-border(
+            $width: $tab-bottom-inner-border-width,
+            $color: $tab-inner-border-color
+        );
+
+        em {
+            padding-top: $framepad;
+        }
+
+        button,
+        .#{$prefix}tab-inner {
+            height: $tab-height - $framepad * 2 - bottom($tab-bottom-border-width);
+            line-height: $tab-height - $framepad * 2 - bottom($tab-bottom-border-width);
+        }
+    }
+
+    .#{$prefix}nbr .#{$prefix}tab-default-bottom {
+        border-top-width: 1px !important;
+    }
+
+    .#{$prefix}tab-default-bottom-active {
+        border-top-color: $tabbar-strip-background-color !important;
+    }
+
+    .#{$prefix}tab-default-disabled {
+        cursor: default;
+
+        * {
+            cursor: default;
+        }
+
+        border-color: $tab-border-color-disabled;
+        @include background-gradient($tab-base-color-disabled, $tab-background-gradient-disabled);
+
+        button {
+            color: $tab-color-disabled !important;
+        }
+    }
+
+    .#{$prefix}tab-icon-text-left {
+        .#{$prefix}tab-inner {
+            padding-left: 20px;
+        }
+    }
+
+    .#{$prefix}tab {
+        button, a {
+            position: relative;
+
+            .#{$prefix}tab-icon {
+                position: absolute;
+                background-repeat: no-repeat;
+                top: 0;
+                left:0;
+                right:auto;
+                bottom:0;
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+
+    //over
+    .#{$prefix}tab-over {
+        @if $tab-border-color-over != $tab-border-color {
+            border-color: $tab-border-color-over;
+        }
+
+        button {
+            @if $tab-color-over != $tab-color {
+                color: $tab-color-over;
+            }
+            @if $tab-font-weight-over != $tab-font-weight {
+                font-weight: $tab-font-weight-over;
+            }
+            @if $tab-font-size-over != $tab-font-size {
+                font-size: $tab-font-size-over;
+            }
+            @if $tab-font-family-over != $tab-font-family {
+                font-family: $tab-font-family-over;
+            }
+        }
+    }
+
+    .#{$prefix}tab-top-over {
+        @include background-gradient($tab-base-color-over, $tab-background-gradient-over, top);
+    }
+    .#{$prefix}tab-bottom-over {
+        @include background-gradient($tab-base-color-over, $tab-background-gradient-over, bottom);
+    }
+
+    //active
+    .#{$prefix}tab-active {
+        z-index: 3;
+        @if $tab-border-color-active != $tab-border-color {
+            border-color: $tab-border-color-active;
+        }
+
+        button {
+            @if $tab-color-active != $tab-color {
+                color: $tab-color-active;
+            }
+            @if $tab-font-weight-active != $tab-font-weight {
+                font-weight: $tab-font-weight-active;
+            }
+            @if $tab-font-size-active != $tab-font-size {
+                font-size: $tab-font-size-active;
+            }
+            @if $tab-font-family-active != $tab-font-family {
+                font-family: $tab-font-family-active;
+            }
+        }
+    }
+
+    .#{$prefix}tab-top-active {
+        @include background-gradient($tab-base-color-active, $tab-background-gradient-active, top);
+    }
+    .#{$prefix}tab-bottom-active {
+        @include background-gradient($tab-base-color-active, $tab-background-gradient-active, bottom);
+    }
+
+    //disabled
+    .#{$prefix}tab-disabled {
+        @if $tab-border-color-disabled != $tab-border-color {
+            border-color: $tab-border-color-disabled;
+        }
+
+        button {
+            @if $tab-color-disabled != $tab-color {
+                color: $tab-color-disabled;
+            }
+            @if $tab-font-weight-disabled != $tab-font-weight {
+                font-weight: $tab-font-weight-disabled;
+            }
+            @if $tab-font-size-disabled != $tab-font-size {
+                font-size: $tab-font-size-disabled;
+            }
+            @if $tab-font-family-disabled != $tab-font-family {
+                font-family: $tab-font-family-disabled;
+            }
+        }
+    }
+
+    .#{$prefix}tab-top-disabled {
+        background-image: none;
+        background: transparent;
+        @include background-gradient($tab-base-color-disabled, $tab-background-gradient-disabled, top);
+    }
+    .#{$prefix}tab-bottom-disabled {
+        background-image: none;
+        background: transparent;
+        @include background-gradient($tab-base-color-disabled, $tab-background-gradient-disabled, bottom);
+    }
+
+    @if not $supports-gradients or $compile-all {
+        .#{$prefix}nlg {
+            @if $tab-background-gradient != null {
+                .#{$prefix}tab-top { background-image: theme-background-image($theme-name, 'tab/tab-default-top-bg.gif'); }
+                .#{$prefix}tab-bottom { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-bg.gif'); }
+            }
+
+            @if $tab-background-gradient-over != null {
+                .#{$prefix}tab-top-over { background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-bg.gif'); }
+                .#{$prefix}tab-bottom-over { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-bg.gif'); }
+            }
+
+            @if $tab-background-gradient-active != null {
+                .#{$prefix}tab-top-active { background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-bg.gif'); }
+                .#{$prefix}tab-bottom-active { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-bg.gif'); }
+            }
+
+            @if $tab-background-gradient-disabled != null {
+                .#{$prefix}tab-top-disabled { background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-bg.gif') !important; }
+                .#{$prefix}tab-bottom-disabled { background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif') !important; }
+            }
+        }
+    }
+
+    .#{$prefix}tab-closable em {
+        padding-right: $tab-closable-icon-width + 3;
+    }
+
+    .#{$prefix}tab-close-btn {
+        position: absolute !important;
+        top: $tab-closable-icon-top;
+        right: $tab-closable-icon-right;
+        width: $tab-closable-icon-width;
+        height: $tab-closable-icon-height;
+        font-size: 0;
+        line-height: 0;
+        text-indent: -999px;
+        background: no-repeat;
+        background-image: theme-background-image($theme-name, $tab-closable-icon);
+        @include opacity(.6);
+    }
+    .#{$prefix}tab-close-btn:hover {
+        @include opacity(1);
+    }
+
+    @if not $supports-border-radius or $compile-all {
+        .#{$prefix}nbr {
+            .#{$prefix}tab-top-over {
+                .#{$prefix}frame-tl,
+                .#{$prefix}frame-bl,
+                .#{$prefix}frame-tr,
+                .#{$prefix}frame-br,
+                .#{$prefix}frame-tc,
+                .#{$prefix}frame-bc {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-corners.gif');
+                }
+                .#{$prefix}frame-ml,
+                .#{$prefix}frame-mr {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-sides.gif');
+                }
+                @if $tab-background-gradient-over != null {
+                    .#{$prefix}frame-mc {
+                        background-color: $tab-base-color-over;
+                        background-repeat: repeat-x;
+                        background-image: theme-background-image($theme-name, 'tab/tab-default-top-over-bg.gif');
+                    }
+                }
+            }
+
+            .#{$prefix}tab-bottom-over {
+                .#{$prefix}frame-tl,
+                .#{$prefix}frame-bl,
+                .#{$prefix}frame-tr,
+                .#{$prefix}frame-br,
+                .#{$prefix}frame-tc,
+                .#{$prefix}frame-bc {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-corners.gif');
+                }
+                .#{$prefix}frame-ml,
+                .#{$prefix}frame-mr {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-sides.gif');
+                }
+                @if $tab-background-gradient-over != null {
+                    .#{$prefix}frame-mc {
+                        background-color: $tab-base-color-over;
+                        background-repeat: repeat-x;
+                        background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-over-bg.gif');
+                    }
+                }
+            }
+
+            .#{$prefix}tab-top-active {
+                .#{$prefix}frame-tl,
+                .#{$prefix}frame-bl,
+                .#{$prefix}frame-tr,
+                .#{$prefix}frame-br,
+                .#{$prefix}frame-tc,
+                .#{$prefix}frame-bc {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-corners.gif');
+                }
+                .#{$prefix}frame-ml,
+                .#{$prefix}frame-mr {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-sides.gif');
+                }
+                @if $tab-background-gradient-active != null {
+                    .#{$prefix}frame-mc {
+                        background-color: $tab-base-color-active;
+                        background-repeat: repeat-x;
+                        background-image: theme-background-image($theme-name, 'tab/tab-default-top-active-bg.gif');
+                    }
+                }
+            }
+
+            .#{$prefix}tab-bottom-active {
+                .#{$prefix}frame-tl,
+                .#{$prefix}frame-bl,
+                .#{$prefix}frame-tr,
+                .#{$prefix}frame-br,
+                .#{$prefix}frame-tc,
+                .#{$prefix}frame-bc {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-corners.gif');
+                }
+                .#{$prefix}frame-ml,
+                .#{$prefix}frame-mr {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-sides.gif');
+                }
+                @if $tab-background-gradient-active != null {
+                    .#{$prefix}frame-mc {
+                        background-color: $tab-base-color-active;
+                        background-repeat: repeat-x;
+                        background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-active-bg.gif');
+                    }
+                }
+            }
+
+            .#{$prefix}tab-top-disabled {
+                .#{$prefix}frame-tl,
+                .#{$prefix}frame-bl,
+                .#{$prefix}frame-tr,
+                .#{$prefix}frame-br,
+                .#{$prefix}frame-tc,
+                .#{$prefix}frame-bc {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-corners.gif');
+                }
+                .#{$prefix}frame-ml,
+                .#{$prefix}frame-mr {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-sides.gif');
+                }
+                @if $tab-background-gradient-disabled != null {
+                    .#{$prefix}frame-mc {
+                        background-repeat: repeat-x;
+                        background-image: theme-background-image($theme-name, 'tab/tab-default-top-disabled-bg.gif');
+                    }
+                }
+            }
+
+            .#{$prefix}tab-bottom-disabled {
+                .#{$prefix}frame-tl,
+                .#{$prefix}frame-bl,
+                .#{$prefix}frame-tr,
+                .#{$prefix}frame-br,
+                .#{$prefix}frame-tc,
+                .#{$prefix}frame-bc {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-corners.gif');
+                }
+                .#{$prefix}frame-ml,
+                .#{$prefix}frame-mr {
+                    background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-sides.gif');
+                }
+                @if $tab-background-gradient-disabled != null {
+                    .#{$prefix}frame-mc {
+                        background-repeat: repeat-x;
+                        background-image: theme-background-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif');
+                    }
+                }
+            }
+        }
+    }
+}
+:
+@linei:@children[o:Sass::Tree::CommentNode:@lines[ :
+@loud0:@value" /**
+  * @class Ext.Tab
+  */;@;i:@silent0;[ o:Sass::Tree::MixinDefNode;T:
+@name"extjs-tab;@:
+@args[ ;i	;['o:Sass::Tree::MixinNode;"x-frame;@:@keywords{"background_gradiento:Sass::Script::Variable	;"tab-background-gradient;{ :@underscored_name"tab_background_gradient;i"
+tableo:Sass::Script::Bool;T;@;i"background_directiono:Sass::Script::String	;"top;@;i:
+@type:identifier"border_radiuso;	;"tab-top-border-radius;@;"tab_top_border_radius;i"uio;	;"default-top;@;i;:string"background_coloro;	;"tab-base-color;@;"tab_base_color;i"border_widtho;	;"tab-top-border-width;@;"tab_top_border_width;i"clso;	;"tab;@;i;;;[ ;i;[ o;;"x-frame;@;{"background_gradiento;	;"tab-background-gradient;{ ;"tab_background_gradient;i"
+tableo;;T;@:;i"background_directiono;	;"bottom;@:;i;;"border_radiuso;	;"tab-bottom-border-radius;@:;"tab_bottom_border_radius;i"uio;	;"default-bottom;@:;i;;"background_coloro;	;"tab-base-color;@:;"tab_base_color;i"border_widtho;	;"tab-bottom-border-width;@:;"tab_bottom_border_width;i"clso;	;"tab;@:;i;;;[ ;i;[ o:Sass::Tree::RuleNode;T:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;i "tab;@;i ;[o:Sass::Tree::PropNode; i ;o;;"1;;;["z-index;@:@prop_syntax:new;i!;[ o;"; i ;o:Sass::Script::List	;[	o:Sass::Script::Number;i ;{ :@original"0:@denominator_units[ ;i":@numerator_units[ o;&;i ;@h;'"0;(@j;i";)[ o;&;i ;@h;'"0;(@j;i";)[ o;	;"tab-spacing;@h;"tab_spacing;i";@h:@separator:
+space;i";["margin;@;#;$;i";[ o;"; i ;o;;"inline-block;;;["display;@;#;$;i#;[ o;"; i ;o;;"1;;;["	zoom;@;#;$;i$;[ o;"; i ;o;;"inline;;;["*display;@;#;$;i%;[ o;"; i ;o;;"nowrap;;;["white-space;@;#;$;i&;[ o;"; i ;o;	;"tab-height;{ ;"tab_height;i';["height;@;#;$;i';[ o;"; i ;o;	;"tab-border-color;{ ;"tab_border_color;i(;["border-color;@;#;$;i(;[ o;"; i ;o;;"pointer;;;["cursor;@;#;$;i);[ o;"; i ;o;;"	hand;;;["cursor;@;#;$;i*;[ o;;T; i ;!["*;@:@parsed_ruleso:"Sass::Selector::CommaSequence:@members[o:Sass::Selector::Sequence;.[o:#Sass::Selector::SimpleSequence;.[o:Sass::Selector::Universal:@namespace0:@filename" ;i,;3@±;i,;3@±;i,;i,;[o;"; i ;o;;"pointer;;;["cursor;@;#;$;i-;[ o;"; i ;o;;"	hand;;;["cursor;@;#;$;i.;[ o;;T; i ;!["em;@;,o;-;.[o;/;.[o;0;.[o:Sass::Selector::Element	;20;["em;3" ;i1;3@Ë;i1;3@Ë;i1;i1;[o;"; i ;o;;"
+block;;;["display;@;#;$;i2;[ o;"; i ;o;;"
+0 6px;;;["padding;@;#;$;i3;[ o;"; i ;o;;"1px;;;["line-height;@;#;$;i4;[ o;;T; i ;!["button;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["button;3" ;i7;3@ë;i7;3@ë;i7;i7;[o;"; i ;o;;"	none;;;["background;@;#;$;i8;[ o;"; i ;o;;"0;;;["border;@;#;$;i9;[ o;"; i ;o;;"0;;;["padding;@;#;$;i:;[ o;"; i ;o;;"0;;;["margin;@;#;$;i;;[ o;"; i ;o;;"	none;;;["-webkit-appearance;@;#;$;i<;[ o;"; i ;o;	;"tab-font-size;{ ;"tab_font_size;i=;["font-size;@;#;$;i=;[ u:Sass::Tree::IfNodeŒ[o:Sass::Script::Variable	:
+@name"tab-font-weight:@options{ :@underscored_name"tab_font_weight:
+@linei>0[o:Sass::Tree::PropNode:
+@tabsi :@valueo; 	;"tab-font-weight;{ ;"tab_font_weight;	i?;["font-weight;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;	i?:@children[ u;5|[o:Sass::Script::Variable	:
+@name"tab-font-family:@options{ :@underscored_name"tab_font_family:
+@lineiA0[o:Sass::Tree::VariableNode:
+@expro; 	;"tab-font-family;{ ;"tab_font_family;	iB;"font-family;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;	iB:@children[ :@guarded0o;"; i ;o;	;"tab-color;{ ;"tab_color;iE;["
+color;@;#;$;iE;[ o;"; i ;o;;"0 none;;;["outline;@;#;$;iF;[ o;"; i ;o;;"hidden;;;["overflow;@;#;$;iH;[ o;"; i ;o;;"visible;;;["overflow-x;@;#;$;iI;[ o;"; i ;o;;"ellipsis;;;["-o-text-overflow;@;#;$;iJ;[ o;"; i ;o;;"ellipsis;;;["text-overflow;@;#;$;iK;[ o;;T; i ;!["&::-moz-focus-inner;@;,o;-;.[o;/;.[o;0;.[o:Sass::Selector::Parent;3" ;iMo:Sass::Selector::Pseudo
+:	@arg0;["-moz-focus-inner;3@E;iM;:element;3@E;iM;3@E;iM;iM;[o;"; i ;o;;"0;;;["border;@;#;$;iN;[ o;"; i ;o;;"0;;;["padding;@;#;$;iO;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iR"tab-inner;@;iR;[o;"; i ;o;;"transparent;;;["background-color;@;#;$;iS;[ o;"; i ;o;;"no-repeat;;;["background-repeat;@;#;$;iT;[ o;"; i ;o;%	;[o;&;i ;{ ;'"0;(@j;iU;)[ o;&;iù;@o;'"	-2px;([ ;iU;)["px;@o;*;+;iU;["background-position;@;#;$;iU;[ o;"; i ;o;;"
+block;;;["display;@;#;$;iV;[ o;"; i ;o;;"center;;;["text-align;@;#;$;iW;[ o;"; i ;o;;"nowrap;;;["white-space;@;#;$;iX;[ o;;T; i ;!["img;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["img;3" ;i\;3@˜;i\;3@˜;i\;i\;[o;"; i ;o;;"	none;;;["display;@;#;$;i];[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;ia"tab-disabled;@;ia;[o;;"opacity;@;{ ;[o;&;i;{ ;'"1;(@j;ib;)[ ;ib;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;ie"border-box;@;ie;[o;;T; i ;![".o;	;"prefix;{ ;"prefix;if"tab-default-top;@;if;[o;"; i ;o:Sass::Script::Operation
+;{ :@operand2o:Sass::Script::Funcall
+;"top;@Æ;{ ;[o;	;""tabbar-top-strip-border-width;@Æ;""tabbar_top_strip_border_width;ig;ig:@operator:	plus;ig:@operand1o;	;"tab-height;@Æ;"tab_height;ig;["height;@;#;$;ig;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;ii"tab-default-bottom;@;ii;[o;"; i ;o;:
+;{ ;;o;<
+;"bottom;@ß;{ ;[o;	;"%tabbar-bottom-strip-border-width;@ß;"%tabbar_bottom_strip_border_width;ij;ij;=;>;ij;?o;	;"tab-height;@ß;"tab_height;ij;["height;@;#;$;ij;[ u;5)[o:Sass::Script::Variable	:
+@name"include-ie:@options{ :@underscored_name"include_ie:
+@linein0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule["* html .o; 	;"prefix;{ ;"prefix;	io"ie;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;	io:@children[o;
+;T;i ;[".o; 	;"prefix;{ ;"prefix;	ip"tab button;@;	ip;[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::String;"1px:
+@type:identifier;["
+width;@:@prop_syntax:new;	iq;[ o;
+;T;i ;[".o; 	;"prefix;{ ;"prefix;	iu"strict .o; 	;"prefix;{ ;"prefix;	iu"ie6,
+        .o; 	;"prefix;{ ;"prefix;	iv"strict .o; 	;"prefix;{ ;"prefix;	iv"ie7;@;	iv;[o;
+;T;i ;[
+".o; 	;"prefix;{ ;"prefix;	iw"
+tab .o; 	;"prefix;{ ;"prefix;	iw"frame-mc;@;	iw;[o;;i ;o;;"	100%;;;["height;@;;;	ix;[ o;
+;T;i ;[
+".o; 	;"prefix;{ ;"prefix;	i|"	ie .o; 	;"prefix;{ ;"prefix;	i|"tab-active button:active;@;	i|;[o;;i ;o;;"relative;;;["position;@;;;	i};[ o;;i ;o:Sass::Script::Number;iú;{ :@original"	-1px:@denominator_units[ ;	i~:@numerator_units["px;["top;@;;;	i~;[ o;;i ;o;;iú;{ ;"	-1px;[ ;	i;["px;["	left;@;;;	i;[ o:Sass::Tree::VariableNode:
+@expro;:
+;{ ;;o;<
+;"top;@ð;{ ;[o;	;"tab-top-border-width;@ð;"tab_top_border_width;i~;i~;=:
+minus;i~;?o;<
+;"max;@ð;{ ;[o;<
+;"top;@ð;{ ;[o;	;"tab-top-border-radius;@ð;"tab_top_border_radius;i~;i~o;<
+;"
+right;@ð;{ ;[o;	;"tab-top-border-radius;@ð;"tab_top_border_radius;i~;i~;i~;"framepad;@;i~;[ :@guarded0o;;T; i ;![".o;	;"prefix;{ ;"prefix;i€"tab-default-top;@;i€;[	u;5è[o:Sass::Script::Variable	:
+@name"tab-inner-border:@options{ :@underscored_name"tab_inner_border:
+@linei0[o:Sass::Tree::MixinNode;"inner-border;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@keywords{"
+coloro; 	;"tab-inner-border-color;{ ;"tab_inner_border_color;	i„"
+widtho; 	;"tab-top-inner-border-width;@;"tab_top_inner_border_width;	iƒ:
+@args[ ;	i…:@children[ o;"; i ;o;%	;[	o;&;i;{ ;'"1px;([ ;iˆ;)["pxo;	;"
+solid;@;iˆ;;o;	;"tabbar-strip-border-color;@;"tabbar_strip_border_color;iˆo;	;"!important;@;iˆ;;;@;*;+;iˆ;["border-bottom;@;#;$;iˆ;[ o;;T; i ;!["em;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["em;3" ;iŠ;3@5;iŠ;3@5;iŠ;iŠ;[o;"; i ;o;	;"framepad;{ ;"framepad;i‹;["padding-bottom;@;#;$;i‹;[ o;;T; i ;!["button,
+        .o;	;"prefix;{ ;"prefix;i"tab-inner;@;i;[o;"; i ;o;:
+;{ ;;o;<
+;"top;@J;{ ;[o;	;"tab-top-border-width;@J;"tab_top_border_width;i;i;=;B;i;?o;:
+;@J;;o;:
+;@J;;o;&;i;@J;'"2;(@j;i;)[ ;=:
+times;i;?o;	;"framepad;@J;"framepad;i;=;B;i;?o;	;"tab-height;@J;"tab_height;i;["height;@;#;$;i;[ o;"; i ;o;:
+;{ ;;o;<
+;"top;@b;{ ;[o;	;"tab-top-border-width;@b;"tab_top_border_width;i‘;i‘;=;B;i‘;?o;:
+;@b;;o;:
+;@b;;o;&;i;@b;'"2;(@j;i‘;)[ ;=;D;i‘;?o;	;"framepad;@b;"framepad;i‘;=;B;i‘;?o;	;"tab-height;@b;"tab_height;i‘;["line-height;@;#;$;i‘;[ o;;T; i ;![
+".o;	;"prefix;{ ;"prefix;i•"
+nbr .o;	;"prefix;{ ;"prefix;i•"tab-default-top;@;i•;[o;"; i ;o;;"1px !important;;;["border-bottom-width;@;#;$;i–;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i™"tab-default-top-active;@;i™;[o;"; i ;o;%	;[o;	;""tabbar-strip-background-color;{ ;""tabbar_strip_background_color;išo;	;"!important;@š;iš;;;@š;*;+;iš;["border-bottom-color;@;#;$;iš;[ o;@;Ao;:
+;{ ;;o;<
+;"bottom;@£;{ ;[o;	;"tab-bottom-border-width;@£;"tab_bottom_border_width;i;i;=;B;i;?o;<
+;"max;@£;{ ;[o;<
+;"bottom;@£;{ ;[o;	;"tab-bottom-border-radius;@£;"tab_bottom_border_radius;i;io;<
+;"	left;@£;{ ;[o;	;"tab-bottom-border-radius;@£;"tab_bottom_border_radius;i;i;i;"framepad;@;i;[ ;C0o;;T; i ;![".o;	;"prefix;{ ;"prefix;iŸ"tab-default-bottom;@;iŸ;[
+u;5î[o:Sass::Script::Variable	:
+@name"tab-inner-border:@options{ :@underscored_name"tab_inner_border:
+@linei 0[o:Sass::Tree::MixinNode;"inner-border;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@keywords{"
+coloro; 	;"tab-inner-border-color;{ ;"tab_inner_border_color;	i£"
+widtho; 	;""tab-bottom-inner-border-width;@;""tab_bottom_inner_border_width;	i¢:
+@args[ ;	i¤:@children[ o;"; i ;o;%	;[	o;&;i;{ ;'"1px;([ ;i§;)["pxo;	;"
+solid;@Í;i§;;o;	;"tabbar-strip-border-color;@Í;"tabbar_strip_border_color;i§o;	;"!important;@Í;i§;;;@Í;*;+;i§;["border-top;@;#;$;i§;[ o;;"inner-border;@;{"
+coloro;	;"tab-inner-border-color;{ ;"tab_inner_border_color;i«"
+widtho;	;""tab-bottom-inner-border-width;@â;""tab_bottom_inner_border_width;iª;[ ;i¬;[ o;;T; i ;!["em;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["em;3" ;i®;3@ö;i®;3@ö;i®;i®;[o;"; i ;o;	;"framepad;{ ;"framepad;i¯;["padding-top;@;#;$;i¯;[ o;;T; i ;!["button,
+        .o;	;"prefix;{ ;"prefix;i³"tab-inner;@;i³;[o;"; i ;o;:
+;{ ;;o;<
+;"bottom;@;{ ;[o;	;"tab-bottom-border-width;@;"tab_bottom_border_width;i´;i´;=;B;i´;?o;:
+;@;;o;:
+;@;;o;&;i;@;'"2;(@j;i´;)[ ;=;D;i´;?o;	;"framepad;@;"framepad;i´;=;B;i´;?o;	;"tab-height;@;"tab_height;i´;["height;@;#;$;i´;[ o;"; i ;o;:
+;{ ;;o;<
+;"bottom;@#;{ ;[o;	;"tab-bottom-border-width;@#;"tab_bottom_border_width;iµ;iµ;=;B;iµ;?o;:
+;@#;;o;:
+;@#;;o;&;i;@#;'"2;(@j;iµ;)[ ;=;D;iµ;?o;	;"framepad;@#;"framepad;iµ;=;B;iµ;?o;	;"tab-height;@#;"tab_height;iµ;["line-height;@;#;$;iµ;[ o;;T; i ;![
+".o;	;"prefix;{ ;"prefix;i¹"
+nbr .o;	;"prefix;{ ;"prefix;i¹"tab-default-bottom;@;i¹;[o;"; i ;o;;"1px !important;;;["border-top-width;@;#;$;iº;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i½"tab-default-bottom-active;@;i½;[o;"; i ;o;%	;[o;	;""tabbar-strip-background-color;{ ;""tabbar_strip_background_color;i¾o;	;"!important;@[;i¾;;;@[;*;+;i¾;["border-top-color;@;#;$;i¾;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iÁ"tab-default-disabled;@;iÁ;[
+o;"; i ;o;;"default;;;["cursor;@;#;$;iÂ;[ o;;T; i ;!["*;@;,o;-;.[o;/;.[o;0;.[o;1;20;3" ;iÄ;3@{;iÄ;3@{;iÄ;iÄ;[o;"; i ;o;;"default;;;["cursor;@;#;$;iÅ;[ o;"; i ;o;	;"tab-border-color-disabled;{ ;"tab_border_color_disabled;iÈ;["border-color;@;#;$;iÈ;[ o;;"background-gradient;@;{ ;[o;	;"tab-base-color-disabled;{ ;"tab_base_color_disabled;iÉo;	;"%tab-background-gradient-disabled;@‘;"%tab_background_gradient_disabled;iÉ;iÉ;[ o;;T; i ;!["button;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["button;3" ;iË;3@£;iË;3@£;iË;iË;[o;"; i ;o;%	;[o;	;"tab-color-disabled;{ ;"tab_color_disabled;iÌo;	;"!important;@ª;iÌ;;;@ª;*;+;iÌ;["
+color;@;#;$;iÌ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iÐ"tab-icon-text-left;@;iÐ;[o;;T; i ;![".o;	;"prefix;{ ;"prefix;iÑ"tab-inner;@;iÑ;[o;"; i ;o;;"	20px;;;["padding-left;@;#;$;iÒ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iÖ"tab;@;iÖ;[o;;T; i ;!["button, a;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["button;3" ;i×;3@Þ;i×o;/;.[o;0;.[o;4	;20;["a;3@Þ;i×;3@Þ;i×;3@Þ;i×;i×;[o;"; i ;o;;"relative;;;["position;@;#;$;iØ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iÚ"tab-icon;@;iÚ;[o;"; i ;o;;"absolute;;;["position;@;#;$;iÛ;[ o;"; i ;o;;"no-repeat;;;["background-repeat;@;#;$;iÜ;[ o;"; i ;o;;"0;;;["top;@;#;$;iÝ;[ o;"; i ;o;;"0;;;["	left;@;#;$;iÞ;[ o;"; i ;o;;"	auto;;;["
+right;@;#;$;iß;[ o;"; i ;o;;"0;;;["bottom;@;#;$;ià;[ o;"; i ;o;;"	18px;;;["
+width;@;#;$;iá;[ o;"; i ;o;;"	18px;;;["height;@;#;$;iâ;[ o;;[ ;0;"/*over */;@;iç;i ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iè"tab-over;@;iè;[u;5'[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-border-color;@:@underscored_name"tab_border_color:
+@lineié:@operator:neq;ié:@operand1o;	;	"tab-border-color-over;@;
+"tab_border_color_over;ié0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-border-color-over;{ ;
+"tab_border_color_over;iê;	["border-color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;iê:@children[ o;;T; i ;!["button;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["button;3" ;ií;3@@;ií;3@@;ií;ií;[	u;5ö[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-color;@:@underscored_name"tab_color:
+@lineiî:@operator:neq;iî:@operand1o;	;	"tab-color-over;@;
+"tab_color_over;iî0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-color-over;{ ;
+"tab_color_over;iï;	["
+color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;iï:@children[ u;5 [o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-weight;@:@underscored_name"tab_font_weight:
+@lineiñ:@operator:neq;iñ:@operand1o;	;	"tab-font-weight-over;@;
+"tab_font_weight_over;iñ0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-weight-over;{ ;
+"tab_font_weight_over;iò;	["font-weight;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;iò:@children[ u;5[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-size;@:@underscored_name"tab_font_size:
+@lineiô:@operator:neq;iô:@operand1o;	;	"tab-font-size-over;@;
+"tab_font_size_over;iô0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-size-over;{ ;
+"tab_font_size_over;iõ;	["font-size;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;iõ:@children[ u;5 [o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-family;@:@underscored_name"tab_font_family:
+@linei÷:@operator:neq;i÷:@operand1o;	;	"tab-font-family-over;@;
+"tab_font_family_over;i÷0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-family-over;{ ;
+"tab_font_family_over;iø;	["font-family;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;iø:@children[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;iý"tab-top-over;@;iý;[o;;"background-gradient;@;{ ;[o;	;"tab-base-color-over;{ ;"tab_base_color_over;iþo;	;"!tab-background-gradient-over;@U;"!tab_background_gradient_over;iþo;	;"top;@U;iþ;;;iþ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i "tab-bottom-over;@;i ;[o;;"background-gradient;@;{ ;[o;	;"tab-base-color-over;{ ;"tab_base_color_over;io;	;"!tab-background-gradient-over;@l;"!tab_background_gradient_over;io;	;"bottom;@l;i;;;i;[ o;;[ ;0;"/*active */;@;i;i ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i"tab-active;@;i;[o;"; i ;o;;"3;;;["z-index;@;#;$;i;[ u;54[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-border-color;@:@underscored_name"tab_border_color:
+@linei:@operator:neq;i:@operand1o;	;	"tab-border-color-active;@;
+"tab_border_color_active;i0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-border-color-active;{ ;
+"tab_border_color_active;i;	["border-color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i:@children[ o;;T; i ;!["button;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["button;3" ;i;3@”;i;3@”;i;i;[	u;5[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-color;@:@underscored_name"tab_color:
+@linei:@operator:neq;i:@operand1o;	;	"tab-color-active;@;
+"tab_color_active;i0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-color-active;{ ;
+"tab_color_active;i;	["
+color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i:@children[ u;5-[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-weight;@:@underscored_name"tab_font_weight:
+@linei:@operator:neq;i:@operand1o;	;	"tab-font-weight-active;@;
+"tab_font_weight_active;i0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-weight-active;{ ;
+"tab_font_weight_active;i;	["font-weight;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i:@children[ u;5[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-size;@:@underscored_name"tab_font_size:
+@linei:@operator:neq;i:@operand1o;	;	"tab-font-size-active;@;
+"tab_font_size_active;i0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-size-active;{ ;
+"tab_font_size_active;i;	["font-size;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i:@children[ u;5-[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-family;@:@underscored_name"tab_font_family:
+@linei:@operator:neq;i:@operand1o;	;	"tab-font-family-active;@;
+"tab_font_family_active;i0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-family-active;{ ;
+"tab_font_family_active;i;	["font-family;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i:@children[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i"tab-top-active;@;i;[o;;"background-gradient;@;{ ;[o;	;"tab-base-color-active;{ ;"tab_base_color_active;io;	;"#tab-background-gradient-active;@©;"#tab_background_gradient_active;io;	;"top;@©;i;;;i;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i"tab-bottom-active;@;i;[o;;"background-gradient;@;{ ;[o;	;"tab-base-color-active;{ ;"tab_base_color_active;io;	;"#tab-background-gradient-active;@À;"#tab_background_gradient_active;io;	;"bottom;@À;i;;;i;[ o;;[ ;0;"/*disabled */;@;i";i ;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i#"tab-disabled;@;i#;[u;5<[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-border-color;@:@underscored_name"tab_border_color:
+@linei$:@operator:neq;i$:@operand1o;	;	"tab-border-color-disabled;@;
+"tab_border_color_disabled;i$0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-border-color-disabled;{ ;
+"tab_border_color_disabled;i%;	["border-color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i%:@children[ o;;T; i ;!["button;@;,o;-;.[o;/;.[o;0;.[o;4	;20;["button;3" ;i(;3@â;i(;3@â;i(;i(;[	u;5[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-color;@:@underscored_name"tab_color:
+@linei):@operator:neq;i):@operand1o;	;	"tab-color-disabled;@;
+"tab_color_disabled;i)0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-color-disabled;{ ;
+"tab_color_disabled;i*;	["
+color;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i*:@children[ u;55[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-weight;@:@underscored_name"tab_font_weight:
+@linei,:@operator:neq;i,:@operand1o;	;	"tab-font-weight-disabled;@;
+"tab_font_weight_disabled;i,0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-weight-disabled;{ ;
+"tab_font_weight_disabled;i-;	["font-weight;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i-:@children[ u;5'[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-size;@:@underscored_name"tab_font_size:
+@linei/:@operator:neq;i/:@operand1o;	;	"tab-font-size-disabled;@;
+"tab_font_size_disabled;i/0[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-size-disabled;{ ;
+"tab_font_size_disabled;i0;	["font-size;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i0:@children[ u;55[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"tab-font-family;@:@underscored_name"tab_font_family:
+@linei2:@operator:neq;i2:@operand1o;	;	"tab-font-family-disabled;@;
+"tab_font_family_disabled;i20[o:Sass::Tree::PropNode:
+@tabsi :@valueo;	;	"tab-font-family-disabled;{ ;
+"tab_font_family_disabled;i3;	["font-family;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets:@prop_syntax:new;i3:@children[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i8"tab-top-disabled;@;i8;[o;"; i ;o;;"	none;;;["background-image;@;#;$;i9;[ o;"; i ;o;;"transparent;;;["background;@;#;$;i:;[ o;;"background-gradient;@;{ ;[o;	;"tab-base-color-disabled;{ ;"tab_base_color_disabled;i;o;	;"%tab-background-gradient-disabled;@;"%tab_background_gradient_disabled;i;o;	;"top;@;i;;;;i;;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i="tab-bottom-disabled;@;i=;[o;"; i ;o;;"	none;;;["background-image;@;#;$;i>;[ o;"; i ;o;;"transparent;;;["background;@;#;$;i?;[ o;;"background-gradient;@;{ ;[o;	;"tab-base-color-disabled;{ ;"tab_base_color_disabled;i@o;	;"%tab-background-gradient-disabled;@&;"%tab_background_gradient_disabled;i@o;	;"bottom;@&;i@;;;i@;[ u;5[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@lineiC:@operator:or;iC:@operand1o:!Sass::Script::UnaryOperation	:@operando;	;	"supports-gradients;@;
+"supports_gradients;iC;@;:not;iC0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;	"prefix;{ ;
+"prefix;iD"nlg;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;iD:@children[	u:Sass::Tree::IfNode,[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@lineiE:
+@type:identifier:@operator:neq;
+iE:@operand1o:Sass::Script::Variable	:
+@name"tab-background-gradient;@:@underscored_name"tab_background_gradient;
+iE0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+iF"tab-top;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+iF:@children[o:Sass::Tree::PropNode;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@;"theme_name;
+iFo;	;	"tab/tab-default-top-bg.gif;@;
+iF;:string;
+iF;["background-image;@:@prop_syntax:new;
+iF;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;
+iG"tab-bottom;@;
+iG;[o;;i ;	o;
+;"theme-background-image;{ ;{ ;[o;	;"theme-name;@4;"theme_name;
+iGo;	;	""tab/tab-default-bottom-bg.gif;@4;
+iG;;;
+iG;["background-image;@; ;!;
+iG;[ u;J[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@lineiJ:
+@type:identifier:@operator:neq;
+iJ:@operand1o:Sass::Script::Variable	:
+@name"!tab-background-gradient-over;@:@underscored_name"!tab_background_gradient_over;
+iJ0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+iK"tab-top-over;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+iK:@children[o:Sass::Tree::PropNode;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@;"theme_name;
+iKo;	;	"$tab/tab-default-top-over-bg.gif;@;
+iK;:string;
+iK;["background-image;@:@prop_syntax:new;
+iK;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;
+iL"tab-bottom-over;@;
+iL;[o;;i ;	o;
+;"theme-background-image;{ ;{ ;[o;	;"theme-name;@4;"theme_name;
+iLo;	;	"'tab/tab-default-bottom-over-bg.gif;@4;
+iL;;;
+iL;["background-image;@; ;!;
+iL;[ u;V[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@lineiO:
+@type:identifier:@operator:neq;
+iO:@operand1o:Sass::Script::Variable	:
+@name"#tab-background-gradient-active;@:@underscored_name"#tab_background_gradient_active;
+iO0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+iP"tab-top-active;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+iP:@children[o:Sass::Tree::PropNode;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@;"theme_name;
+iPo;	;	"&tab/tab-default-top-active-bg.gif;@;
+iP;:string;
+iP;["background-image;@:@prop_syntax:new;
+iP;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;
+iQ"tab-bottom-active;@;
+iQ;[o;;i ;	o;
+;"theme-background-image;{ ;{ ;[o;	;"theme-name;@4;"theme_name;
+iQo;	;	")tab/tab-default-bottom-active-bg.gif;@4;
+iQ;;;
+iQ;["background-image;@; ;!;
+iQ;[ u;ï[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@lineiT:
+@type:identifier:@operator:neq;
+iT:@operand1o:Sass::Script::Variable	:
+@name"%tab-background-gradient-disabled;@:@underscored_name"%tab_background_gradient_disabled;
+iT0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+iU"tab-top-disabled;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+iU:@children[o:Sass::Tree::PropNode;i ;	o:Sass::Script::List	;	[o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@;"theme_name;
+iUo;	;	"(tab/tab-default-top-disabled-bg.gif;@;
+iU;:string;
+iUo;	;	"!important;@;
+iU;;;@:@separator:
+space;
+iU;["background-image;@:@prop_syntax:new;
+iU;[ o;;T;i ;[".o;	;"prefix;{ ;"prefix;
+iV"tab-bottom-disabled;@;
+iV;[o;;i ;	o;	;	[o;
+;"theme-background-image;{ ;{ ;[o;	;"theme-name;@:;"theme_name;
+iVo;	;	"+tab/tab-default-bottom-disabled-bg.gif;@:;
+iV;; ;
+iVo;	;	"!important;@:;
+iV;;;@:;!;";
+iV;["background-image;@;#;$;
+iV;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i["tab-closable em;@;i[;[o;"; i ;o;:
+;{ ;;o;&;i;@:;'"3;(@j;i\;)[ ;=;>;i\;?o;	;"tab-closable-icon-width;@:;"tab_closable_icon_width;i\;["padding-right;@;#;$;i\;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;i_"tab-close-btn;@;i_;[o;"; i ;o;;"absolute !important;;;["position;@;#;$;i`;[ o;"; i ;o;	;"tab-closable-icon-top;{ ;"tab_closable_icon_top;ia;["top;@;#;$;ia;[ o;"; i ;o;	;"tab-closable-icon-right;{ ;"tab_closable_icon_right;ib;["
+right;@;#;$;ib;[ o;"; i ;o;	;"tab-closable-icon-width;{ ;"tab_closable_icon_width;ic;["
+width;@;#;$;ic;[ o;"; i ;o;	;"tab-closable-icon-height;{ ;"tab_closable_icon_height;id;["height;@;#;$;id;[ o;"; i ;o;;"0;;;["font-size;@;#;$;ie;[ o;"; i ;o;;"0;;;["line-height;@;#;$;if;[ o;"; i ;o;&;iþü;{ ;'"-999px;([ ;ig;)["px;["text-indent;@;#;$;ig;[ o;"; i ;o;;"no-repeat;;;["background;@;#;$;ih;[ o;"; i ;o;<
+;"theme-background-image;{ ;{ ;[o;	;"theme-name;@’;"theme_name;iio;	;"tab-closable-icon;@’;"tab_closable_icon;ii;ii;["background-image;@;#;$;ii;[ o;;"opacity;@;{ ;[o;&;f0.59999999999999998 33;{ ;'"0.6;(@j;ij;)[ ;ij;[ o;;T; i ;![".o;	;"prefix;{ ;"prefix;il"tab-close-btn:hover;@;il;[o;;"opacity;@;{ ;[o;&;i;{ ;'"1;(@j;im;)[ ;im;[ u;5o1[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::Variable	:
+@name"compile-all;@:@underscored_name"compile_all:
+@lineip:@operator:or;ip:@operand1o:!Sass::Script::UnaryOperation	:@operando;	;	"supports-border-radius;@;
+"supports_border_radius;ip;@;:not;ip0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;	"prefix;{ ;
+"prefix;iq"nbr;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;iq:@children[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;ir"tab-top-over;@;ir;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;is" frame-tl,
+                .o;	;	"prefix;{ ;
+"prefix;it" frame-bl,
+                .o;	;	"prefix;{ ;
+"prefix;iu" frame-tr,
+                .o;	;	"prefix;{ ;
+"prefix;iv" frame-br,
+                .o;	;	"prefix;{ ;
+"prefix;iw" frame-tc,
+                .o;	;	"prefix;{ ;
+"prefix;ix"frame-bc;@;ix;[o:Sass::Tree::PropNode;i :@valueo:Sass::Script::Funcall
+;	"theme-background-image;{ :@keywords{ :
+@args[o;	;	"theme-name;@J;
+"theme_name;iyo:Sass::Script::String	;")tab/tab-default-top-over-corners.gif;@J;iy:
+@type:string;iy;	["background-image;@:@prop_syntax:new;iy;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;i{" frame-ml,
+                .o;	;	"prefix;{ ;
+"prefix;i|"frame-mr;@;i|;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@f;
+"theme_name;i}o;	;"'tab/tab-default-top-over-sides.gif;@f;i}; ;!;i};	["background-image;@;";#;i};[ u:Sass::Tree::IfNodeä[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@linei:
+@type:identifier:@operator:neq;
+i:@operand1o:Sass::Script::Variable	:
+@name"!tab-background-gradient-over;@:@underscored_name"!tab_background_gradient_over;
+i0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+i€"frame-mc;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+i€:@children[o:Sass::Tree::PropNode;i ;	o;	;"tab-base-color-over;{ ;"tab_base_color_over;
+i;["background-color;@:@prop_syntax:new;
+i;[ o;;i ;	o;;	"repeat-x;;;["background-repeat;@;;;
+i‚;[ o;;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@+;"theme_name;
+iƒo;	;	"$tab/tab-default-top-over-bg.gif;@+;
+iƒ;:string;
+iƒ;["background-image;@;;;
+iƒ;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iˆ"tab-bottom-over;@;iˆ;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;i‰" frame-tl,
+                .o;	;	"prefix;{ ;
+"prefix;iŠ" frame-bl,
+                .o;	;	"prefix;{ ;
+"prefix;i‹" frame-tr,
+                .o;	;	"prefix;{ ;
+"prefix;iŒ" frame-br,
+                .o;	;	"prefix;{ ;
+"prefix;i" frame-tc,
+                .o;	;	"prefix;{ ;
+"prefix;iŽ"frame-bc;@;iŽ;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@›;
+"theme_name;io;	;",tab/tab-default-bottom-over-corners.gif;@›;i; ;!;i;	["background-image;@;";#;i;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;i‘" frame-ml,
+                .o;	;	"prefix;{ ;
+"prefix;i’"frame-mr;@;i’;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@·;
+"theme_name;i“o;	;"*tab/tab-default-bottom-over-sides.gif;@·;i“; ;!;i“;	["background-image;@;";#;i“;[ u;$ç[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@linei•:
+@type:identifier:@operator:neq;
+i•:@operand1o:Sass::Script::Variable	:
+@name"!tab-background-gradient-over;@:@underscored_name"!tab_background_gradient_over;
+i•0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+i–"frame-mc;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+i–:@children[o:Sass::Tree::PropNode;i ;	o;	;"tab-base-color-over;{ ;"tab_base_color_over;
+i—;["background-color;@:@prop_syntax:new;
+i—;[ o;;i ;	o;;	"repeat-x;;;["background-repeat;@;;;
+i˜;[ o;;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@+;"theme_name;
+i™o;	;	"'tab/tab-default-bottom-over-bg.gif;@+;
+i™;:string;
+i™;["background-image;@;;;
+i™;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iž"tab-top-active;@;iž;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iŸ" frame-tl,
+                .o;	;	"prefix;{ ;
+"prefix;i " frame-bl,
+                .o;	;	"prefix;{ ;
+"prefix;i¡" frame-tr,
+                .o;	;	"prefix;{ ;
+"prefix;i¢" frame-br,
+                .o;	;	"prefix;{ ;
+"prefix;i£" frame-tc,
+                .o;	;	"prefix;{ ;
+"prefix;i¤"frame-bc;@;i¤;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@ñ;
+"theme_name;i¥o;	;"+tab/tab-default-top-active-corners.gif;@ñ;i¥; ;!;i¥;	["background-image;@;";#;i¥;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;i§" frame-ml,
+                .o;	;	"prefix;{ ;
+"prefix;i¨"frame-mr;@;i¨;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@;
+"theme_name;i©o;	;")tab/tab-default-top-active-sides.gif;@;i©; ;!;i©;	["background-image;@;";#;i©;[ u;$î[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@linei«:
+@type:identifier:@operator:neq;
+i«:@operand1o:Sass::Script::Variable	:
+@name"#tab-background-gradient-active;@:@underscored_name"#tab_background_gradient_active;
+i«0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+i¬"frame-mc;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+i¬:@children[o:Sass::Tree::PropNode;i ;	o;	;"tab-base-color-active;{ ;"tab_base_color_active;
+i­;["background-color;@:@prop_syntax:new;
+i­;[ o;;i ;	o;;	"repeat-x;;;["background-repeat;@;;;
+i®;[ o;;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@+;"theme_name;
+i¯o;	;	"&tab/tab-default-top-active-bg.gif;@+;
+i¯;:string;
+i¯;["background-image;@;;;
+i¯;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;i´"tab-bottom-active;@;i´;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iµ" frame-tl,
+                .o;	;	"prefix;{ ;
+"prefix;i¶" frame-bl,
+                .o;	;	"prefix;{ ;
+"prefix;i·" frame-tr,
+                .o;	;	"prefix;{ ;
+"prefix;i¸" frame-br,
+                .o;	;	"prefix;{ ;
+"prefix;i¹" frame-tc,
+                .o;	;	"prefix;{ ;
+"prefix;iº"frame-bc;@;iº;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@G;
+"theme_name;i»o;	;".tab/tab-default-bottom-active-corners.gif;@G;i»; ;!;i»;	["background-image;@;";#;i»;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;i½" frame-ml,
+                .o;	;	"prefix;{ ;
+"prefix;i¾"frame-mr;@;i¾;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@c;
+"theme_name;i¿o;	;",tab/tab-default-bottom-active-sides.gif;@c;i¿; ;!;i¿;	["background-image;@;";#;i¿;[ u;$ñ[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@lineiÁ:
+@type:identifier:@operator:neq;
+iÁ:@operand1o:Sass::Script::Variable	:
+@name"#tab-background-gradient-active;@:@underscored_name"#tab_background_gradient_active;
+iÁ0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+iÂ"frame-mc;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+iÂ:@children[o:Sass::Tree::PropNode;i ;	o;	;"tab-base-color-active;{ ;"tab_base_color_active;
+iÃ;["background-color;@:@prop_syntax:new;
+iÃ;[ o;;i ;	o;;	"repeat-x;;;["background-repeat;@;;;
+iÄ;[ o;;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@+;"theme_name;
+iÅo;	;	")tab/tab-default-bottom-active-bg.gif;@+;
+iÅ;:string;
+iÅ;["background-image;@;;;
+iÅ;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iÊ"tab-top-disabled;@;iÊ;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iË" frame-tl,
+                .o;	;	"prefix;{ ;
+"prefix;iÌ" frame-bl,
+                .o;	;	"prefix;{ ;
+"prefix;iÍ" frame-tr,
+                .o;	;	"prefix;{ ;
+"prefix;iÎ" frame-br,
+                .o;	;	"prefix;{ ;
+"prefix;iÏ" frame-tc,
+                .o;	;	"prefix;{ ;
+"prefix;iÐ"frame-bc;@;iÐ;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@;
+"theme_name;iÑo;	;"-tab/tab-default-top-disabled-corners.gif;@;iÑ; ;!;iÑ;	["background-image;@;";#;iÑ;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;iÓ" frame-ml,
+                .o;	;	"prefix;{ ;
+"prefix;iÔ"frame-mr;@;iÔ;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@¹;
+"theme_name;iÕo;	;"+tab/tab-default-top-disabled-sides.gif;@¹;iÕ; ;!;iÕ;	["background-image;@;";#;iÕ;[ u;$‚[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@linei×:
+@type:identifier:@operator:neq;
+i×:@operand1o:Sass::Script::Variable	:
+@name"%tab-background-gradient-disabled;@:@underscored_name"%tab_background_gradient_disabled;
+i×0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+iØ"frame-mc;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+iØ:@children[o:Sass::Tree::PropNode;i ;	o;;	"repeat-x;;;["background-repeat;@:@prop_syntax:new;
+iÙ;[ o;;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@#;"theme_name;
+iÚo;	;	"(tab/tab-default-top-disabled-bg.gif;@#;
+iÚ;:string;
+iÚ;["background-image;@;;;
+iÚ;[ o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;iß"tab-bottom-disabled;@;iß;[o;;T;i ;[".o;	;	"prefix;{ ;
+"prefix;ià" frame-tl,
+                .o;	;	"prefix;{ ;
+"prefix;iá" frame-bl,
+                .o;	;	"prefix;{ ;
+"prefix;iâ" frame-tr,
+                .o;	;	"prefix;{ ;
+"prefix;iã" frame-br,
+                .o;	;	"prefix;{ ;
+"prefix;iä" frame-tc,
+                .o;	;	"prefix;{ ;
+"prefix;iå"frame-bc;@;iå;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@ó;
+"theme_name;iæo;	;"0tab/tab-default-bottom-disabled-corners.gif;@ó;iæ; ;!;iæ;	["background-image;@;";#;iæ;[ o;;T;i ;[
+".o;	;	"prefix;{ ;
+"prefix;iè" frame-ml,
+                .o;	;	"prefix;{ ;
+"prefix;ié"frame-mr;@;ié;[o;;i ;o;
+;	"theme-background-image;{ ;{ ;[o;	;	"theme-name;@;
+"theme_name;iêo;	;".tab/tab-default-bottom-disabled-sides.gif;@;iê; ;!;iê;	["background-image;@;";#;iê;[ u;$…[o:Sass::Script::Operation
+:@options{ :@operand2o:Sass::Script::String	:@value"	null;@:
+@lineiì:
+@type:identifier:@operator:neq;
+iì:@operand1o:Sass::Script::Variable	:
+@name"%tab-background-gradient-disabled;@:@underscored_name"%tab_background_gradient_disabled;
+iì0[o:Sass::Tree::RuleNode:@has_childrenT:
+@tabsi :
+@rule[".o;	;"prefix;{ ;"prefix;
+ií"frame-mc;{:importero: Sass::Importers::Filesystem:
+@root"Y/Sites/sandbox/redamp/js/ext-4.0.7/resources/sass/../../resources/themes/stylesheets;
+ií:@children[o:Sass::Tree::PropNode;i ;	o;;	"repeat-x;;;["background-repeat;@:@prop_syntax:new;
+iî;[ o;;i ;	o:Sass::Script::Funcall
+;"theme-background-image;{ :@keywords{ :
+@args[o;	;"theme-name;@#;"theme_name;
+iïo;	;	"+tab/tab-default-bottom-disabled-bg.gif;@#;
+iï;:string;
+iï;["background-image;@;;;
+iï;[ 
