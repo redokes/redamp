@@ -1,0 +1,3 @@
+[submodule "resources/js/lapidos"]
+	path = resources/js/lapidos
+	url = git@github.com:redokes/lapidos.git
