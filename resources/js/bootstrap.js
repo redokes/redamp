@@ -1,9 +1,9 @@
 Ext.Loader.setConfig({
 	enabled: true,
 	paths:{
-		Ext: 'js/ext-4.0.7/src',
-		RedAmp: '/js/redamp/src',
-		Lapidos: '/js/lapidos/src'
+		Ext: '/resources/js/ext-4.0.7/src',
+		RedAmp: '/resources/js/redamp/src',
+		Lapidos: '/resources/js/lapidos/src'
 	}
 });
 
