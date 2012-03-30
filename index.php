@@ -13,7 +13,7 @@ require_once 'config/bootstrap.php';
 	<body>
 		<script>
 			Ext.onReady(function() {
-				Ext.require('RedAmp.Application');
+				Ext.require('RedAmp.System');
 			});
 		</script>
 	</body>

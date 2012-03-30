@@ -85,7 +85,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		}
 		
 		this.dragZone = Ext.create('RedAmp.music.playlist.DragZone', this, {
-			ddGroup: RedAmp.music.Music.ddGroup
+			ddGroup: RedAmp.music.module.Music.getDDGroup()
 		});
 	},
 	
@@ -96,7 +96,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		}
 		
 		this.dropZone = Ext.create('RedAmp.music.playlist.DropZone', this, {
-			ddGroup: RedAmp.music.Music.ddGroup
+			ddGroup: RedAmp.music.module.Music.getDDGroup()
 		});
 	},
 	
