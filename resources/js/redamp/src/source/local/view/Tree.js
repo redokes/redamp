@@ -44,7 +44,7 @@ Ext.define('RedAmp.source.local.view.Tree', {
 		}
 		
 		this.dragZone = Ext.create('RedAmp.source.local.dd.TreeDragZone', this, {
-			ddGroup: RedAmp.music.Music.ddGroup
+			ddGroup: RedAmp.music.module.Music.getDDGroup()
 		});
 	},
 	

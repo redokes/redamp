@@ -32,7 +32,6 @@ Ext.define('RedAmp.lastfm.api.Api', {
 		var cookie = Ext.util.Cookies.get(this.cookieKey);
 		if(cookie != null){
 			this.setSession(Ext.decode(cookie));
-			console.log(this.getSession());
 		}
 	},
 	

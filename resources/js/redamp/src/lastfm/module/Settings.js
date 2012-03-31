@@ -1,3 +1,55 @@
+Ext.define('RedAmp.lastfm.module.Settings', {
+	extend: 'Lapidos.module.Viewable',
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Requires
+	///////////////////////////////////////////////////////////////////////////
+	requires:[
+		'RedAmp.lastfm.api.Api'
+	],
+	
+	//Config
+	config: {
+		name: 'lastfm-settings',
+		title: 'Last FM Settings'
+	},
+	
+	init: function(){
+		this.api = RedAmp.lastfm.api.Api;
+		this.initSettings();
+		this.initAuth();
+		this.initLastFmModule();
+	},
+	
+	initSettings: function(){
+		this.manager.on({
+			scope: this,
+			register: function(manager, module){
+				if(module.getName() != "settings"){
+					return;
+				}
+				module.addSection(this.auth);
+			}
+		});
+	},
+	
+	initAuth: function(){
+		this.auth = Ext.create('RedAmp.lastfm.form.Authenticate', {
+			title: 'Last FM'
+		});
+	},
+	
+	initLastFmModule: function(){
+		console.log(this.api.isAuthenticated());
+		this.api.onAuthentication(function(){
+			Ext.require('RedAmp.lastfm.module.LastFm', function(){
+				this.manager.register('RedAmp.lastfm.module.LastFm');
+				this.manager.getInstance('lastfm').launch();
+			}, this);
+		}, this);
+	}
+});
+/*
 Ext.define('RedAmp.lastfm.LastFm', {
 	extend: 'RedAmp.module.Module',
 	singleton: true,
@@ -153,3 +205,4 @@ Ext.define('RedAmp.lastfm.LastFm', {
 		});
 	}
 });
+*/

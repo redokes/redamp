@@ -11,7 +11,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	player: null,
 	albumSelector: '.playlist-album-item',
 	itemSelector: '.view-item',
-	emptyText: '<div class="playlist-empty-text">Drop files here....</div>',
+	emptyText: '<div class="playlist-empty-text">Drag files from the library and drop here...</div>',
 	deferEmptyText: false,
 	overItemCls: 'view-hover',
 	trackOver: true,
@@ -104,11 +104,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		if(this.player == null){
 			return
 		}
-		
-		//Listen for the complete event
-		this.player.on('complete', function(){
-			this.next();
-		}, this);
+		this.setPlayer(this.player);
 	},
 	
 	initToolbar: function(){
@@ -124,6 +120,17 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	///////////////////////////////////////////////////////////////////////////
 	getAlbumSelector: function(){
 		return this.albumSelector;
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Mutators
+	///////////////////////////////////////////////////////////////////////////
+	setPlayer: function(player){
+		this.player = player;
+		
+		//Listen for the complete event
+		this.player.un('complete', this.next, this);
+		this.player.on('complete', this.next, this);
 	},
 	
 	///////////////////////////////////////////////////////////////////////////

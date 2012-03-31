@@ -7,19 +7,41 @@ Ext.define('RedAmp.System', {
 	modules:[
 		//'RedAmp.stream.Stream',
 		'RedAmp.music.module.Music',
-		//'RedAmp.lastfm.LastFm',
+		'RedAmp.lastfm.module.Settings',
 		
 		//Sources
-		//'RedAmp.source.local.Local'
+		'RedAmp.source.local.module.Local',
+		
+		//Settings
+		'RedAmp.settings.module.Settings'
 	],
 	
 	singleton: true,
 	init: function(){
 		this.callParent(arguments);
+		this.initStore();
 	},
 	
 	initShell: function(){
 		this.shell = new RedAmp.shell.Shell(this);
+	},
+	
+	initStore: function(){
+		this.store = Ext.create('Ext.data.Store', {
+			scope: this,
+			fields:[
+				'key',
+				'value'
+			],
+			proxy: {
+				type: 'localstorage',
+				id  : 'redamp-store'
+			}
+		});
+		this.store.on('load', function(){
+			console.log(arguments);
+		}, this);
+		this.store.load();
 	},
 	
 	onBoot: function() {

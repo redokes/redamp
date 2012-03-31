@@ -37,13 +37,11 @@ Ext.define('RedAmp.shell.Shell', {
 	// Events
 	///////////////////////////////////////////////////////////////////////////
 	onModuleLaunch: function(manager, module, launchParams){
-		console.log('on module launch');
 		this.callParent(arguments);
 		if(Ext.isFunction(module.isViewable) && module.isViewable()){
 			this.view.getCenter().setLoading('Loading');
 			this.view.getCenter().setLoading('Loading ' + module.getName() + '...');
 			module.getActiveView(function(view){
-				console.log(view);
 				this.view.getCenter().setLoading(false);
 				this.view.setActive(view);
 			}, this);

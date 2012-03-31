@@ -1,9 +1,11 @@
 Ext.define('RedAmp.lastfm.form.Authenticate', {
-	extend: 'Ext.form.Panel',
+	extend: 'Ext.panel.Panel',
 	
+	bodyPadding: 5,
 	requires:[
 		'RedAmp.lastfm.api.Api'
 	],
+	title: 'Last FM',
 	
 	initComponent: function(){
 		this.items = this.items || [];

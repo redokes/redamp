@@ -20,20 +20,28 @@ Ext.define('RedAmp.music.module.Music', {
 		}]
 	},
 	
-	onRegister: function(){
+	init: function(){
 		this.initPlayer();
+	},
+	
+	onRegister: function(){
+		this.getOs().getShell().getView().getNorth().add(this.player);
 	},
 	
 	onLaunch: function(){
 		this.callParent(arguments);
-		console.log('music launch');
 	},
 	
 	initPlayer: function(){
 		this.player = Ext.create('RedAmp.music.Player', {
 			scope: this
-		}, this);
-		this.getOs().getShell().getView().getNorth().add(this.player);
+		});
+		this.on({
+			scope: this,
+			initviewhome: function(module, view){
+				view.setPlayer(this.player);
+			}
+		});
 	}
 });
 /*

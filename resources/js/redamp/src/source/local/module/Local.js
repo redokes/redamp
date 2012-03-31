@@ -1,3 +1,27 @@
+Ext.define('RedAmp.source.local.module.Local', {
+	extend: 'Lapidos.module.Viewable',
+	
+	//Config
+	config: {
+		name: 'source-local',
+		title: 'Source Local'
+	},
+	
+	init: function(){
+		this.initTree();
+	},
+	
+	initTree: function(){
+		this.tree = Ext.create('RedAmp.source.local.view.Tree', {
+			width: 200
+		});
+	},
+	
+	onRegister: function(){
+		this.getOs().getShell().getView().getEast().add(this.tree);
+	}
+});
+/*
 Ext.define('RedAmp.source.local.Local', {
 	extend: 'RedAmp.module.Module',
 	singleton: true,
@@ -89,3 +113,4 @@ Ext.define('RedAmp.source.local.Local', {
 		}, this);
 	}
 });
+*/

@@ -1,0 +1,108 @@
+/******************************************************
+*	Lapidos shell navigation
+******************************************************/
+/*
+$tab-spacing: 2px;
+$tab-height: 40px;
+$tab-font-size: 16px;
+$tab-base-color: #eaeaea;
+$tab-color-active: #333333;
+$tab-background-gradient: color-stops(#dcdcdc, #eaeaea);
+$tab-background-gradient-over: 'tab-over' !default;
+$tab-background-gradient-active: color-stops(#eaeaea, #ffffff);
+$tab-background-gradient-disabled: 'tab-disabled' !default;
+*/
+/* line 15, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a3a3a3), color-stop(100%, #878787));
+  background-image: -webkit-linear-gradient(#a3a3a3, #878787);
+  background-image: -moz-linear-gradient(#a3a3a3, #878787);
+  background-image: -o-linear-gradient(#a3a3a3, #878787);
+  background-image: -ms-linear-gradient(#a3a3a3, #878787);
+  background-image: linear-gradient(#a3a3a3, #878787);
+}
+
+/* line 18, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-container {
+  z-index: 500;
+  overflow: visible;
+}
+
+/* line 23, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-container .x-box-inner {
+  overflow: visible;
+}
+
+/* line 27, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation {
+  height: 40px;
+  overflow: visible;
+  z-index: 500;
+}
+
+/* line 33, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-item {
+  position: relative;
+  float: left;
+  display: inline;
+  padding: 10px;
+  height: 40px;
+  cursor: pointer;
+  color: #333333;
+  font-size: 16px;
+  font-family: 'Lucida Grande';
+  font-weight: bold;
+}
+
+/* line 46, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-item-icon .lapidos-shell-navigation-item-display {
+  padding-left: 30px;
+}
+
+/* line 50, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-item-image {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+/* line 55, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-item-image img {
+  width: 24px;
+}
+
+/* line 59, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-item-over, .lapidos-shell-navigation-item-active {
+  color: #000000;
+}
+
+/* line 63, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-sub-menu {
+  display: none;
+}
+
+/* line 67, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-sub-menu .lapidos-shell-navigation-item {
+  width: 120px;
+}
+
+/* line 71, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-sub-menu .lapidos-shell-navigation-item:last-child {
+  border-radius: 0px 0px 5px 5px;
+}
+
+/* line 75, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-menu li:hover > .lapidos-shell-navigation-sub-menu {
+  position: absolute;
+  display: block;
+  top: 40px;
+  left: 0px;
+}
+
+/* line 82, ../sass/application/_navigation.scss */
+.lapidos-shell-navigation-sub-menu li:hover > .lapidos-shell-navigation-sub-menu {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 120px;
+}
