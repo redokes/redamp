@@ -38,6 +38,7 @@ Ext.define('RedAmp.Application', {
 		this.initWest();
 		this.initCenter();
 		this.initNavigation();
+		this.initSettingsNavigation();
 	},
 	
 	initExt: function(){
@@ -63,8 +64,7 @@ Ext.define('RedAmp.Application', {
 	initSouth: function(){
 		this.south = new Ext.panel.Panel({
 			region: 'south',
-			unstyled: true,
-			border: false
+			layout: 'hbox'
 		});
 		this.items.push(this.south);
 	},
@@ -102,6 +102,16 @@ Ext.define('RedAmp.Application', {
 			tags: ['application']
 		});
 		this.getSouth().add(this.navigation);
+	},
+	
+	initSettingsNavigation: function(){
+		this.settingsNavigation = Ext.create('Lapidos.shell.navigation.Dom', {
+			flex: 1,
+			cls: 'navigation-settings',
+			store: this.shell.getNavigationStore(),
+			tags: ['settings']
+		});
+		this.getSouth().add(this.settingsNavigation);
 	},
 	
 	

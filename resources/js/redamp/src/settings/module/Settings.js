@@ -8,7 +8,7 @@ Ext.define('RedAmp.settings.module.Settings', {
 		viewCls: 'RedAmp.settings.form.Settings',
 		menu:[{
 			display: 'Settings',
-			tags:['application']
+			tags:['settings']
 		}]
 	},
 	

@@ -13,6 +13,7 @@ Ext.define('RedAmp.System', {
 		'RedAmp.source.local.module.Local',
 		
 		//Settings
+		'RedAmp.about.module.About',
 		'RedAmp.settings.module.Settings'
 	],
 	
