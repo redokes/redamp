@@ -10,4 +10,9 @@
 	<li>
 		I would love your feedback and contribution
 	</li>
+	<li>
+		RedAmp is designed to work in modern browsers. Chrome specifically. 
+		Actually, I haven't even tested it in any other browser, so just use 
+		chrome.
+	</li>
 </ul>
