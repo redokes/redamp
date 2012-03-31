@@ -131,6 +131,14 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 		//Listen for the complete event
 		this.player.un('complete', this.next, this);
 		this.player.on('complete', this.next, this);
+		
+		//Listen for next
+		this.player.un('next', this.next, this);
+		this.player.on('next', this.next, this);
+		
+		//Listen for previous
+		this.player.un('previous', this.previous, this);
+		this.player.on('previous', this.previous, this);
 	},
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -149,6 +157,13 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	
 	next: function(){
 		var record = this.store.getAt(this.store.indexOf(this.currentlyPlaying) + 1);
+		if(record != null){
+			this.play(record);
+		}
+	},
+	
+	previous: function(){
+		var record = this.store.getAt(this.store.indexOf(this.currentlyPlaying) - 1);
 		if(record != null){
 			this.play(record);
 		}

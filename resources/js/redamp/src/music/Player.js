@@ -78,6 +78,20 @@ Ext.define('RedAmp.music.Player', {
 	* @param {Record} record
 	*/
    
+   /**
+	* @event next
+	* Fires when the next button was pressed
+	* @param {Player} player
+	* @param {Record} record
+	*/
+   
+   /**
+	* @event previous
+	* Fires when the previous button was pressed
+	* @param {Player} player
+	* @param {Record} record
+	*/
+   
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Inits
@@ -93,12 +107,12 @@ Ext.define('RedAmp.music.Player', {
 		this.playPauseEl.on('click', this.onPlayPauseClick, this);
 	},
 	
-	initPlaylist: function() {
-		this.playlist = Ext.create('RedAmp.music.Playlist', {
-			title: 'Playlist'
-		});
-		
-		this.items.push(this.playlist);
+	initNext: function(){
+		this.nextEl.on('click', this.next, this);
+	},
+	
+	initPrevious: function(){
+		this.previousEl.on('click', this.previous, this);
 	},
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -108,6 +122,8 @@ Ext.define('RedAmp.music.Player', {
 		this.callParent(arguments);
 		this.initAudio();
 		this.initPlayPause();
+		this.initNext();
+		this.initPrevious();
 	},
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -248,9 +264,13 @@ Ext.define('RedAmp.music.Player', {
 		this.fireEvent('pause', this, this.getCurrentTrack());
 	},
 	
-	previous: function() {},
+	previous: function() {
+		this.fireEvent('previous', this, this.getCurrentTrack());
+	},
 	
-	next: function() {},
+	next: function() {
+		this.fireEvent('next', this, this.getCurrentTrack());
+	},
 	
 	mute: function() {
 		this.oldVolume = this.audio.dom.volume;
