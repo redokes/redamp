@@ -1,0 +1,34 @@
+/******************************************
+* Last Fm Module
+******************************************/
+.lastfm-recent-track{
+	position: relative;
+	padding: 10px;
+}
+
+.lastfm-recent-track .image{
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	width: 34px;
+	height: 34px;
+	overflow: hidden;
+	@include border-radius(3px);
+	@include box-shadow(#000 0px 0px 5px);
+	
+	img{
+		@include border-radius(3px);
+	}
+}
+
+.lastfm-recent-track .display{
+	padding-left: 40px;
+	font-weight: bold;
+}
+
+.lastfm-recent-track .date{
+	padding-left: 40px;
+	padding-top: 3px;
+	font-size: 10px;
+	font-style: italic;
+}

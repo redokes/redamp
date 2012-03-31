@@ -72,7 +72,9 @@ Ext.define('RedAmp.Application', {
 	initEast: function(){
 		this.east = new Ext.panel.Panel({
 			region: 'east',
-			layout: 'fit'
+			layout: 'accordion',
+			width: 250,
+			split: true
 		});
 		this.items.push(this.east);
 	},

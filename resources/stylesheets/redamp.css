@@ -106,3 +106,52 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   top: 0;
   left: 120px;
 }
+
+/******************************************
+* Last Fm Module
+******************************************/
+/* line 4, ../sass/modules/_lastfm.scss */
+.lastfm-recent-track {
+  position: relative;
+  padding: 10px;
+}
+
+/* line 9, ../sass/modules/_lastfm.scss */
+.lastfm-recent-track .image {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: black 0px 0px 5px;
+  -moz-box-shadow: black 0px 0px 5px;
+  box-shadow: black 0px 0px 5px;
+}
+/* line 19, ../sass/modules/_lastfm.scss */
+.lastfm-recent-track .image img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 24, ../sass/modules/_lastfm.scss */
+.lastfm-recent-track .display {
+  padding-left: 40px;
+  font-weight: bold;
+}
+
+/* line 29, ../sass/modules/_lastfm.scss */
+.lastfm-recent-track .date {
+  padding-left: 40px;
+  padding-top: 3px;
+  font-size: 10px;
+  font-style: italic;
+}

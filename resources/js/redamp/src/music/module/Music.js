@@ -42,6 +42,10 @@ Ext.define('RedAmp.music.module.Music', {
 				view.setPlayer(this.player);
 			}
 		});
+	},
+	
+	getPlayer: function(){
+		return this.player;
 	}
 });
 /*

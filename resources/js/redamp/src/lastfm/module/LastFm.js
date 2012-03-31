@@ -21,6 +21,102 @@ Ext.define('RedAmp.lastfm.module.LastFm', {
 	
 	init: function(){
 		this.api = RedAmp.lastfm.api.Api;
+		this.initScrobble();
+	},
+	
+	initScrobble: function(){
+		//Get a reference to the music module
+		var musicModule = this.manager.getInstance('music');
+		
+		//Make sure the music module is loaded
+		if(Ext.isEmpty(musicModule)){
+			this.manager.on({
+				scope: this,
+				register: function(manager, module){
+					if(module.getName() != "settings"){
+						return;
+					}
+					this.initScrobble();
+				}
+			});
+			return;
+		}
+		
+		//Get the player
+		var player = musicModule.getPlayer();
+		
+		//Listen for when a song starts playing
+		player.on('play', this.onPlay, this);
+		
+		//Listen for when a song stops
+		player.on('beforestop', this.onBeforeStop, this);
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Events
+	///////////////////////////////////////////////////////////////////////////
+	onPlay: function(player, track){
+		this.api.request({
+			scope: this,
+			signed: true,
+			type: 'post',
+			module: 'track',
+			method: 'updateNowPlaying',
+			params:{
+				track: track.get('title'),
+				artist: track.get('artist'),
+				album: track.get('album')
+			},
+			callback: function(response){
+				if(response.success){
+					return;
+					this.getApplication().onModuleReady('stream', function(stream, options){
+						var response = options.response;
+						stream.addMessage({
+							text: '<span style="font-weight: bold;">Now Playing: </span>' + response.nowplaying.artist.text + ' - ' + response.nowplaying.track.text
+						});
+					}, this, {response: response});
+				}
+			}
+		});
+	},
+	
+	onBeforeStop: function(player, track, percentagePlayed){
+		if(percentagePlayed < 50){
+			return;
+		}
+		this.scrobble(track);
+	},
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods
+	///////////////////////////////////////////////////////////////////////////
+	scrobble: function(track){
+		this.api.request({
+			scope: this,
+			signed: true,
+			type: 'post',
+			module: 'track',
+			method: 'scrobble',
+			params:{
+				timestamp: RedAmp.util.Util.getUnixTimestamp(),
+				track: track.get('title'),
+				artist: track.get('artist'),
+				album: track.get('album')
+			},
+			callback: function(response){
+				if(response.success){
+					return;
+					this.getApplication().onModuleReady('stream', function(stream, options){
+						var response = options.response;
+						var scrobble = response.scrobbles.scrobble;
+						stream.addMessage({
+							text: '<span style="font-weight: bold;">Scrobbled: </span>' + scrobble.artist.text + ' - ' + scrobble.track.text
+						});
+					}, this, {response: response});
+				}
+			}
+		});
 	}
 });
 /*

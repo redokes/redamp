@@ -13,7 +13,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 	
 	initTree: function(){
 		this.tree = Ext.create('RedAmp.source.local.view.Tree', {
-			width: 200
+			title: 'Library'
 		});
 	},
 	

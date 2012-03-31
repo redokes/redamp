@@ -70,8 +70,8 @@ Ext.define('RedAmp.source.local.view.Tree', {
 		this.folderSelect = Ext.create('RedAmp.form.field.Folder', {
 			scope: this,
 			width: 60,
-			iconCls: 'folder',
-			buttonText: 'Add Library'
+			iconCls: 'add',
+			buttonText: 'Add'
 		});
 		
 		//Chain events
