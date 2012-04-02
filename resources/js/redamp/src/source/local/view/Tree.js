@@ -2,7 +2,8 @@ Ext.define('RedAmp.source.local.view.Tree', {
 	extend: 'Ext.tree.Panel',
 	
 	requires:[
-		'RedAmp.model.Audio'
+		'RedAmp.model.Audio',
+		'RedAmp.music.library.Store'
 	],
 	
 	statics:{
@@ -182,6 +183,7 @@ Ext.define('RedAmp.source.local.view.Tree', {
 					var file = Ext.create('RedAmp.file.File', audioRecord.get('file'));
 					file.getTags(function(file, tags, options){
 						options.record.set(tags);
+						RedAmp.music.library.Store.add(options.record);
 					}, this, {record: audioRecord});
 					
 					//Add Config

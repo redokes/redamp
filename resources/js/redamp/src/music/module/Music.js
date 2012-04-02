@@ -12,20 +12,22 @@ Ext.define('RedAmp.music.module.Music', {
 		name: 'music',
 		title: 'Music',
 		viewConfig: {
-			home: 'RedAmp.music.playlist.Playlist'
+			home: 'RedAmp.music.ui.Library'
 		},
 		menu:[{
-			display: 'Playlist',
+			display: 'Library',
 			tags:['application']
 		}]
 	},
 	
 	init: function(){
 		this.initPlayer();
+		this.initPlaylist();
 	},
 	
 	onRegister: function(){
 		this.getOs().getShell().getView().getNorth().add(this.player);
+		this.getOs().getShell().getView().getWest().add(this.playlist);
 	},
 	
 	onLaunch: function(){
@@ -39,13 +41,24 @@ Ext.define('RedAmp.music.module.Music', {
 		this.on({
 			scope: this,
 			initviewhome: function(module, view){
-				view.setPlayer(this.player);
+				//view.setPlayer(this.player);
 			}
+		});
+	},
+	
+	initPlaylist: function(){
+		this.playlist = Ext.create('RedAmp.music.playlist.Playlist', {
+			scope: this,
+			player: this.player
 		});
 	},
 	
 	getPlayer: function(){
 		return this.player;
+	},
+	
+	getPlaylist: function(){
+		return this.playlist;
 	}
 });
 /*

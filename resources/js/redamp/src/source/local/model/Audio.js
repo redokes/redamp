@@ -11,7 +11,7 @@ Ext.define('RedAmp.source.local.model.Audio', {
 			return this.callParent(arguments);
 		}
 		
-		//Load the file to loca storage, play when finished
+		//Load the file to local storage, play when finished
 		var file = Ext.create('RedAmp.file.File', this.get('file'));
 		file.getURL(function(url){
 			this.set({

@@ -1,0 +1,37 @@
+$library-item-width: 126px;
+$library-item-height: 126px;
+.library-artist{
+	width: 126px;
+	height: 126px;
+	overflow: hidden;
+	margin: 0px 10px 10px 0px;
+	display: inline-block;
+	position: relative;
+	@include border-radius(5px);
+	-moz-transition: all 1s ease;
+	
+	&:hover{
+		@include box-shadow(#000 0px 0px 5px);
+	}
+	
+	.name{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		padding: 5px;
+		background: rgba(0, 0, 0, 0.7);
+		color: white;
+		font-size: 14px;
+		font-weight: bold;
+		@include border-radius(5px 5px 0px 0px);
+		z-index: 10000;
+	}
+	
+	img{
+		@include border-radius(5px);
+	}
+}
+.library-artist.drag{
+	@include box-shadow(#000 0px 0px 5px);
+}

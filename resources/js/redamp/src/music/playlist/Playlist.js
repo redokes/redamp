@@ -11,7 +11,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	player: null,
 	albumSelector: '.playlist-album-item',
 	itemSelector: '.view-item',
-	emptyText: '<div class="playlist-empty-text">Drag files from the library and drop here...</div>',
+	emptyText: '<div style="padding: 10px;">Drag files from the library and drop here...</div>',
 	deferEmptyText: false,
 	overItemCls: 'view-hover',
 	trackOver: true,

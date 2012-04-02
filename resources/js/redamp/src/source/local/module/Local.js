@@ -1,6 +1,13 @@
 Ext.define('RedAmp.source.local.module.Local', {
 	extend: 'Lapidos.module.Viewable',
 	
+	requires:[
+		'RedAmp.form.field.Folder',
+		'RedAmp.music.library.Store',
+		'RedAmp.source.local.model.Audio',
+		'RedAmp.file.File'
+	],
+	
 	//Config
 	config: {
 		name: 'source-local',
@@ -8,17 +15,70 @@ Ext.define('RedAmp.source.local.module.Local', {
 	},
 	
 	init: function(){
-		this.initTree();
+		this.initBrowseButton();
 	},
 	
-	initTree: function(){
-		this.tree = Ext.create('RedAmp.source.local.view.Tree', {
-			title: 'Library'
+	initBrowseButton: function(){
+		this.browseButton = Ext.create('RedAmp.form.field.Folder', {
+			scope: this,
+			width: 60,
+			iconCls: 'add',
+			buttonText: 'Add'
+		});
+		
+		//Chain events
+		this.browseButton.on('select', this.onBrowseSelect, this);
+		this.manager.on({
+			scope: this,
+			launch: this.onMusicLaunch
 		});
 	},
 	
+	onMusicLaunch: function(manager, module){
+		if(module.getName() != "music"){
+			return;
+		}
+		module.getActiveView(function(library){
+			library.toolbar.add(this.browseButton);
+			library.doComponentLayout();
+		}, this);
+		this.manager.un('launch', this.onMusicLaunch);
+	},
+	
+	onBrowseSelect: function(field, inputEl, event, options){
+		var files = field.getFiles();
+
+		//Create the audio records
+		Ext.each(files, function(file){
+			var pathParts = file.webkitRelativePath.split('/');
+			var fileName = pathParts.pop();
+			var fileNameParts = fileName.split('.');
+			var extension = fileNameParts[fileNameParts.length-1];
+			if (fileName.substr(0,1) == '.' || extension != 'mp3') {
+				return;
+			}
+			
+			//Create the record
+			var record = Ext.create('RedAmp.source.local.model.Audio', {
+				file: file,
+				path: file.webkitRelativePath,
+				name: file.fileName,
+				size: file.size,
+				type: file.type
+			});
+			
+			//Read the tags and add to the library
+			var redampFile = Ext.create('RedAmp.file.File', record.get('file'));
+			redampFile.getTags(function(musicFile, tags, options){
+				options.record.set(tags);
+				RedAmp.music.library.Store.add(options.record);
+			}, this, {record: record});
+			
+		}, this);
+	},
+	
 	onRegister: function(){
-		this.getOs().getShell().getView().getEast().add(this.tree);
+		//this.getOs().getShell().getView().getEast().add(this.tree);
 	}
 });
 /*

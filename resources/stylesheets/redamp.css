@@ -174,3 +174,58 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   font-size: 10px;
   font-style: italic;
 }
+
+/* line 3, ../sass/modules/_library.scss */
+.library-artist {
+  width: 126px;
+  height: 126px;
+  overflow: hidden;
+  margin: 0px 10px 10px 0px;
+  display: inline-block;
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -moz-transition: all 1s ease;
+}
+/* line 13, ../sass/modules/_library.scss */
+.library-artist:hover {
+  -webkit-box-shadow: black 0px 0px 5px;
+  -moz-box-shadow: black 0px 0px 5px;
+  box-shadow: black 0px 0px 5px;
+}
+/* line 17, ../sass/modules/_library.scss */
+.library-artist .name {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+  -ms-border-radius: 5px 5px 0px 0px;
+  -o-border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
+  z-index: 10000;
+}
+/* line 31, ../sass/modules/_library.scss */
+.library-artist img {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 35, ../sass/modules/_library.scss */
+.library-artist.drag {
+  -webkit-box-shadow: black 0px 0px 5px;
+  -moz-box-shadow: black 0px 0px 5px;
+  box-shadow: black 0px 0px 5px;
+}

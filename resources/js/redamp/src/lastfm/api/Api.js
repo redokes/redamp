@@ -91,12 +91,12 @@ Ext.define('RedAmp.lastfm.api.Api', {
 			method: 'POST',
 			success: function(response, request){
 				var responseObject = Ext.decode(response.responseText);
-				Ext.bind(request.customCallback, request.scope)(responseObject);
+				Ext.bind(request.customCallback, request.scope)(responseObject, request);
 			},
 			failure: function(response, request){
 				Ext.bind(request.customCallback, request.scope)({
 					success: false
-				});
+				}, request);
 			}
 		}));
 	},
