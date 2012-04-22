@@ -39,9 +39,6 @@ Ext.define('RedAmp.System', {
 				id  : 'redamp-store'
 			}
 		});
-		this.store.on('load', function(){
-			console.log(arguments);
-		}, this);
 		this.store.load();
 	},
 	
