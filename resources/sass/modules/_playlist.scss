@@ -1,0 +1,37 @@
+/******************************************
+* Audio Playlist
+******************************************/
+.playlist-item{
+  padding: 5px;
+  font-size: 11px;
+  font-family: Arial;
+}
+.playlist-item .icon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+.playlist-item.playing .icon{
+  background-image:url(../images/icons/icon_eq.gif);
+  background-repeat: no-repeat;
+}
+
+.playlist-album-item{
+  margin: 3px;
+}
+
+.playlist-album-item .playlist-album-header{
+  border-radius: 5px 5px 0px 0px;
+  background-color: #C7C7C7;
+  padding: 3px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.playlist-album-item .playlist-album-body{
+  border: 1px solid #C7C7C7;
+  margin-bottom: 5px;
+}

@@ -229,3 +229,48 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   -moz-box-shadow: black 0px 0px 5px;
   box-shadow: black 0px 0px 5px;
 }
+
+/******************************************
+* Audio Playlist
+******************************************/
+/* line 4, ../sass/modules/_playlist.scss */
+.playlist-item {
+  padding: 5px;
+  font-size: 11px;
+  font-family: Arial;
+}
+
+/* line 9, ../sass/modules/_playlist.scss */
+.playlist-item .icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+/* line 17, ../sass/modules/_playlist.scss */
+.playlist-item.playing .icon {
+  background-image: url(../images/icons/icon_eq.gif);
+  background-repeat: no-repeat;
+}
+
+/* line 22, ../sass/modules/_playlist.scss */
+.playlist-album-item {
+  margin: 3px;
+}
+
+/* line 26, ../sass/modules/_playlist.scss */
+.playlist-album-item .playlist-album-header {
+  border-radius: 5px 5px 0px 0px;
+  background-color: #C7C7C7;
+  padding: 3px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/* line 34, ../sass/modules/_playlist.scss */
+.playlist-album-item .playlist-album-body {
+  border: 1px solid #C7C7C7;
+  margin-bottom: 5px;
+}

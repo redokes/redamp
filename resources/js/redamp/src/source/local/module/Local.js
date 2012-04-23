@@ -13,9 +13,13 @@ Ext.define('RedAmp.source.local.module.Local', {
 		name: 'source-local',
 		title: 'Source Local'
 	},
+	totalFiles: 0,
+	completedFiles: 0,
+	progressBar: null,
 	
 	init: function(){
 		this.initBrowseButton();
+		this.initProgressBar();
 	},
 	
 	initBrowseButton: function(){
@@ -34,22 +38,30 @@ Ext.define('RedAmp.source.local.module.Local', {
 		});
 	},
 	
+	initProgressBar: function(){
+	   this.progressBar = new Ext.ProgressBar({
+	       width: 300
+	   });
+	},
+	
 	onMusicLaunch: function(manager, module){
 		if(module.getName() != "music"){
 			return;
 		}
 		module.getActiveView(function(library){
 			library.toolbar.add(this.browseButton);
-			library.doComponentLayout();
+			this.getOs().getShell().getView().getNorth().addDocked(this.progressBar);
+			this.progressBar.hide();
 		}, this);
 		this.manager.un('launch', this.onMusicLaunch);
 	},
 	
 	onBrowseSelect: function(field, inputEl, event, options){
 		var files = field.getFiles();
-
+        var records = [];
+        
 		//Create the audio records
-		Ext.each(files, function(file){
+		Ext.each(files, function(file, index){
 			var pathParts = file.webkitRelativePath.split('/');
 			var fileName = pathParts.pop();
 			var fileNameParts = fileName.split('.');
@@ -57,6 +69,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 			if (fileName.substr(0,1) == '.' || extension != 'mp3') {
 				return;
 			}
+			this.totalFiles++;
 			
 			//Create the record
 			var record = Ext.create('RedAmp.source.local.model.Audio', {
@@ -66,15 +79,38 @@ Ext.define('RedAmp.source.local.module.Local', {
 				size: file.size,
 				type: file.type
 			});
-			
-			//Read the tags and add to the library
-			var redampFile = Ext.create('RedAmp.file.File', record.get('file'));
-			redampFile.getTags(function(musicFile, tags, options){
-				options.record.set(tags);
-				RedAmp.music.library.Store.add(options.record);
-			}, this, {record: record});
-			
+			records.push(record);
 		}, this);
+		
+		this.progressBar.show();
+		this.processFiles(records);
+	},
+	
+	processFiles: function(records, index){
+	    if(Ext.isEmpty(index)){
+	        index = 0;
+	    }
+	    var record = null;
+	    record = records[index];
+	    if(Ext.isEmpty(record)){
+	        this.progressBar.hide();
+	        return;
+	    }
+	    
+	    //Read the tags and add to the library
+        var redampFile = Ext.create('RedAmp.file.File', record.get('file'));
+        redampFile.getTags(function(musicFile, tags, options){
+            options.record.set(tags);
+            RedAmp.music.library.Store.add(options.record);
+            this.completedFiles++;
+            var percentage = this.completedFiles / this.totalFiles;
+            var defer = 10;
+            this.progressBar.updateProgress(percentage, Math.round(100*percentage)+'% completed');
+            if(!(this.completedFiles % 100)){
+                defer = 500;
+            }
+            Ext.defer(this.processFiles, defer, this, [options.records, index+1]);
+        }, this, {record: record, records: records, index: index});
 	},
 	
 	onRegister: function(){

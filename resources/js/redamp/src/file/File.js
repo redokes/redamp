@@ -94,7 +94,15 @@ Ext.define('RedAmp.file.File', {
 		//var offset = data.getLength() - 128;
 
 		var offset = 0;
-
+        var tagsObject = {
+            title : this.file.name,
+            artist : "Unknown",
+            album : "Unknown",
+            year : "Unknown",
+            comment : "",
+            track : 0,
+            genre : null
+        };
 		var header = tags.substr(offset, 3);
 		if (header == "TAG") {
 			var title = tags.substr(offset + 3, 30).replace(/\0/g, "");
@@ -120,17 +128,19 @@ Ext.define('RedAmp.file.File', {
 			}
 			*/
 
-			return {
-				title : title,
-				artist : artist,
-				album : album,
-				year : year,
-				comment : comment,
-				track : track,
-				genre : null
-			}
-		} else {
-			return {};
+            Ext.apply(tagsObject, {
+                title : title || this.file.name,
+                artist : artist || "Unknown",
+                album : album || "Unknown",
+                year : year || "Unknown",
+                comment : comment || "",
+                track : track || 0,
+                genre : null
+            });
+			return tagsObject; 
+		}
+		else {
+			return tagsObject;
 		}
 	},
 	
