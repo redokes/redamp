@@ -1,5 +1,5 @@
 Ext.define('RedAmp.System', {
-	extend: 'Lapidos.os.OS',
+	extend: 'Lapidos.os.Os',
 	requires: [
 		'RedAmp.shell.Shell'
 	],
@@ -17,7 +17,6 @@ Ext.define('RedAmp.System', {
 		'RedAmp.settings.module.Settings'
 	],
 	
-	singleton: true,
 	init: function(){
 		this.callParent(arguments);
 		this.initStore();
