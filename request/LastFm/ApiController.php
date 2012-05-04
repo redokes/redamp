@@ -76,7 +76,7 @@ class LastFm_ApiController extends AjaxController {
 		}
 		
 		//Clean the response
-		$this->cleanResponse(&$response);
+		$this->cleanResponse($response);
 		
 		//Add any errors
 		if(isset($response['error']) && isset($response['message'])){
@@ -112,7 +112,7 @@ class LastFm_ApiController extends AjaxController {
 				}
 			}
 			if(is_array($value)){
-				$response[$key] = $this->cleanResponse(&$value);
+				$response[$key] = $this->cleanResponse($value);
 			}
 		}
 		return $response;
