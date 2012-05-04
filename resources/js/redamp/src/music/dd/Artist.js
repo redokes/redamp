@@ -13,6 +13,8 @@ Ext.define('RedAmp.music.dd.Artist', {
 	constructor: function(el, group, artist, config){
 		this.artist = artist;
 		this.callParent([el, group, config]);
+		this.ignoreSelf = true;
+		this.isTarget = false;
 	},
 	
 	onMouseDown: function(event){
@@ -20,6 +22,7 @@ Ext.define('RedAmp.music.dd.Artist', {
 		clone.id = Ext.id();
 		this.dragEl = Ext.get(clone);
 		this.dragEl.addCls('drag');
+		this.dragEl.addCls('library-artist-drag');
 		this.dragEl.setOpacity(0);
 		this.dragEl.set({
 			style:{
@@ -29,6 +32,10 @@ Ext.define('RedAmp.music.dd.Artist', {
 				'z-index': 10000
 			}
 		});
+		this.dragIcon = Ext.get(Ext.DomHelper.append(this.dragEl, {
+			tag: 'div',
+			cls: 'dd-notify-icon'
+		}));
 		
 		this.dragEl.setXY(event.getXY());
 		this.dragEl.animate({
@@ -56,11 +63,42 @@ Ext.define('RedAmp.music.dd.Artist', {
 		this.dragEl.setXY(event.getXY());
 	},
 	
+	onDragEnter: function(el, dropId){
+		var dropItem = Ext.dd.DragDropManager.getDDById(dropId);
+		var legal = Ext.dd.DragDropManager.isLegalTarget(this, dropItem);
+		var target = dropItem.isTarget || false;
+		if(target && legal){
+			this.dragIcon.setOpacity(0);
+			this.dragIcon.addCls('ok');
+			this.dragIcon.animate({
+				to:{
+					opacity: 1
+				},
+				duration: 500
+			});
+		}
+	},
+	
+	onDragOut: function(){
+		this.dragIcon.animate({
+			scope: this,
+			to:{
+				opacity: 0
+			},
+			duration: 500,
+			callback: function(){
+				this.dragIcon.removeCls('ok');
+			}
+		});
+	},
+	
 	onDragDrop: function(event, dropId){
 		var dropEl = Ext.dd.DragDropManager.getDDById(dropId);
 		var records = RedAmp.music.library.Store.getByArtist(this.artist.record.get('artist'));
-		dropEl.notifyDrop(this, event, {
-			records: records.items
-		});
+		if(Ext.isDefined(dropEl.notifyDrop)){
+			dropEl.notifyDrop(this, event, {
+				records: records.items
+			});
+		}
 	}
 });

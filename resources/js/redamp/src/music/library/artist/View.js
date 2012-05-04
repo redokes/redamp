@@ -22,7 +22,17 @@ Ext.define('RedAmp.music.library.artist.View', {
 	},
 	
 	init: function() {
+		this.initArtistContainer();
 		this.initStore();
+	},
+	
+	initArtistContainer: function(){
+		this.artistContainer = new Ext.container.Container();
+		this.items.push(this.artistContainer);
+		this.items.push({
+			border: false,
+			html: '<div class="x-clear"></div>'
+		})
 	},
 	
 	initStore: function() {
@@ -79,7 +89,7 @@ Ext.define('RedAmp.music.library.artist.View', {
 			var artist = new RedAmp.music.library.artist.Item({
 				record: record
 			});
-			this.add(artist);
+			this.artistContainer.add(artist);
 		}, this);
 	}
 });

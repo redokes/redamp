@@ -5,7 +5,8 @@ Ext.define('RedAmp.source.local.module.Local', {
 		'RedAmp.form.field.Folder',
 		'RedAmp.music.library.Store',
 		'RedAmp.source.local.model.Audio',
-		'RedAmp.file.File'
+		'RedAmp.file.File',
+		'RedAmp.file.store.Tag'
 	],
 	
 	//Config
@@ -40,7 +41,8 @@ Ext.define('RedAmp.source.local.module.Local', {
 	
 	initProgressBar: function(){
 	   this.progressBar = new Ext.ProgressBar({
-	       width: 300
+	       width: 300,
+	       dock: 'bottom'
 	   });
 	},
 	
@@ -50,8 +52,8 @@ Ext.define('RedAmp.source.local.module.Local', {
 		}
 		module.getActiveView(function(library){
 			library.toolbar.add(this.browseButton);
-			this.getOs().getShell().getView().getNorth().addDocked(this.progressBar);
-			this.progressBar.hide();
+			library.addDocked(this.progressBar);
+			//this.progressBar.hide();
 		}, this);
 		this.manager.un('launch', this.onMusicLaunch);
 	},
@@ -59,6 +61,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 	onBrowseSelect: function(field, inputEl, event, options){
 		var files = field.getFiles();
         var records = [];
+        var tagStore = RedAmp.file.store.Tag;
         
 		//Create the audio records
 		Ext.each(files, function(file, index){
@@ -93,7 +96,8 @@ Ext.define('RedAmp.source.local.module.Local', {
 	    var record = null;
 	    record = records[index];
 	    if(Ext.isEmpty(record)){
-	        this.progressBar.hide();
+	        this.progressBar.updateProgress(0, ' ');
+	        RedAmp.file.store.Tag.sync();
 	        return;
 	    }
 	    
@@ -104,7 +108,7 @@ Ext.define('RedAmp.source.local.module.Local', {
             RedAmp.music.library.Store.add(options.record);
             this.completedFiles++;
             var percentage = this.completedFiles / this.totalFiles;
-            var defer = 10;
+            var defer = 1;
             this.progressBar.updateProgress(percentage, Math.round(100*percentage)+'% completed');
             if(!(this.completedFiles % 100)){
                 defer = 500;
@@ -117,96 +121,3 @@ Ext.define('RedAmp.source.local.module.Local', {
 		//this.getOs().getShell().getView().getEast().add(this.tree);
 	}
 });
-/*
-Ext.define('RedAmp.source.local.Local', {
-	extend: 'RedAmp.module.Module',
-	singleton: true,
-	
-	//Config
-	config:{
-		name: 'source-local',
-		title: ''
-	},
-	
-	//Init Functions
-	init: function(){
-		this.initStream();
-	},
-	
-	initView: function(){
-		//Create the view if it hasnt already been created
-		if(!this.creatingView){
-			this.creatingView = true;
-
-			//Load the view class
-			this.view = Ext.create('RedAmp.source.local.view.Tree', {
-				dock: 'right',
-				width: 200
-			});
-			
-			//Fire the init view event
-			this.fireEvent('initview', this, this.getView());
-
-			//Add the view to the applications center
-			this.getApplication().getCenter().addDocked(this.view);
-
-			//Set creating view to false
-			this.creatingView = false;
-		}
-	},
-	
-	initStore: function(){
-		this.store = Ext.create('Ext.data.Store', {
-			scope: this,
-			fields:[
-				'file'
-			],
-			proxy: {
-				type: 'localstorage',
-				id  : 'file-store'
-			}
-		});
-		this.store.on('load', function(){
-			console.log(arguments);
-		}, this);
-		this.store.load();
-	},
-	
-	initUser: function(){
-		var record = this.store.getAt(0);
-		if(record == null){
-			record = this.store.add({
-				name: 'New User'
-			});
-			this.store.sync();
-		}
-		
-		this.application.getSocketClient().socket.emit('setData', {
-			user: record.data
-		});
-	},
-	
-	
-	initStream: function(){
-		var stream = this.application.getModule('stream');
-		if(!stream){
-			this.appication.onModuleReady('stream', function(){
-				this.initStream();
-			}, this);
-			return;
-		}
-		
-		//Listen for when the user adds files
-		this.onViewReady(function(){
-			this.getView().on('filesadded', function(field){
-				var stream = this.application.getModule('stream');
-
-				//Add to local stream
-				stream.addMessage({
-					text: '<span style="color:green;"> + ' + field.getFiles().length + ' file(s) </span>'
-				});
-			}, this);
-		}, this);
-	}
-});
-*/

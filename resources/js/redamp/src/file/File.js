@@ -1,5 +1,8 @@
 Ext.define('RedAmp.file.File', {
 	extend: 'Ext.util.Observable',
+	requires:[
+	   'RedAmp.file.store.Tag'
+	],
 	
 	//Config
 	remote: false,
@@ -22,8 +25,13 @@ Ext.define('RedAmp.file.File', {
 	},
 
 	init: function(){
+	    this.initStore();
 		this.initFile();
 		this.initReader();
+	},
+	
+	initStore: function(){
+        this.store = RedAmp.file.store.Tag;
 	},
 	
 	initFile: function(){
@@ -49,6 +57,15 @@ Ext.define('RedAmp.file.File', {
 		if(scope == null){
 			scope = this;
 		}
+		
+		//Try to find this tag record
+        var tagRecord = this.store.getAt(this.store.findExact('path', this.file.webkitRelativePath));
+        if(!Ext.isEmpty(tagRecord)){
+            //Run the callback
+            Ext.bind(callback, scope)(this, tagRecord.data, options);
+            return;
+        }
+		
 		var me = this;
 		var tagSize = 128;
 		var blob = this.file.webkitSlice(this.file.size - tagSize, this.file.size);
@@ -56,6 +73,19 @@ Ext.define('RedAmp.file.File', {
 		reader.onloadend = Ext.bind(function(e) {
 			if (e.target.readyState == FileReader.DONE) { // DONE == 2
 				Ext.apply(this.tags, this.readTags(e.target.result));
+				
+				//Try to find the record
+				var tagRecord = this.store.getAt(this.store.findExact('path', this.file.webkitRelativePath));
+				var tagObject = {
+				    path: this.file.webkitRelativePath
+				};
+				Ext.apply(tagObject, this.tags);
+				if(Ext.isEmpty(tagRecord)){
+				    tagRecord = this.store.add(tagObject)[0];
+				}
+				tagRecord.set(tagObject);
+				
+				//Run the callback
 				Ext.bind(callback, scope)(this, this.tags, options);
 			}
 		}, this);

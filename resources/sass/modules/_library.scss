@@ -5,10 +5,11 @@ $library-item-height: 126px;
 	height: 126px;
 	overflow: hidden;
 	margin: 0px 10px 10px 0px;
-	display: inline-block;
+	float: left;
 	position: relative;
 	@include border-radius(5px);
 	-moz-transition: all 1s ease;
+	cursor: pointer;
 	
 	&:hover{
 		@include box-shadow(#000 0px 0px 5px);
@@ -25,7 +26,7 @@ $library-item-height: 126px;
 		font-size: 14px;
 		font-weight: bold;
 		@include border-radius(5px 5px 0px 0px);
-		z-index: 10000;
+		z-index: 1;
 	}
 	
 	img{
@@ -34,4 +35,14 @@ $library-item-height: 126px;
 }
 .library-artist.drag{
 	@include box-shadow(#000 0px 0px 5px);
+	
+	.dd-notify-icon.ok{
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+		z-index: 100;
+		width: 48px;
+		height: 48px;
+		@include background(image-url("icons/check-48.png"))
+	}
 }

@@ -181,7 +181,7 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   height: 126px;
   overflow: hidden;
   margin: 0px 10px 10px 0px;
-  display: inline-block;
+  float: left;
   position: relative;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -189,14 +189,15 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   -o-border-radius: 5px;
   border-radius: 5px;
   -moz-transition: all 1s ease;
+  cursor: pointer;
 }
-/* line 13, ../sass/modules/_library.scss */
+/* line 14, ../sass/modules/_library.scss */
 .library-artist:hover {
   -webkit-box-shadow: black 0px 0px 5px;
   -moz-box-shadow: black 0px 0px 5px;
   box-shadow: black 0px 0px 5px;
 }
-/* line 17, ../sass/modules/_library.scss */
+/* line 18, ../sass/modules/_library.scss */
 .library-artist .name {
   position: absolute;
   top: 0px;
@@ -212,9 +213,9 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   -ms-border-radius: 5px 5px 0px 0px;
   -o-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
-  z-index: 10000;
+  z-index: 1;
 }
-/* line 31, ../sass/modules/_library.scss */
+/* line 32, ../sass/modules/_library.scss */
 .library-artist img {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -223,11 +224,21 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   border-radius: 5px;
 }
 
-/* line 35, ../sass/modules/_library.scss */
+/* line 36, ../sass/modules/_library.scss */
 .library-artist.drag {
   -webkit-box-shadow: black 0px 0px 5px;
   -moz-box-shadow: black 0px 0px 5px;
   box-shadow: black 0px 0px 5px;
+}
+/* line 39, ../sass/modules/_library.scss */
+.library-artist.drag .dd-notify-icon.ok {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  background: url('../images/icons/check-48.png?1336147855');
 }
 
 /******************************************
