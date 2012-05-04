@@ -1,0 +1,4 @@
+.progress-line{
+	height: 4px;
+	@include background-image(linear-gradient(#446489, #23538a));
+}

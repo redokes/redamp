@@ -40,7 +40,6 @@ Ext.define('RedAmp.lastfm.module.Settings', {
 	},
 	
 	initLastFmModule: function(){
-		console.log(this.api.isAuthenticated());
 		this.api.onAuthentication(function(){
 			Ext.require('RedAmp.lastfm.module.LastFm', function(){
 				this.manager.register('RedAmp.lastfm.module.LastFm');

@@ -5,8 +5,6 @@ Ext.define('RedAmp.music.library.artist.ImageStore', {
 	listeners:{
 		load:{
 			fn: function(){
-				console.log('image store load');
-				console.log(arguments);
 			}
 		}
 	},

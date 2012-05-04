@@ -8,7 +8,6 @@ Ext.define('RedAmp.music.library.Store', {
 	remoteGroup: false,
 	
 	getByArtist: function(artist){
-		console.log('get by artist');
 		var records = this.data.filterBy(function(record){
 			if(record.get('artist') == artist){
 				return true;

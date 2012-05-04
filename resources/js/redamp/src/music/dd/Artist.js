@@ -9,12 +9,22 @@ Ext.define('RedAmp.music.dd.Artist', {
 	// Config
 	///////////////////////////////////////////////////////////////////////////
 	dragEl: null,
+	dragData: {},
 	
 	constructor: function(el, group, artist, config){
 		this.artist = artist;
 		this.callParent([el, group, config]);
 		this.ignoreSelf = true;
 		this.isTarget = false;
+		this.dragData = {};
+	},
+	
+	getDragData: function(event){
+		var records = RedAmp.music.library.Store.getByArtist(this.artist.record.get('artist'));
+		Ext.apply(this.dragData, {
+			records: records.items
+		});
+		return this.dragData;
 	},
 	
 	onMouseDown: function(event){
@@ -67,6 +77,8 @@ Ext.define('RedAmp.music.dd.Artist', {
 		var dropItem = Ext.dd.DragDropManager.getDDById(dropId);
 		var legal = Ext.dd.DragDropManager.isLegalTarget(this, dropItem);
 		var target = dropItem.isTarget || false;
+		
+		//If this is a legal target
 		if(target && legal){
 			this.dragIcon.setOpacity(0);
 			this.dragIcon.addCls('ok');
@@ -77,6 +89,16 @@ Ext.define('RedAmp.music.dd.Artist', {
 				duration: 500
 			});
 		}
+		
+		//Notify drop item
+		dropItem.notifyEnter(this, event, this.dragData);
+	},
+	
+	onDragOver: function(event, dropId){
+		var dropItem = Ext.dd.DragDropManager.getDDById(dropId);
+		
+		//Notify drop item
+		dropItem.notifyOver(this, event, this.dragData);
 	},
 	
 	onDragOut: function(){
@@ -94,11 +116,8 @@ Ext.define('RedAmp.music.dd.Artist', {
 	
 	onDragDrop: function(event, dropId){
 		var dropEl = Ext.dd.DragDropManager.getDDById(dropId);
-		var records = RedAmp.music.library.Store.getByArtist(this.artist.record.get('artist'));
 		if(Ext.isDefined(dropEl.notifyDrop)){
-			dropEl.notifyDrop(this, event, {
-				records: records.items
-			});
+			dropEl.notifyDrop(this, event, this.getDragData());
 		}
 	}
 });
