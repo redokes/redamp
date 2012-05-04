@@ -2,7 +2,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	extend:'Ext.view.View',
 	
 	requires:[
-		'RedAmp.model.Audio'
+		'Lapidos.audio.model.Audio'
 	],
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,18 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	playlistItems: false,
 	playingCls: 'playing',
 	
+	config: {
+		channel: null
+	},
+	
+	
+	constructor: function(config) {
+		this.initConfig(config);
+		this.callParent(arguments);
+		this.getChannel().on('changeaudio', function(channel, audio) {
+			this.play(audio);
+		}, this);
+	},
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Inits
@@ -43,7 +55,7 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	
 	initStore: function() {
 		this.store = Ext.create('Ext.data.Store', {
-			model: 'RedAmp.model.Audio'
+			model: 'Lapidos.audio.model.Audio'
 		});
 	},
 	
@@ -64,8 +76,11 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 			event.preventDefault();
 			event.stopEvent();
 			
+			this.getChannel().play(record, {
+				playNow: true
+			});
 			//Play the file if a player is attached
-			this.play(record);
+			// this.play(record);
 			
 		}, this);
 		
@@ -144,15 +159,36 @@ Ext.define('RedAmp.music.playlist.Playlist', {
 	///////////////////////////////////////////////////////////////////////////
 	// Methods
 	///////////////////////////////////////////////////////////////////////////
-	play: function(record){
-		if(this.player == null){
-			return
-		}
-		
-		//Tell the player to play the record
+	play: function(record) {
+		console.log('playlist play');
 		this.currentlyPlaying = record;
-		this.player.play(record);
-		this.select(record);
+		// this.select(record);
+		if (record.get('isLoaded')) {
+			this.preloadNextRecord();
+		}
+		else {
+			record.on('progress', function(record) {
+				this.preloadNextRecord();
+			}, this, {
+				single: true
+			});
+		}
+	},
+	
+	preloadNextRecord: function() {
+		var nextRecord = this.getNextRecord();
+		if (nextRecord) {
+			this.getChannel().play(nextRecord, {
+				enqueue: true
+			});
+		}
+	},
+	
+	getNextRecord: function() {
+		if (this.currentlyPlaying) {
+			return this.store.getAt(this.store.indexOf(this.currentlyPlaying) + 1);
+		}
+		return false;
 	},
 	
 	next: function(){

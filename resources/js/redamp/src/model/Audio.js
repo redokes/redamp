@@ -54,6 +54,7 @@ Ext.define('RedAmp.model.Audio', {
 	// Methods
 	///////////////////////////////////////////////////////////////////////////
 	play: function(player){
+		console.log('audio model play');
 		this.playing = true;
 		player.setText(this.data);
 		player.setSrc(this.get('url'));

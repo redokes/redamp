@@ -36,6 +36,10 @@ Ext.define('RedAmp.music.Player', {
         previousEl: '.previous',
         nextEl: '.next'
     },
+    
+    config: {
+    	channel: null
+    },
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties
@@ -93,14 +97,46 @@ Ext.define('RedAmp.music.Player', {
 	*/
    
 	
+	constructor: function(config) {
+		this.initConfig(config);
+		this.callParent(arguments);
+		this.initChannel();
+	},
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Inits
 	///////////////////////////////////////////////////////////////////////////
-	initAudio: function(){
-		this.audio.on('progress', this.onProgress, this);
-		this.audio.on('timeupdate', this.onTimeUpdate, this);
-		this.audio.on('ended', this.onEnded, this);
-		this.progressContainerEl.on('click', this.onProgressClick, this);
+	initChannel: function() {
+		this.getChannel().on({
+			scope: this,
+			changeaudio: this.onChangeAudio
+		});
+	},
+	
+	onChangeAudio: function(channel, audio, oldAudio) {
+		if (oldAudio) {
+			console.log('on change audio from ' + oldAudio.get('name') + ' to ' + audio.get('name'));
+			this.unregisterAudioListeners(oldAudio);
+		}
+		else {
+			console.log('on change audio to ' + audio.get('name'));
+		}
+		
+		this.registerAudioListeners(audio);
+		this.setText(audio.data);
+	},
+	
+	registerAudioListeners: function(audio) {
+		audio.on({
+			scope: this,
+			progress: this.onProgress,
+			timeupdate: this.onTimeUpdate,
+			ended: this.onEnded,
+		})
+	},
+	
+	unregisterAudioListeners: function(audio) {
+		audio.clearListeners();
 	},
 	
 	initPlayPause: function(){
@@ -120,7 +156,7 @@ Ext.define('RedAmp.music.Player', {
 	///////////////////////////////////////////////////////////////////////////
 	onRender: function(){
 		this.callParent(arguments);
-		this.initAudio();
+		this.progressContainerEl.on('click', this.onProgressClick, this);
 		this.initPlayPause();
 		this.initNext();
 		this.initPrevious();
@@ -184,15 +220,18 @@ Ext.define('RedAmp.music.Player', {
 	},
 	
 	setVolume: function(volume) {
-		this.audio.dom.volume = volume;
+		// TODO: switch this to a method of the channel once it is implemented
+		this.getChannel().getActiveAudio().setVolume(volume);
 	},
-	
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods
 	///////////////////////////////////////////////////////////////////////////
 	play: function(record) {
-		if(record != null){
+		console.log('player play method');
+		return;
+		if (record != null) {
+			
 			//Stop the player
 			this.stop();
 			
@@ -287,18 +326,17 @@ Ext.define('RedAmp.music.Player', {
 		}
 	},
 	
-	
 	///////////////////////////////////////////////////////////////////////////
 	// Events
 	///////////////////////////////////////////////////////////////////////////
-	onProgress: function(){
-		var loaded = parseInt(((this.audio.dom.buffered.end(0) / this.audio.dom.duration) * 100), 10);
+	onProgress: function(audio) {
+		var loaded = parseInt(((audio.getEl().dom.buffered.end(0) / audio.getEl().dom.duration) * 100), 10);
 		this.loaderEl.setWidth(loaded + "%");
 	},
 	
-	onTimeUpdate: function(){
-		var currentTime = parseInt(this.audio.dom.currentTime, 10);
-		var totalTime = parseInt(this.audio.dom.duration, 10);
+	onTimeUpdate: function(audio) {
+		var currentTime = parseInt(audio.getEl().dom.currentTime, 10);
+		var totalTime = parseInt(audio.getEl().dom.duration, 10);
 		var totalMinutes = Math.floor(totalTime/60, 10);
 		var totalSeconds = totalTime - totalMinutes * 60;
 		var currentMinutes = Math.floor(currentTime/60, 10);
@@ -306,7 +344,7 @@ Ext.define('RedAmp.music.Player', {
 		var remainingMinutes = Math.floor((totalTime - currentTime)/60, 10);
 		var remainingSeconds = (totalTime-currentTime) - remainingMinutes * 60;
 		
-		var percentage = this.getPlayPercentage();
+		var percentage = audio.getPlayedPercent() * 100;
 		
 		//Update the progress
 		this.progressEl.setWidth(percentage + "%");
@@ -315,28 +353,31 @@ Ext.define('RedAmp.music.Player', {
 		this.timeEl.update("-" + remainingMinutes + ':' + (remainingSeconds > 9 ? remainingSeconds : '0' + remainingSeconds));
 	},
 	
-	onEnded: function(){
-		this.stop();
-		this.fireEvent('complete', this, this.getCurrentTrack());
+	onEnded: function(audio) {
+		// this.unregisterAudioListeners(audio);
+		// this.fireEvent('complete', this, this.getCurrentTrack());
 	},
 	
-	onProgressClick: function(event){
+	onProgressClick: function(event) {
 		var eventX = event.getX();
 		var elX = this.progressEl.getX();
 		var elWidth = this.progressContainerEl.getWidth(true);
-		var duration = ((eventX - elX) / elWidth) * this.audio.dom.duration;
-		this.audio.dom.currentTime = duration;
+		var audio = this.getChannel().getActiveAudio();
+		var percent = (eventX - elX) / elWidth;
+		var seconds = percent * audio.getDuration();
+		
+		audio.seek(seconds);
 	},
 	
-	onPlayPauseClick: function(){
-		if(!this.isLoaded()){
+	onPlayPauseClick: function() {
+		if (!this.isLoaded()) {
 			return;
 		}
 		
-		if(this.isPlaying()){
+		if (this.isPlaying()) {
 			this.pause();
 		}
-		else{
+		else {
 			this.play();
 		}
 	}

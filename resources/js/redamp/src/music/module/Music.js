@@ -1,5 +1,8 @@
 Ext.define('RedAmp.music.module.Music', {
 	extend: 'Lapidos.module.Viewable',
+	requires: [
+		'RedAmp.music.Player'
+	],
 	
 	statics:{
 		getDDGroup: function(){
@@ -17,10 +20,12 @@ Ext.define('RedAmp.music.module.Music', {
 		menu:[{
 			display: 'Library',
 			tags:['application']
-		}]
+		}],
+		channel: null
 	},
 	
 	init: function(){
+		this.initChannel();
 		this.initPlayer();
 		this.initPlaylist();
 	},
@@ -34,9 +39,19 @@ Ext.define('RedAmp.music.module.Music', {
 		this.callParent(arguments);
 	},
 	
+	initChannel: function() {
+		this.setChannel(new Lapidos.audio.Channel({
+			name: 'Music',
+			mode: 'multi',
+			crossfade: true,
+			crossfadeDuration: 80
+		}));
+	},
+	
 	initPlayer: function(){
-		this.player = Ext.create('RedAmp.music.Player', {
-			scope: this
+		this.player = new RedAmp.music.Player({
+			scope: this,
+			channel: this.getChannel()
 		});
 		this.on({
 			scope: this,
@@ -49,7 +64,8 @@ Ext.define('RedAmp.music.module.Music', {
 	initPlaylist: function(){
 		this.playlist = Ext.create('RedAmp.music.playlist.Playlist', {
 			scope: this,
-			player: this.player
+			player: this.player,
+			channel: this.getChannel()
 		});
 	},
 	

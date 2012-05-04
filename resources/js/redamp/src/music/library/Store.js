@@ -1,10 +1,10 @@
 Ext.define('RedAmp.music.library.Store', {
 	extend: 'Ext.data.Store',
 	requires:[
-		'RedAmp.model.Audio'
+		'Lapidos.audio.model.Audio'
 	],
 	singleton: true,
-	model: 'RedAmp.model.Audio',
+	model: 'Lapidos.audio.model.Audio',
 	remoteGroup: false,
 	
 	getByArtist: function(artist){

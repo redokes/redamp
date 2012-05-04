@@ -82,6 +82,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 				size: file.size,
 				type: file.type
 			});
+			
 			records.push(record);
 		}, this);
 		
@@ -93,6 +94,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 	    if(Ext.isEmpty(index)){
 	        index = 0;
 	    }
+	    
 	    var record = null;
 	    record = records[index];
 	    if(Ext.isEmpty(record)){

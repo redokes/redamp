@@ -52,4 +52,5 @@ Ext.define('RedAmp.System', {
 			this.getModuleManager().getInstance('music').launch();
 		}, this);
 	}
+	
 });

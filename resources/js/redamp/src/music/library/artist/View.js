@@ -1,7 +1,7 @@
 Ext.define('RedAmp.music.library.artist.View', {
 	extend:'Ext.container.Container',
 	requires:[
-		'RedAmp.model.Audio',
+		'Lapidos.audio.model.Audio',
 		'RedAmp.music.library.Store',
 		'RedAmp.music.library.artist.Item'
 	],

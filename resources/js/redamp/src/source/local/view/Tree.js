@@ -2,7 +2,7 @@ Ext.define('RedAmp.source.local.view.Tree', {
 	extend: 'Ext.tree.Panel',
 	
 	requires:[
-		'RedAmp.model.Audio',
+		'Lapidos.audio.model.Audio',
 		'RedAmp.music.library.Store'
 	],
 	
@@ -55,7 +55,7 @@ Ext.define('RedAmp.source.local.view.Tree', {
 	
 	initAudioStore: function(){
 		this.audioStore = Ext.create('Ext.data.Store', {
-			model: 'RedAmp.model.Audio'
+			model: 'Lapidos.audio.model.Audio'
 		});
 	},
 	
