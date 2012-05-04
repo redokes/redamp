@@ -112,6 +112,17 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   left: 120px;
 }
 
+/* line 1, ../sass/application/_progress.scss */
+.progress-line {
+  height: 4px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #446489), color-stop(100%, #23538a));
+  background-image: -webkit-linear-gradient(#446489, #23538a);
+  background-image: -moz-linear-gradient(#446489, #23538a);
+  background-image: -o-linear-gradient(#446489, #23538a);
+  background-image: -ms-linear-gradient(#446489, #23538a);
+  background-image: linear-gradient(#446489, #23538a);
+}
+
 /* line 2, ../sass/modules/_about.scss */
 .redamp-about-panel h1 {
   font-size: 20px;
@@ -230,15 +241,16 @@ $tab-background-gradient-disabled: 'tab-disabled' !default;
   -moz-box-shadow: black 0px 0px 5px;
   box-shadow: black 0px 0px 5px;
 }
-/* line 39, ../sass/modules/_library.scss */
-.library-artist.drag .dd-notify-icon.ok {
+
+/* line 41, ../sass/modules/_library.scss */
+.library-artist-drag .ok {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 15px;
+  right: 15px;
   z-index: 100;
   width: 48px;
   height: 48px;
-  background: url('../images/icons/check-48.png?1336147855');
+  background: url('../images/icons/check-48.png?1336151685');
 }
 
 /******************************************
