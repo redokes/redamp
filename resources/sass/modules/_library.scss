@@ -35,11 +35,13 @@ $library-item-height: 126px;
 }
 .library-artist.drag{
 	@include box-shadow(#000 0px 0px 5px);
-	
-	.dd-notify-icon.ok{
+}
+
+.library-artist-drag{
+	.ok{
 		position: absolute;
-		bottom: 5px;
-		right: 5px;
+		bottom: 15px;
+		right: 15px;
 		z-index: 100;
 		width: 48px;
 		height: 48px;

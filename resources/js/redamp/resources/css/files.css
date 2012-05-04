@@ -77,41 +77,28 @@ div::-webkit-scrollbar-track {
 }
 
 .x-proxy{
-	box-shadow: 0 0 5px #888;
+	
 }
 
 .x-dd-drag-proxy{
 	position: relative;
 }
 
-.x-dd-drag-proxy .x-dd-drag-ghost{
-	padding: 10px;
-	font-size: 14px;
-	border-radius: 5px;
+.x-dd-drag-ghost{
+	padding: 0px;
+	background-color: transparent;
+	border: none;
+	margin: 0px;
 }
 
 .x-dd-drag-proxy .x-dd-drop-icon{
-	width: 24px;
-	height: 24px;
-	top: -10px;
-	left: auto;
-	right: -10px;
+	display: none;
 }
 
-.x-dd-drop-ok .x-dd-drop-icon{
-	background-image: url(../images/icons/check-24.gif);
-}
 .x-dd-drop-ok .x-dd-drag-ghost{
 	opacity: 1;
 }
 
-.drop-trash .x-dd-drop-icon{
-	background-image: url(../images/icons/trash-24.png);
-}
-
-.drop-trash .x-dd-drag-ghost{
-	opacity: 1;
-}
 
 /******************************************
 * Icons

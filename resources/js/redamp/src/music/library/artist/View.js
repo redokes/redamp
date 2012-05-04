@@ -3,13 +3,16 @@ Ext.define('RedAmp.music.library.artist.View', {
 	requires:[
 		'RedAmp.model.Audio',
 		'RedAmp.music.library.Store',
-		'RedAmp.music.library.artist.Item'
+		'RedAmp.music.library.artist.Item',
+		'RedAmp.music.module.Music',
+		'RedAmp.music.library.artist.DragZone'
 	],
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Config
 	///////////////////////////////////////////////////////////////////////////
 	padding: 10,
+	artistItems: null,
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Inits
@@ -17,6 +20,7 @@ Ext.define('RedAmp.music.library.artist.View', {
 	initComponent: function(){
 		this.items = this.items || [];
 		this.artists = [];
+		this.artistItems = new Ext.util.MixedCollection();
 		this.init();
 		this.callParent(arguments);
 	},
@@ -24,6 +28,7 @@ Ext.define('RedAmp.music.library.artist.View', {
 	init: function() {
 		this.initArtistContainer();
 		this.initStore();
+		this.initDragZone();
 	},
 	
 	initArtistContainer: function(){
@@ -66,6 +71,16 @@ Ext.define('RedAmp.music.library.artist.View', {
 		});
 	},
 	
+	initDragZone: function() {
+		if (!this.rendered) {
+			this.on('afterrender', this.initDragZone, this);
+			return;
+		}
+		this.dragZone = Ext.create('RedAmp.music.library.artist.DragZone', this, RedAmp.music.module.Music.getDDGroup(), {
+			proxyCls: 'library-artist-drag'
+		});
+	},
+	
 	onLibraryChange: function(){
 		var records = [];
 		RedAmp.music.library.Store.each(function(record){
@@ -90,6 +105,11 @@ Ext.define('RedAmp.music.library.artist.View', {
 				record: record
 			});
 			this.artistContainer.add(artist);
+			this.artistItems.add(artist.getEl().dom.id, artist);
 		}, this);
+	},
+	
+	getArtistByEl: function(el){
+		return this.artistItems.get(Ext.get(el).dom.id);
 	}
 });

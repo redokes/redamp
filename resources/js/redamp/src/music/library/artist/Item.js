@@ -6,9 +6,9 @@ Ext.define('RedAmp.music.library.artist.Item', {
 	],
 	
 	config:{
-		baseCls: 'library-artist',
 		record: null
 	},
+	cls: 'library-artist',
 	
 	constructor: function(config){
 		this.initConfig(config);
@@ -28,10 +28,8 @@ Ext.define('RedAmp.music.library.artist.Item', {
 	
 	initRenderTemplate: function(){
 		this.renderTpl = new Ext.XTemplate(
-			'<div class="library-artist x-unselectable">',
-				'<div class="name">{artist}</div>',
-				'<img src="{image}" width="126px" style="display: none;" />',
-			'</div>'
+			'<div class="name">{artist}</div>',
+			'<img src="{image}" width="126px" style="display: none;" />'
 		);
 	},
 	
@@ -43,7 +41,7 @@ Ext.define('RedAmp.music.library.artist.Item', {
 	},
 	
 	initDragDrop: function(){
-		this.dd = new RedAmp.music.dd.Artist(this.getEl(), RedAmp.music.module.Music.getDDGroup(), this);
+		//this.dd = new RedAmp.music.dd.Artist(this.getEl(), RedAmp.music.module.Music.getDDGroup(), this);
 	},
 	
 	setImage: function(image){

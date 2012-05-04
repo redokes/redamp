@@ -6,7 +6,8 @@ Ext.define('RedAmp.source.local.module.Local', {
 		'RedAmp.music.library.Store',
 		'RedAmp.source.local.model.Audio',
 		'RedAmp.file.File',
-		'RedAmp.file.store.Tag'
+		'RedAmp.file.store.Tag',
+		'RedAmp.progress.Line'
 	],
 	
 	//Config
@@ -16,11 +17,11 @@ Ext.define('RedAmp.source.local.module.Local', {
 	},
 	totalFiles: 0,
 	completedFiles: 0,
-	progressBar: null,
+	progressLine: null,
 	
 	init: function(){
 		this.initBrowseButton();
-		this.initProgressBar();
+		this.initProgressLine();
 	},
 	
 	initBrowseButton: function(){
@@ -39,9 +40,8 @@ Ext.define('RedAmp.source.local.module.Local', {
 		});
 	},
 	
-	initProgressBar: function(){
-	   this.progressBar = new Ext.ProgressBar({
-	       width: 300,
+	initProgressLine: function(){
+	   this.progressLine = new RedAmp.progress.Line({
 	       dock: 'bottom'
 	   });
 	},
@@ -52,8 +52,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 		}
 		module.getActiveView(function(library){
 			library.toolbar.add(this.browseButton);
-			library.addDocked(this.progressBar);
-			//this.progressBar.hide();
+			library.addDocked(this.progressLine);
 		}, this);
 		this.manager.un('launch', this.onMusicLaunch);
 	},
@@ -85,7 +84,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 			records.push(record);
 		}, this);
 		
-		this.progressBar.show();
+		this.progressLine.show();
 		this.processFiles(records);
 	},
 	
@@ -96,7 +95,7 @@ Ext.define('RedAmp.source.local.module.Local', {
 	    var record = null;
 	    record = records[index];
 	    if(Ext.isEmpty(record)){
-	        this.progressBar.updateProgress(0, ' ');
+	        this.progressLine.updateProgress(0);
 	        RedAmp.file.store.Tag.sync();
 	        return;
 	    }
@@ -109,7 +108,7 @@ Ext.define('RedAmp.source.local.module.Local', {
             this.completedFiles++;
             var percentage = this.completedFiles / this.totalFiles;
             var defer = 1;
-            this.progressBar.updateProgress(percentage, Math.round(100*percentage)+'% completed');
+            this.progressLine.updateProgress(percentage);
             if(!(this.completedFiles % 100)){
                 defer = 500;
             }
